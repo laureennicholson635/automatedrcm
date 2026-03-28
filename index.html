@@ -9,27 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
---navy:#0a1628;--navy2:#0f2040;--navy3:#1a3560;
---green:#00e87a;--green2:#00c469;
---red:#ff3b5c;--white:#ffffff;--off:#f7f8fa;
---gray:#8a97a8;--border:#e4e8ef;
---text:#0a1628;--text2:#445566;
---fh:'Bebas Neue',sans-serif;
---fb:'Fraunces',serif;
---fm:'DM Mono',monospace;
-}
+:root{--navy:#0a1628;--navy2:#0f2040;--green:#00e87a;--green2:#00c469;--red:#ff3b5c;--white:#fff;--off:#f7f8fa;--gray:#8a97a8;--border:#e4e8ef;--text:#0a1628;--text2:#445566;--fh:'Bebas Neue',sans-serif;--fb:'Fraunces',serif;--fm:'DM Mono',monospace}
 html{scroll-behavior:smooth}
 body{font-family:var(--fb);color:var(--text);background:var(--white);overflow-x:hidden;cursor:none}
 .cursor{position:fixed;width:12px;height:12px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:multiply}
 .cursor.grow{width:36px;height:36px;background:var(--navy)}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:10px;font-family:var(--fh);font-size:22px;letter-spacing:.05em;color:var(--navy)}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 5%;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--fh);font-size:22px;letter-spacing:.05em;color:var(--navy);text-decoration:none}
 .lm{width:32px;height:32px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--green);font-family:var(--fm);font-size:11px;font-weight:500}
 .nl{display:flex;align-items:center;gap:28px}
 .nl a{font-family:var(--fm);font-size:12px;color:var(--text2);text-decoration:none;letter-spacing:.05em;transition:color .15s}
 .nl a:hover{color:var(--navy)}
-.nc{background:var(--navy)!important;color:#fff!important;padding:9px 18px;border-radius:6px}
+.nc{background:var(--navy)!important;color:#fff!important;padding:9px 18px;border-radius:6px;transition:background .15s!important}
+.nc:hover{background:#1a3560!important}
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 5% 80px;background:var(--white);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-200px;right:-100px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,232,122,.08),transparent 70%);pointer-events:none}
 .eb{font-family:var(--fm);font-size:11px;letter-spacing:.15em;color:var(--green2);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
@@ -40,12 +32,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;background:rgba
 .hb{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .bp{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;padding:15px 26px;border-radius:8px;font-family:var(--fm);font-size:13px;text-decoration:none;letter-spacing:.03em;transition:all .2s;border:2px solid var(--navy)}
 .bp:hover{background:var(--green);color:var(--navy);border-color:var(--green);transform:translateY(-2px)}
-.bs{display:inline-flex;align-items:center;gap:8px;color:var(--text2);font-family:var(--fm);font-size:13px;text-decoration:none;letter-spacing:.03em}
+.bs{display:inline-flex;align-items:center;gap:8px;color:var(--text2);font-family:var(--fm);font-size:13px;text-decoration:none;letter-spacing:.03em;transition:color .15s;cursor:pointer;background:none;border:none}
 .bs:hover{color:var(--navy)}
 .ht{margin-top:44px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .htl{font-family:var(--fm);font-size:10px;color:var(--gray);letter-spacing:.1em;text-transform:uppercase}
-.ps{display:flex;gap:8px;flex-wrap:wrap}
-.pl{font-family:var(--fm);font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);color:var(--text2)}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pill{font-family:var(--fm);font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid var(--border);color:var(--text2)}
 .hr2{display:flex;flex-direction:column;gap:16px;padding-left:56px}
 .sc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
 .sc:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(10,22,40,.08)}
@@ -98,8 +90,7 @@ h2{font-family:var(--fh);font-size:clamp(38px,5vw,70px);line-height:.95;color:va
 .pdesc{font-size:14px;color:var(--text2);font-weight:300;line-height:1.7;margin-bottom:18px}
 .pff{display:flex;flex-direction:column;gap:7px}
 .pf{font-family:var(--fm);font-size:11px;color:var(--text2);display:flex;align-items:center;gap:8px}
-.pf::before{content:'checkmark';font-size:0;width:0}
-.pf::before{content:'✓';font-size:11px;color:var(--cc,var(--green));font-weight:700;flex-shrink:0}
+.pf::before{content:'✓';color:var(--cc,var(--green));font-weight:700;flex-shrink:0}
 .how{background:var(--navy);color:#fff}
 .how h2{color:#fff}
 .how .sub{color:rgba(255,255,255,.6)}
@@ -138,7 +129,7 @@ h2{font-family:var(--fh);font-size:clamp(38px,5vw,70px);line-height:.95;color:va
 .pri{font-family:var(--fm);font-size:11px;color:var(--text2);display:flex;align-items:center;gap:8px}
 .feat .pri{color:rgba(255,255,255,.7)}
 .pri::before{content:'✓';color:var(--green);font-size:12px;flex-shrink:0}
-.prbtn{display:block;text-align:center;padding:13px;border-radius:10px;font-family:var(--fm);font-size:13px;text-decoration:none;letter-spacing:.03em;transition:all .2s;border:2px solid var(--navy);color:var(--navy)}
+.prbtn{display:block;text-align:center;padding:13px;border-radius:10px;font-family:var(--fm);font-size:13px;text-decoration:none;letter-spacing:.03em;transition:all .2s;border:2px solid var(--navy);color:var(--navy);cursor:pointer;background:none;width:100%}
 .prbtn:hover{background:var(--navy);color:#fff}
 .feat .prbtn{background:var(--green);color:var(--navy);border-color:var(--green)}
 .feat .prbtn:hover{background:#00f088;border-color:#00f088}
@@ -148,9 +139,9 @@ h2{font-family:var(--fh);font-size:clamp(38px,5vw,70px);line-height:.95;color:va
 .cta h2 em{color:var(--green);font-style:normal;display:block}
 .cta p{font-size:18px;color:rgba(255,255,255,.6);font-weight:300;max-width:480px;margin:0 auto 44px;line-height:1.7}
 .ctab{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.bg{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:var(--navy);padding:17px 34px;border-radius:8px;font-family:var(--fm);font-size:14px;text-decoration:none;font-weight:500;letter-spacing:.03em;transition:all .2s}
+.bg{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:var(--navy);padding:17px 34px;border-radius:8px;font-family:var(--fm);font-size:14px;text-decoration:none;font-weight:500;letter-spacing:.03em;transition:all .2s;cursor:pointer;border:none}
 .bg:hover{background:#00f088;transform:translateY(-2px)}
-.bo{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:17px 34px;border-radius:8px;font-family:var(--fm);font-size:14px;text-decoration:none;letter-spacing:.03em;transition:all .2s}
+.bo{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:17px 34px;border-radius:8px;font-family:var(--fm);font-size:14px;text-decoration:none;letter-spacing:.03em;transition:all .2s;cursor:pointer;background:none}
 .bo:hover{border-color:#fff;color:#fff}
 footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);padding:36px 5%;display:flex;align-items:center;justify-content:space-between}
 .fl{font-family:var(--fh);font-size:18px;color:rgba(255,255,255,.4);letter-spacing:.05em}
@@ -161,6 +152,25 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);padding
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}
+/* DEMO MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,22,40,.75);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:20px;padding:44px;width:100%;max-width:520px;position:relative;box-shadow:0 40px 80px rgba(10,22,40,.25);max-height:90vh;overflow-y:auto}
+.modal-close{position:absolute;top:16px;right:20px;font-size:22px;cursor:pointer;color:#8a97a8;background:none;border:none;line-height:1;padding:4px}
+.modal-close:hover{color:#0a1628}
+.modal h3{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#0a1628;letter-spacing:.03em;margin-bottom:8px}
+.modal-sub{font-size:14px;color:#445566;font-weight:300;margin-bottom:28px;line-height:1.6}
+.mform{display:flex;flex-direction:column;gap:14px}
+.mform input,.mform select{width:100%;padding:13px 16px;border:1.5px solid #e4e8ef;border-radius:10px;font-family:'Fraunces',serif;font-size:14px;color:#0a1628;outline:none;transition:border-color .2s;background:#fff;-webkit-appearance:none}
+.mform input:focus,.mform select:focus{border-color:#00e87a}
+.mform input::placeholder{color:#8a97a8}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.msubmit{background:#0a1628;color:#fff;padding:15px;border-radius:10px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.03em;border:none;cursor:pointer;transition:all .2s;margin-top:4px;width:100%}
+.msubmit:hover{background:#00e87a;color:#0a1628;transform:translateY(-2px)}
+.msuccess{display:none;text-align:center;padding:30px 0}
+.msuccess .check{font-size:52px;margin-bottom:20px}
+.msuccess h4{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#0a1628;letter-spacing:.03em;margin-bottom:10px}
+.msuccess p{font-size:15px;color:#445566;line-height:1.7;font-weight:300}
 @media(max-width:900px){
 .hero{grid-template-columns:1fr;padding:100px 5% 60px}
 .hr2{padding-left:0;margin-top:40px}
@@ -173,11 +183,53 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);padding
 .prcard.feat{order:-1}
 nav .nl{display:none}
 footer{flex-direction:column;gap:16px;text-align:center}
+.mrow{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
+
+<!-- DEMO MODAL -->
+<div class="modal-overlay" id="demoModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeDemo()">✕</button>
+    <div id="mform-wrap">
+      <h3>Book Your Demo</h3>
+      <p class="modal-sub">See ClaimFlow in action. We'll walk you through exactly how it works for your practice — live, no pressure, no obligation.</p>
+      <div class="mform">
+        <div class="mrow">
+          <input type="text" id="m-fname" placeholder="First name *">
+          <input type="text" id="m-lname" placeholder="Last name *">
+        </div>
+        <input type="email" id="m-email" placeholder="Work email *">
+        <input type="text" id="m-practice" placeholder="Practice / organization name *">
+        <input type="tel" id="m-phone" placeholder="Phone number">
+        <select id="m-size">
+          <option value="" disabled selected>Practice size</option>
+          <option>Solo practitioner</option>
+          <option>2–5 providers</option>
+          <option>6–15 providers</option>
+          <option>16–50 providers</option>
+          <option>50+ providers</option>
+        </select>
+        <select id="m-time">
+          <option value="" disabled selected>Best time to reach you</option>
+          <option>Morning (8am – 12pm ET)</option>
+          <option>Afternoon (12pm – 5pm ET)</option>
+          <option>Evening (5pm – 7pm ET)</option>
+        </select>
+        <button class="msubmit" onclick="submitDemo()">Request My Demo →</button>
+      </div>
+    </div>
+    <div class="msuccess" id="msuccess">
+      <div class="check">✅</div>
+      <h4>You're booked!</h4>
+      <p>Thanks for your interest in ClaimFlow. Our team will reach out within 1 business day to confirm your personalized demo time.</p>
+    </div>
+  </div>
+</div>
+
 <nav>
   <div class="logo"><div class="lm">CF</div>CLAIMFLOW</div>
   <div class="nl">
@@ -188,6 +240,7 @@ footer{flex-direction:column;gap:16px;text-align:center}
     <a href="#pricing" class="nc">Get Started →</a>
   </div>
 </nav>
+
 <section class="hero">
   <div>
     <div class="eb">Medical Billing Automation</div>
@@ -195,20 +248,15 @@ footer{flex-direction:column;gap:16px;text-align:center}
     <p class="hs">AI-powered bots that verify eligibility, scrub claims, and fight denials — automatically. Built by billers, for billers.</p>
     <div class="hb">
       <a href="#pricing" class="bp">Start Free Trial →</a>
-      <a href="#products" class="bs">▷&nbsp; See how it works</a>
+      <button class="bs" onclick="openDemo()">▷&nbsp; See how it works</button>
     </div>
     <div class="ht">
       <span class="htl">Trusted tech</span>
-      <div class="ps"><span class="pl">HIPAA Compliant</span><span class="pl">Availity Integrated</span><span class="pl">No contracts</span><span class="pl">14-day free trial</span></div>
+      <div class="pills"><span class="pill">HIPAA Compliant</span><span class="pill">Availity Integrated</span><span class="pill">No contracts</span><span class="pill">14-day free trial</span></div>
     </div>
   </div>
   <div class="hr2">
-    <div class="sc" style="--ac:var(--green)">
-      <div class="scl">Claims scrubbed today</div>
-      <div class="scv" id="cc">0</div>
-      <div class="scs">Errors caught before submission</div>
-      <div class="slv"><span class="dot"></span>&nbsp;Live counter</div>
-    </div>
+    <div class="sc" style="--ac:var(--green)"><div class="scl">Claims scrubbed today</div><div class="scv" id="cc">0</div><div class="scs">Errors caught before submission</div><div class="slv"><span class="dot"></span>&nbsp;Live counter</div></div>
     <div class="sr">
       <div class="sc" style="--ac:var(--navy)"><div class="scl">Denial win rate</div><div class="scv">45%</div><div class="scs">vs. 15% industry avg</div></div>
       <div class="sc" style="--ac:var(--red)"><div class="scl">Avg recovery/mo</div><div class="scv" id="rc">$0</div><div class="scs">per provider</div></div>
@@ -216,22 +264,22 @@ footer{flex-direction:column;gap:16px;text-align:center}
     <div class="sc" style="--ac:var(--navy)"><div class="scl">Time saved on billing</div><div class="scv">12 hrs</div><div class="scs">Per provider per week — back to patient care</div></div>
   </div>
 </section>
-<div class="ticker">
-  <div class="ti2">
-    <span class="ti">EligibilityBot verified Aetna PPO <span>·</span> Active · $820 deductible remaining</span>
-    <span class="ti">ClaimScrubber caught CCI error <span>·</span> CPT 99214+93000 · Saved $245 denial</span>
-    <span class="ti">DenialManager won CO-50 appeal <span>·</span> UnitedHealthcare · $485 recovered</span>
-    <span class="ti">PatientBillingBot payment plan set up <span>·</span> $150/month · 6 months</span>
-    <span class="ti">EligibilityBot verified Medicare Part B <span>·</span> Deductible met · 20% coinsurance</span>
-    <span class="ti">ClaimScrubber blocked ICD-10 error <span>·</span> J069→J06.9 corrected pre-submission</span>
-    <span class="ti">EligibilityBot verified Aetna PPO <span>·</span> Active · $820 deductible remaining</span>
-    <span class="ti">ClaimScrubber caught CCI error <span>·</span> CPT 99214+93000 · Saved $245 denial</span>
-    <span class="ti">DenialManager won CO-50 appeal <span>·</span> UnitedHealthcare · $485 recovered</span>
-    <span class="ti">PatientBillingBot payment plan set up <span>·</span> $150/month · 6 months</span>
-    <span class="ti">EligibilityBot verified Medicare Part B <span>·</span> Deductible met · 20% coinsurance</span>
-    <span class="ti">ClaimScrubber blocked ICD-10 error <span>·</span> J069→J06.9 corrected pre-submission</span>
-  </div>
-</div>
+
+<div class="ticker"><div class="ti2">
+  <span class="ti">EligibilityBot verified Aetna PPO <span>·</span> Active · $820 deductible remaining</span>
+  <span class="ti">ClaimScrubber caught CCI error <span>·</span> CPT 99214+93000 · Saved $245 denial</span>
+  <span class="ti">DenialManager won CO-50 appeal <span>·</span> UnitedHealthcare · $485 recovered</span>
+  <span class="ti">PatientBillingBot payment plan set up <span>·</span> $150/month · 6 months</span>
+  <span class="ti">EligibilityBot verified Medicare Part B <span>·</span> Deductible met · 20% coinsurance</span>
+  <span class="ti">ClaimScrubber blocked ICD-10 error <span>·</span> J069→J06.9 corrected pre-submission</span>
+  <span class="ti">EligibilityBot verified Aetna PPO <span>·</span> Active · $820 deductible remaining</span>
+  <span class="ti">ClaimScrubber caught CCI error <span>·</span> CPT 99214+93000 · Saved $245 denial</span>
+  <span class="ti">DenialManager won CO-50 appeal <span>·</span> UnitedHealthcare · $485 recovered</span>
+  <span class="ti">PatientBillingBot payment plan set up <span>·</span> $150/month · 6 months</span>
+  <span class="ti">EligibilityBot verified Medicare Part B <span>·</span> Deductible met · 20% coinsurance</span>
+  <span class="ti">ClaimScrubber blocked ICD-10 error <span>·</span> J069→J06.9 corrected pre-submission</span>
+</div></div>
+
 <section class="prob" id="problem">
   <div class="reveal"><div class="sl">The Problem</div><h2>YOUR PRACTICE IS BLEEDING MONEY</h2><p class="sub">Medical billing is broken. Every day you submit claims manually, you're leaving recoverable revenue on the floor.</p></div>
   <div class="pg">
@@ -254,35 +302,17 @@ footer{flex-direction:column;gap:16px;text-align:center}
     </div>
   </div>
 </section>
+
 <section class="prods" id="products">
   <div class="reveal"><div class="sl">The Solution</div><h2>FOUR BOTS. ONE MISSION.</h2><p class="sub">Each bot tackles a specific revenue leak. Together they form a complete RCM automation engine for your practice.</p></div>
   <div class="pgrid reveal d1">
-    <div class="pc" style="--cc:#00e87a;--cb:#e8fff3;--cd:rgba(0,232,122,.2)">
-      <div class="pbg" style="background:#e8fff3;color:#00c469;border:1px solid rgba(0,232,122,.3)">LIVE</div>
-      <div class="pci">✦</div><div class="pname">ELIGIBILITYBOT</div>
-      <p class="pdesc">Verifies insurance coverage before every appointment via Availity 270/271 EDI. Catches inactive policies before they become denied claims.</p>
-      <div class="pff"><div class="pf">Real-time Availity / Waystar integration</div><div class="pf">4-hour smart cache to cut API costs</div><div class="pf">Deductible, copay &amp; OOP max returned</div><div class="pf">Batch nightly checks for next-day patients</div><div class="pf">EHR write-back via webhook</div></div>
-    </div>
-    <div class="pc" style="--cc:#4d9fff;--cb:#e8f4ff;--cd:rgba(77,159,255,.2)">
-      <div class="pbg" style="background:#e8f4ff;color:#2563eb;border:1px solid rgba(77,159,255,.3)">LIVE</div>
-      <div class="pci" style="background:#e8f4ff;border-color:rgba(77,159,255,.2)">◎</div><div class="pname">CLAIMSCRUBBER</div>
-      <p class="pdesc">Runs every claim through 4 validation engines before submission — ICD-10, CPT/modifier, CCI bundling, and payer-specific rules.</p>
-      <div class="pff"><div class="pf">ICD-10 format &amp; billability validation</div><div class="pf">CPT + modifier compatibility checks</div><div class="pf">Full CCI edit database built in</div><div class="pf">Payer-specific unit &amp; POS rules</div><div class="pf">Errors ranked by denial risk severity</div></div>
-    </div>
-    <div class="pc" style="--cc:#b57aff;--cb:#f3eeff;--cd:rgba(181,122,255,.2)">
-      <div class="pbg" style="background:#f3eeff;color:#7c3aed;border:1px solid rgba(181,122,255,.3)">LIVE</div>
-      <div class="pci" style="background:#f3eeff;border-color:rgba(181,122,255,.2)">⚑</div><div class="pname">DENIALMANAGER</div>
-      <p class="pdesc">Automatically categorizes denials by CARC/RARC code, generates AI appeal letters, and tracks every denial to resolution.</p>
-      <div class="pff"><div class="pf">6 denial engines running in parallel</div><div class="pf">AI appeal letters via Claude API</div><div class="pf">Medical necessity + auth + modifier + POS</div><div class="pf">Timely filing deadline tracking</div><div class="pf">45% average appeal win rate</div></div>
-    </div>
-    <div class="pc" style="--cc:#ffb020;--cb:#fff8e8;--cd:rgba(255,176,32,.2)">
-      <div class="pbg" style="background:#fff8e8;color:#d97706;border:1px solid rgba(255,176,32,.3)">LIVE</div>
-      <div class="pci" style="background:#fff8e8;border-color:rgba(255,176,32,.2)">💬</div><div class="pname">PATIENTBILLINGBOT</div>
-      <p class="pdesc">AI chat widget + SMS bot that answers patient billing questions, sets up payment plans, and sends automated reminders — 24/7.</p>
-      <div class="pff"><div class="pf">Web chat widget (embed in 1 line)</div><div class="pf">Inbound SMS via Twilio</div><div class="pf">6-tier automated reminder schedule</div><div class="pf">Stripe payment links built in</div><div class="pf">Explains EOBs in plain English</div></div>
-    </div>
+    <div class="pc" style="--cc:#00e87a;--cb:#e8fff3;--cd:rgba(0,232,122,.2)"><div class="pbg" style="background:#e8fff3;color:#00c469;border:1px solid rgba(0,232,122,.3)">LIVE</div><div class="pci">✦</div><div class="pname">ELIGIBILITYBOT</div><p class="pdesc">Verifies insurance coverage before every appointment via Availity 270/271 EDI. Catches inactive policies before they become denied claims.</p><div class="pff"><div class="pf">Real-time Availity / Waystar integration</div><div class="pf">4-hour smart cache to cut API costs</div><div class="pf">Deductible, copay &amp; OOP max returned</div><div class="pf">Batch nightly checks for next-day patients</div><div class="pf">EHR write-back via webhook</div></div></div>
+    <div class="pc" style="--cc:#4d9fff;--cb:#e8f4ff;--cd:rgba(77,159,255,.2)"><div class="pbg" style="background:#e8f4ff;color:#2563eb;border:1px solid rgba(77,159,255,.3)">LIVE</div><div class="pci" style="background:#e8f4ff;border-color:rgba(77,159,255,.2)">◎</div><div class="pname">CLAIMSCRUBBER</div><p class="pdesc">Runs every claim through 4 validation engines before submission — ICD-10, CPT/modifier, CCI bundling, and payer-specific rules.</p><div class="pff"><div class="pf">ICD-10 format &amp; billability validation</div><div class="pf">CPT + modifier compatibility checks</div><div class="pf">Full CCI edit database built in</div><div class="pf">Payer-specific unit &amp; POS rules</div><div class="pf">Errors ranked by denial risk severity</div></div></div>
+    <div class="pc" style="--cc:#b57aff;--cb:#f3eeff;--cd:rgba(181,122,255,.2)"><div class="pbg" style="background:#f3eeff;color:#7c3aed;border:1px solid rgba(181,122,255,.3)">LIVE</div><div class="pci" style="background:#f3eeff;border-color:rgba(181,122,255,.2)">⚑</div><div class="pname">DENIALMANAGER</div><p class="pdesc">Automatically categorizes denials by CARC/RARC code, generates AI appeal letters, and tracks every denial to resolution.</p><div class="pff"><div class="pf">6 denial engines running in parallel</div><div class="pf">AI appeal letters via Claude API</div><div class="pf">Medical necessity + auth + modifier + POS</div><div class="pf">Timely filing deadline tracking</div><div class="pf">45% average appeal win rate</div></div></div>
+    <div class="pc" style="--cc:#ffb020;--cb:#fff8e8;--cd:rgba(255,176,32,.2)"><div class="pbg" style="background:#fff8e8;color:#d97706;border:1px solid rgba(255,176,32,.3)">LIVE</div><div class="pci" style="background:#fff8e8;border-color:rgba(255,176,32,.2)">💬</div><div class="pname">PATIENTBILLINGBOT</div><p class="pdesc">AI chat widget + SMS bot that answers patient billing questions, sets up payment plans, and sends automated reminders — 24/7.</p><div class="pff"><div class="pf">Web chat widget (embed in 1 line)</div><div class="pf">Inbound SMS via Twilio</div><div class="pf">6-tier automated reminder schedule</div><div class="pf">Stripe payment links built in</div><div class="pf">Explains EOBs in plain English</div></div></div>
   </div>
 </section>
+
 <section class="how" id="how">
   <div class="reveal" style="text-align:center"><div class="sl" style="justify-content:center">How It Works</div><h2>LIVE IN 48 HOURS</h2><p class="sub" style="margin:0 auto">No IT team required. No EHR replacement. Your bots connect to your existing clearinghouse and PM system.</p></div>
   <div class="steps reveal d1">
@@ -292,6 +322,7 @@ footer{flex-direction:column;gap:16px;text-align:center}
     <div class="step"><div class="snum">04</div><h3>COLLECT</h3><p>Watch your clean claim rate climb and denial rate drop. Average ROI in the first billing cycle.</p></div>
   </div>
 </section>
+
 <section class="proof" id="proof">
   <div class="reveal"><div class="sl">Real Results</div><h2>THE NUMBERS DON'T LIE</h2><p class="sub">What practices see in their first 90 days on ClaimFlow.</p></div>
   <div class="pgr2">
@@ -307,40 +338,46 @@ footer{flex-direction:column;gap:16px;text-align:center}
     </div>
   </div>
 </section>
+
 <section class="pricing" id="pricing">
   <div class="reveal" style="text-align:center"><div class="sl" style="justify-content:center">Pricing</div><h2>SIMPLE. TRANSPARENT. PAYS FOR ITSELF.</h2><p class="sub" style="margin:0 auto">Per provider pricing. No setup fees. No annual contracts. Cancel anytime.</p></div>
   <div class="prgrid reveal d1">
-    <div class="prcard">
-      <div class="prt">Starter</div><div class="prp">$299</div><div class="prper">per provider / month</div>
-      <div class="prd">EligibilityBot + ClaimScrubber. Perfect for solo practitioners and small offices just getting started.</div>
-      <div class="prlist"><div class="pri">EligibilityBot (real-time + batch)</div><div class="pri">ClaimScrubber (4 engines)</div><div class="pri">Up to 500 claims/month</div><div class="pri">Email alerts</div><div class="pri">14-day free trial</div></div>
-      <a href="#" class="prbtn">Start Free Trial</a>
-    </div>
-    <div class="prcard feat">
-      <div class="popb">Most Popular</div>
-      <div class="prt">Growth</div><div class="prp">$549</div><div class="prper">per provider / month</div>
-      <div class="prd">Full bot suite minus PatientBillingBot. The sweet spot for group practices that want maximum denial recovery.</div>
-      <div class="prlist"><div class="pri">Everything in Starter</div><div class="pri">DenialManager (6 engines)</div><div class="pri">AI appeal letter generation</div><div class="pri">Unlimited claims</div><div class="pri">Slack + SMS alerts</div><div class="pri">Priority support</div></div>
-      <a href="#" class="prbtn">Start Free Trial</a>
-    </div>
-    <div class="prcard">
-      <div class="prt">Pro Suite</div><div class="prp">$899</div><div class="prper">per provider / month</div>
-      <div class="prd">All 4 bots. The complete RCM automation stack for practices serious about maximizing every dollar.</div>
-      <div class="prlist"><div class="pri">Everything in Growth</div><div class="pri">PatientBillingBot (web + SMS)</div><div class="pri">Automated payment reminders</div><div class="pri">Stripe payment collection</div><div class="pri">White-glove onboarding</div><div class="pri">Dedicated success manager</div></div>
-      <a href="#" class="prbtn">Start Free Trial</a>
-    </div>
+    <div class="prcard"><div class="prt">Starter</div><div class="prp">$299</div><div class="prper">per provider / month</div><div class="prd">EligibilityBot + ClaimScrubber. Perfect for solo practitioners and small offices just getting started with automation.</div><div class="prlist"><div class="pri">EligibilityBot (real-time + batch)</div><div class="pri">ClaimScrubber (4 engines)</div><div class="pri">Up to 500 claims/month</div><div class="pri">Email alerts</div><div class="pri">14-day free trial</div></div><button class="prbtn" onclick="openDemo()">Start Free Trial</button></div>
+    <div class="prcard feat"><div class="popb">Most Popular</div><div class="prt">Growth</div><div class="prp">$549</div><div class="prper">per provider / month</div><div class="prd">Full bot suite minus PatientBillingBot. The sweet spot for group practices that want maximum denial recovery.</div><div class="prlist"><div class="pri">Everything in Starter</div><div class="pri">DenialManager (6 engines)</div><div class="pri">AI appeal letter generation</div><div class="pri">Unlimited claims</div><div class="pri">Slack + SMS alerts</div><div class="pri">Priority support</div></div><button class="prbtn" onclick="openDemo()">Start Free Trial</button></div>
+    <div class="prcard"><div class="prt">Pro Suite</div><div class="prp">$899</div><div class="prper">per provider / month</div><div class="prd">All 4 bots. The complete RCM automation stack for practices serious about maximizing every dollar.</div><div class="prlist"><div class="pri">Everything in Growth</div><div class="pri">PatientBillingBot (web + SMS)</div><div class="pri">Automated payment reminders</div><div class="pri">Stripe payment collection</div><div class="pri">White-glove onboarding</div><div class="pri">Dedicated success manager</div></div><button class="prbtn" onclick="openDemo()">Start Free Trial</button></div>
   </div>
-  <p style="text-align:center;margin-top:28px;font-family:var(--fm);font-size:11px;color:var(--gray)">Medical billing company or health system? &nbsp;·&nbsp;<a href="#" style="color:var(--green2);text-decoration:none">Contact us for Enterprise &amp; white-label pricing →</a></p>
+  <p style="text-align:center;margin-top:28px;font-family:var(--fm);font-size:11px;color:var(--gray)">Medical billing company or health system? &nbsp;·&nbsp;<a href="#" onclick="openDemo();return false;" style="color:var(--green2);text-decoration:none">Contact us for Enterprise &amp; white-label pricing →</a></p>
 </section>
+
 <section class="cta">
-  <div class="reveal"><h2>READY TO STOP<em>LOSING MONEY?</em></h2><p>14-day free trial. No credit card. No IT team. Your first scrubbed claim in under 5 minutes.</p><div class="ctab"><a href="#pricing" class="bg">Start Free Trial →</a><a href="#" class="bo">▷&nbsp; Book a demo</a></div></div>
+  <div class="reveal"><h2>READY TO STOP<em>LOSING MONEY?</em></h2><p>14-day free trial. No credit card. No IT team. Your first scrubbed claim in under 5 minutes.</p><div class="ctab"><button class="bg" onclick="openDemo()">Start Free Trial →</button><button class="bo" onclick="openDemo()">▷&nbsp; Book a demo</button></div></div>
 </section>
+
 <footer>
   <div class="fl">CLAIMFLOW</div>
-  <div class="fls"><a href="#">Privacy</a><a href="#">HIPAA</a><a href="#">Terms</a><a href="#">Contact</a><a href="#">Docs</a></div>
+  <div class="fls"><a href="#">Privacy</a><a href="#">HIPAA</a><a href="#">Terms</a><a href="#" onclick="openDemo();return false;">Contact</a><a href="#">Docs</a></div>
   <div class="fc">© 2026 ClaimFlow Solutions. All rights reserved.</div>
 </footer>
+
 <script>
+function openDemo(){ document.getElementById('demoModal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDemo(){ document.getElementById('demoModal').classList.remove('open'); document.body.style.overflow=''; }
+function submitDemo(){
+  const f=document.getElementById('m-fname').value.trim();
+  const l=document.getElementById('m-lname').value.trim();
+  const e=document.getElementById('m-email').value.trim();
+  const pr=document.getElementById('m-practice').value.trim();
+  if(!f||!l||!e||!pr){ alert('Please fill in all required fields (marked with *).'); return; }
+  const ph=document.getElementById('m-phone').value.trim();
+  const sz=document.getElementById('m-size').value;
+  const tm=document.getElementById('m-time').value;
+  const body=encodeURIComponent('CLAIMFLOW DEMO REQUEST\n\nName: '+f+' '+l+'\nEmail: '+e+'\nPractice: '+pr+'\nPhone: '+(ph||'Not provided')+'\nPractice size: '+(sz||'Not provided')+'\nBest time: '+(tm||'Not provided'));
+  window.location.href='mailto:info@claimflow.io?subject=Demo+Request+-+'+encodeURIComponent(f+' '+l)+'&body='+body;
+  document.getElementById('mform-wrap').style.display='none';
+  document.getElementById('msuccess').style.display='block';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDemo(); });
+document.getElementById('demoModal').addEventListener('click',e=>{ if(e.target===document.getElementById('demoModal')) closeDemo(); });
 const cur=document.getElementById('cursor');
 document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
 document.querySelectorAll('a,button,.pc,.prcard,.sc').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('grow'));el.addEventListener('mouseleave',()=>cur.classList.remove('grow'))});
