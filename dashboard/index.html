@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RCM AutoMed \u2014 Command Center</title>
+<title>RCM AutoMed — Command Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -48,7 +48,7 @@
     overflow-x: hidden;
   }
 
-  /* \u2500\u2500\u2500 GRID NOISE OVERLAY \u2500\u2500\u2500 */
+  /* ─── GRID NOISE OVERLAY ─── */
   body::before {
     content: '';
     position: fixed;
@@ -61,7 +61,7 @@
     z-index: 0;
   }
 
-  /* \u2500\u2500\u2500 LAYOUT \u2500\u2500\u2500 */
+  /* ─── LAYOUT ─── */
   .shell {
     display: grid;
     grid-template-columns: 220px 1fr;
@@ -71,7 +71,7 @@
     z-index: 1;
   }
 
-  /* \u2500\u2500\u2500 TOPBAR \u2500\u2500\u2500 */
+  /* ─── TOPBAR ─── */
   .topbar {
     grid-column: 1 / -1;
     display: flex;
@@ -135,7 +135,7 @@
     color: var(--text3);
   }
 
-  /* \u2500\u2500\u2500 SIDEBAR \u2500\u2500\u2500 */
+  /* ─── SIDEBAR ─── */
   .sidebar {
     border-right: 1px solid var(--border);
     padding: 24px 0;
@@ -204,7 +204,7 @@
     border-color: rgba(0,229,160,0.2);
   }
 
-  /* \u2500\u2500\u2500 MAIN CONTENT \u2500\u2500\u2500 */
+  /* ─── MAIN CONTENT ─── */
   .main {
     padding: 28px;
     overflow-y: auto;
@@ -213,7 +213,7 @@
     gap: 24px;
   }
 
-  /* \u2500\u2500\u2500 PAGE HEADER \u2500\u2500\u2500 */
+  /* ─── PAGE HEADER ─── */
   .page-header {
     display: flex; align-items: flex-start; justify-content: space-between;
     opacity: 0; transform: translateY(12px);
@@ -265,7 +265,7 @@
   }
   .btn-ghost:hover { border-color: var(--border2); color: var(--text); background: var(--bg3); }
 
-  /* \u2500\u2500\u2500 KPI ROW \u2500\u2500\u2500 */
+  /* ─── KPI ROW ─── */
   .kpi-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -323,7 +323,7 @@
   .kpi-delta.up { color: var(--green); }
   .kpi-delta.down { color: var(--red); }
 
-  /* \u2500\u2500\u2500 TWO COLUMN GRID \u2500\u2500\u2500 */
+  /* ─── TWO COLUMN GRID ─── */
   .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -340,7 +340,7 @@
     animation: fadeUp 0.5s ease 0.25s forwards;
   }
 
-  /* \u2500\u2500\u2500 PANEL \u2500\u2500\u2500 */
+  /* ─── PANEL ─── */
   .panel {
     background: var(--bg2);
     border: 1px solid var(--border);
@@ -384,7 +384,7 @@
 
   .panel-body { padding: 20px; }
 
-  /* \u2500\u2500\u2500 BOT STATUS CARDS \u2500\u2500\u2500 */
+  /* ─── BOT STATUS CARDS ─── */
   .bot-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -492,7 +492,7 @@
     margin-top: 2px;
   }
 
-  /* \u2500\u2500\u2500 ACTIVITY FEED \u2500\u2500\u2500 */
+  /* ─── ACTIVITY FEED ─── */
   .feed { display: flex; flex-direction: column; }
 
   .feed-item {
@@ -540,7 +540,7 @@
   .feed-amount.green { color: var(--green); }
   .feed-amount.red { color: var(--red); }
 
-  /* \u2500\u2500\u2500 DENIAL BREAKDOWN \u2500\u2500\u2500 */
+  /* ─── DENIAL BREAKDOWN ─── */
   .denial-list { display: flex; flex-direction: column; gap: 10px; }
 
   .denial-row {
@@ -584,7 +584,7 @@
     text-align: right;
   }
 
-  /* \u2500\u2500\u2500 LIVE DEMO SECTION \u2500\u2500\u2500 */
+  /* ─── LIVE DEMO SECTION ─── */
   .demo-section {
     background: var(--bg2);
     border: 1px solid var(--border);
@@ -674,7 +674,7 @@
     font-size: 10px;
   }
 
-  /* \u2500\u2500\u2500 REVENUE CHART \u2500\u2500\u2500 */
+  /* ─── REVENUE CHART ─── */
   .chart-wrap {
     position: relative;
     height: 160px;
@@ -683,7 +683,7 @@
 
   .chart-svg { width: 100%; height: 100%; }
 
-  /* \u2500\u2500\u2500 ROI CALCULATOR \u2500\u2500\u2500 */
+  /* ─── ROI CALCULATOR ─── */
   .roi-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -750,12 +750,12 @@
   .roi-item-label { color: var(--text2); }
   .roi-item-val { font-family: var(--font-mono); color: var(--green); }
 
-  /* \u2500\u2500\u2500 SCROLLBAR \u2500\u2500\u2500 */
+  /* ─── SCROLLBAR ─── */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
-  /* \u2500\u2500\u2500 RESPONSIVE HELPERS \u2500\u2500\u2500 */
+  /* ─── RESPONSIVE HELPERS ─── */
   .span-2 { grid-column: span 2; }
 </style>
 </head>
@@ -784,37 +784,37 @@
     <div class="nav-section">
       <div class="nav-label">Overview</div>
       <div class="nav-item active" onclick="showPage('dashboard')">
-        <span class="nav-icon">\u2b21</span> Dashboard
+        <span class="nav-icon">⬡</span> Dashboard
       </div>
       <div class="nav-item" onclick="showPage('demo')">
-        <span class="nav-icon">\u25b7</span> Live Demo
+        <span class="nav-icon">▷</span> Live Demo
       </div>
       <div class="nav-item" onclick="showPage('roi')">
-        <span class="nav-icon">\u25c8</span> ROI Calculator
+        <span class="nav-icon">◈</span> ROI Calculator
       </div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Bots</div>
       <div class="nav-item" onclick="showPage('eligibility')">
-        <span class="nav-icon">\u2726</span> EligibilityBot
+        <span class="nav-icon">✦</span> EligibilityBot
         <span class="nav-badge green">Live</span>
       </div>
       <div class="nav-item" onclick="showPage('scrubber')">
-        <span class="nav-icon">\u25ce</span> ClaimScrubber
+        <span class="nav-icon">◎</span> ClaimScrubber
         <span class="nav-badge green">Live</span>
       </div>
       <div class="nav-item" onclick="showPage('denials')">
-        <span class="nav-icon">\u2691</span> DenialManager
+        <span class="nav-icon">⚑</span> DenialManager
         <span class="nav-badge red">7</span>
       </div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Coming Soon</div>
       <div class="nav-item" style="opacity:0.4">
-        <span class="nav-icon">\u25f7</span> AuthBot
+        <span class="nav-icon">◷</span> AuthBot
       </div>
       <div class="nav-item" style="opacity:0.4">
-        <span class="nav-icon">\u25d1</span> PatientBillingBot
+        <span class="nav-icon">◑</span> PatientBillingBot
       </div>
     </div>
   </nav>
@@ -822,17 +822,17 @@
   <!-- MAIN -->
   <main class="main" id="main-content">
 
-    <!-- \u2500\u2500 PAGE: DASHBOARD \u2500\u2500 -->
+    <!-- ── PAGE: DASHBOARD ── -->
     <div id="page-dashboard">
 
       <div class="page-header">
         <div>
           <div class="page-title">Practice <span>Intelligence</span></div>
-          <div class="page-sub">Today's revenue cycle snapshot \u2014 Sat, Mar 21 2026</div>
+          <div class="page-sub">Today's revenue cycle snapshot — Sat, Mar 21 2026</div>
         </div>
         <div style="display:flex;gap:10px">
-          <button class="btn btn-ghost">\u2193 Export</button>
-          <button class="btn btn-primary" onclick="showPage('demo')">\u25b7 Run Demo</button>
+          <button class="btn btn-ghost">↓ Export</button>
+          <button class="btn btn-primary" onclick="showPage('demo')">▷ Run Demo</button>
         </div>
       </div>
 
@@ -841,17 +841,17 @@
         <div class="kpi-card" style="--accent:var(--green)">
           <div class="kpi-label">Claims Scrubbed Today</div>
           <div class="kpi-value">247</div>
-          <div class="kpi-delta up">\u2191 12% vs yesterday</div>
+          <div class="kpi-delta up">↑ 12% vs yesterday</div>
         </div>
         <div class="kpi-card" style="--accent:var(--blue)">
           <div class="kpi-label">Eligibility Checks</div>
           <div class="kpi-value">183</div>
-          <div class="kpi-delta up">\u2191 8% vs yesterday</div>
+          <div class="kpi-delta up">↑ 8% vs yesterday</div>
         </div>
         <div class="kpi-card" style="--accent:var(--red)">
           <div class="kpi-label">Open Denials</div>
           <div class="kpi-value" style="color:var(--red)">41</div>
-          <div class="kpi-delta down">\u2193 $28,400 at risk</div>
+          <div class="kpi-delta down">↓ $28,400 at risk</div>
         </div>
         <div class="kpi-card" style="--accent:var(--amber)">
           <div class="kpi-label">Est. Recovery This Month</div>
@@ -865,11 +865,11 @@
         <!-- EligibilityBot -->
         <div class="bot-card" style="--bot-color:var(--green);--bot-bg:var(--green-bg);--bot-border:rgba(0,229,160,0.2)" onclick="showPage('eligibility')">
           <div class="bot-header">
-            <div class="bot-icon">\u2726</div>
+            <div class="bot-icon">✦</div>
             <div class="bot-status live"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span> LIVE</div>
           </div>
           <div class="bot-name">EligibilityBot</div>
-          <div class="bot-desc">Real-time insurance verification via Availity 270/271 \u2014 checks before every appointment</div>
+          <div class="bot-desc">Real-time insurance verification via Availity 270/271 — checks before every appointment</div>
           <div class="bot-stats">
             <div class="bot-stat">
               <div class="bot-stat-val">183</div>
@@ -893,11 +893,11 @@
         <!-- ClaimScrubber -->
         <div class="bot-card" style="--bot-color:var(--blue);--bot-bg:var(--blue-bg);--bot-border:rgba(77,159,255,0.2)" onclick="showPage('scrubber')">
           <div class="bot-header">
-            <div class="bot-icon" style="background:var(--blue-bg);border-color:rgba(77,159,255,0.2)">\u25ce</div>
+            <div class="bot-icon" style="background:var(--blue-bg);border-color:rgba(77,159,255,0.2)">◎</div>
             <div class="bot-status live" style="background:var(--blue-bg);color:var(--blue);border-color:rgba(77,159,255,0.2)"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block"></span> LIVE</div>
           </div>
           <div class="bot-name">ClaimScrubber</div>
-          <div class="bot-desc">Pre-submission claim validation \u2014 catches ICD-10, CPT, CCI, and modifier errors before denial</div>
+          <div class="bot-desc">Pre-submission claim validation — catches ICD-10, CPT, CCI, and modifier errors before denial</div>
           <div class="bot-stats">
             <div class="bot-stat">
               <div class="bot-stat-val" style="color:var(--blue)">247</div>
@@ -921,11 +921,11 @@
         <!-- DenialManager -->
         <div class="bot-card" style="--bot-color:var(--purple);--bot-bg:var(--purple-bg);--bot-border:rgba(181,122,255,0.2)" onclick="showPage('denials')">
           <div class="bot-header">
-            <div class="bot-icon" style="background:var(--purple-bg);border-color:rgba(181,122,255,0.2)">\u2691</div>
+            <div class="bot-icon" style="background:var(--purple-bg);border-color:rgba(181,122,255,0.2)">⚑</div>
             <div class="bot-status live" style="background:var(--purple-bg);color:var(--purple);border-color:rgba(181,122,255,0.2)"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple);display:inline-block"></span> LIVE</div>
           </div>
           <div class="bot-name">DenialManager</div>
-          <div class="bot-desc">AI-powered denial categorization and appeal letter generation \u2014 6 denial type engines</div>
+          <div class="bot-desc">AI-powered denial categorization and appeal letter generation — 6 denial type engines</div>
           <div class="bot-stats">
             <div class="bot-stat">
               <div class="bot-stat-val" style="color:var(--purple)">41</div>
@@ -953,54 +953,54 @@
         <!-- Activity Feed -->
         <div class="panel">
           <div class="panel-head">
-            <div class="panel-title">\u26a1 Live Activity <span class="panel-badge">Real-time</span></div>
+            <div class="panel-title">⚡ Live Activity <span class="panel-badge">Real-time</span></div>
           </div>
           <div class="feed" id="activity-feed">
             <div class="feed-item">
               <div class="feed-dot" style="background:var(--green)"></div>
               <div class="feed-content">
-                <div class="feed-title">Eligibility verified \u2014 Aetna PPO</div>
-                <div class="feed-meta">Patient #4821 \u00b7 POS 11 \u00b7 14s ago</div>
+                <div class="feed-title">Eligibility verified — Aetna PPO</div>
+                <div class="feed-meta">Patient #4821 · POS 11 · 14s ago</div>
               </div>
-              <div class="feed-amount green">\u2713 Active</div>
+              <div class="feed-amount green">✓ Active</div>
             </div>
             <div class="feed-item">
               <div class="feed-dot" style="background:var(--red)"></div>
               <div class="feed-content">
-                <div class="feed-title">Claim blocked \u2014 CCI edit CO-97</div>
-                <div class="feed-meta">CPT 99214 + 93000 \u00b7 missing mod 25 \u00b7 42s ago</div>
+                <div class="feed-title">Claim blocked — CCI edit CO-97</div>
+                <div class="feed-meta">CPT 99214 + 93000 · missing mod 25 · 42s ago</div>
               </div>
               <div class="feed-amount red">$245 saved</div>
             </div>
             <div class="feed-item">
               <div class="feed-dot" style="background:var(--purple)"></div>
               <div class="feed-content">
-                <div class="feed-title">Appeal letter generated \u2014 CO-50</div>
-                <div class="feed-meta">UnitedHealthcare \u00b7 Medical necessity \u00b7 1m ago</div>
+                <div class="feed-title">Appeal letter generated — CO-50</div>
+                <div class="feed-meta">UnitedHealthcare · Medical necessity · 1m ago</div>
               </div>
               <div class="feed-amount" style="color:var(--purple)">$485 at risk</div>
             </div>
             <div class="feed-item">
               <div class="feed-dot" style="background:var(--green)"></div>
               <div class="feed-content">
-                <div class="feed-title">Eligibility verified \u2014 Medicare</div>
-                <div class="feed-meta">Patient #4819 \u00b7 POS 11 \u00b7 2m ago</div>
+                <div class="feed-title">Eligibility verified — Medicare</div>
+                <div class="feed-meta">Patient #4819 · POS 11 · 2m ago</div>
               </div>
-              <div class="feed-amount green">\u2713 Active</div>
+              <div class="feed-amount green">✓ Active</div>
             </div>
             <div class="feed-item">
               <div class="feed-dot" style="background:var(--amber)"></div>
               <div class="feed-content">
-                <div class="feed-title">Denial \u2014 CO-29 timely filing</div>
-                <div class="feed-meta">Cigna \u00b7 Claim #8847 \u00b7 3m ago</div>
+                <div class="feed-title">Denial — CO-29 timely filing</div>
+                <div class="feed-meta">Cigna · Claim #8847 · 3m ago</div>
               </div>
               <div class="feed-amount" style="color:var(--amber)">$1,200 risk</div>
             </div>
             <div class="feed-item">
               <div class="feed-dot" style="background:var(--blue)"></div>
               <div class="feed-content">
-                <div class="feed-title">Claim scrubbed \u2014 0 errors found</div>
-                <div class="feed-meta">CPT 90837 \u00b7 ICD F32.1 \u00b7 4m ago</div>
+                <div class="feed-title">Claim scrubbed — 0 errors found</div>
+                <div class="feed-meta">CPT 90837 · ICD F32.1 · 4m ago</div>
               </div>
               <div class="feed-amount" style="color:var(--blue)">Ready</div>
             </div>
@@ -1010,7 +1010,7 @@
         <!-- Denial Breakdown -->
         <div class="panel">
           <div class="panel-head">
-            <div class="panel-title">\u2691 Denial Breakdown <span class="panel-badge amber">41 Open</span></div>
+            <div class="panel-title">⚑ Denial Breakdown <span class="panel-badge amber">41 Open</span></div>
           </div>
           <div class="panel-body">
             <div class="denial-list">
@@ -1068,20 +1068,20 @@
       </div>
     </div>
 
-    <!-- \u2500\u2500 PAGE: LIVE DEMO \u2500\u2500 -->
+    <!-- ── PAGE: LIVE DEMO ── -->
     <div id="page-demo" style="display:none">
       <div class="page-header">
         <div>
           <div class="page-title">Live <span>Bot Demo</span></div>
-          <div class="page-sub">Run any bot in real-time \u2014 enter a claim and see it work</div>
+          <div class="page-sub">Run any bot in real-time — enter a claim and see it work</div>
         </div>
       </div>
 
       <div class="demo-section">
         <div class="demo-tabs">
-          <div class="demo-tab active" onclick="switchTab('eligibility-demo')">\u2726 EligibilityBot</div>
-          <div class="demo-tab" onclick="switchTab('scrubber-demo')">\u25ce ClaimScrubber</div>
-          <div class="demo-tab" onclick="switchTab('denial-demo')">\u2691 DenialManager</div>
+          <div class="demo-tab active" onclick="switchTab('eligibility-demo')">✦ EligibilityBot</div>
+          <div class="demo-tab" onclick="switchTab('scrubber-demo')">◎ ClaimScrubber</div>
+          <div class="demo-tab" onclick="switchTab('denial-demo')">⚑ DenialManager</div>
         </div>
 
         <!-- Eligibility Demo -->
@@ -1101,7 +1101,7 @@
             </div>
           </div>
           <div style="display:flex;gap:10px;margin-bottom:20px">
-            <button class="btn btn-primary" onclick="runEligibility()">\u25b7 Check Eligibility</button>
+            <button class="btn btn-primary" onclick="runEligibility()">▷ Check Eligibility</button>
             <button class="btn btn-ghost" onclick="clearResult('elig-result')">Clear</button>
           </div>
           <div class="demo-result" id="elig-result">
@@ -1126,7 +1126,7 @@
             </div>
           </div>
           <div style="display:flex;gap:10px;margin-bottom:20px">
-            <button class="btn btn-primary" onclick="runScrubber()">\u25b7 Scrub Claim</button>
+            <button class="btn btn-primary" onclick="runScrubber()">▷ Scrub Claim</button>
             <button class="btn btn-ghost" onclick="clearResult('scrub-result')">Clear</button>
           </div>
           <div class="demo-result" id="scrub-result">
@@ -1151,7 +1151,7 @@
             </div>
           </div>
           <div style="display:flex;gap:10px;margin-bottom:20px">
-            <button class="btn btn-primary" onclick="runDenial()">\u25b7 Process Denial</button>
+            <button class="btn btn-primary" onclick="runDenial()">▷ Process Denial</button>
             <button class="btn btn-ghost" onclick="clearResult('denial-result')">Clear</button>
           </div>
           <div class="demo-result" id="denial-result">
@@ -1161,7 +1161,7 @@
       </div>
     </div>
 
-    <!-- \u2500\u2500 PAGE: ROI CALCULATOR \u2500\u2500 -->
+    <!-- ── PAGE: ROI CALCULATOR ── -->
     <div id="page-roi" style="display:none">
       <div class="page-header">
         <div>
@@ -1172,7 +1172,7 @@
 
       <div class="panel">
         <div class="panel-head">
-          <div class="panel-title">\u25c8 Practice Revenue Analyzer</div>
+          <div class="panel-title">◈ Practice Revenue Analyzer</div>
         </div>
         <div class="panel-body">
           <div class="roi-grid">
@@ -1213,7 +1213,7 @@
                 </div>
                 <div class="roi-item" style="border-top:1px solid var(--green);margin-top:4px;padding-top:12px">
                   <span class="roi-item-label" style="color:var(--text);font-weight:500">RCM AutoMed Pro cost</span>
-                  <span class="roi-item-val" id="roi-cost" style="color:var(--red)">\u2013$0</span>
+                  <span class="roi-item-val" id="roi-cost" style="color:var(--red)">–$0</span>
                 </div>
                 <div class="roi-item">
                   <span class="roi-item-label" style="color:var(--text);font-weight:500">Net ROI</span>
@@ -1226,74 +1226,74 @@
       </div>
     </div>
 
-    <!-- \u2500\u2500 PAGE: ELIGIBILITY \u2500\u2500 -->
+    <!-- ── PAGE: ELIGIBILITY ── -->
     <div id="page-eligibility" style="display:none">
       <div class="page-header">
-        <div><div class="page-title">\u2726 <span>EligibilityBot</span></div>
+        <div><div class="page-title">✦ <span>EligibilityBot</span></div>
         <div class="page-sub">Real-time insurance verification via Availity 270/271 EDI</div></div>
-        <button class="btn btn-primary" onclick="showPage('demo');switchTab('eligibility-demo')">\u25b7 Run Check</button>
+        <button class="btn btn-primary" onclick="showPage('demo');switchTab('eligibility-demo')">▷ Run Check</button>
       </div>
       <div class="three-col" style="opacity:1;animation:none">
-        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Today's Checks</div><div class="kpi-value">183</div><div class="kpi-delta up">\u2191 8% vs yesterday</div></div>
+        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Today's Checks</div><div class="kpi-value">183</div><div class="kpi-delta up">↑ 8% vs yesterday</div></div>
         <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Cache Hit Rate</div><div class="kpi-value">67%</div><div class="kpi-delta up">Saving API costs</div></div>
-        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Avg Response Time</div><div class="kpi-value">1.2s</div><div class="kpi-delta up">\u2193 0.3s vs last week</div></div>
+        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Avg Response Time</div><div class="kpi-value">1.2s</div><div class="kpi-delta up">↓ 0.3s vs last week</div></div>
       </div>
       <div class="panel" style="margin-top:16px">
         <div class="panel-head"><div class="panel-title">Recent Eligibility Checks</div></div>
         <div class="feed">
-          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Aetna PPO \u2014 W123456789</div><div class="feed-meta">Active \u00b7 Deductible $820 remaining \u00b7 Copay $25 \u00b7 14s ago</div></div><div class="feed-amount green">Active</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Medicare \u2014 1EG4-TE5-MK72</div><div class="feed-meta">Active \u00b7 Part B \u00b7 Deductible met \u00b7 2m ago</div></div><div class="feed-amount green">Active</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">Cigna \u2014 U18873441</div><div class="feed-meta">Inactive \u2014 coverage terminated 3/1/2026 \u00b7 5m ago</div></div><div class="feed-amount red">Inactive</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">UHC \u2014 912345678</div><div class="feed-meta">Active \u2014 requires referral for specialist \u00b7 8m ago</div></div><div class="feed-amount" style="color:var(--amber)">\u26a0 Referral</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Humana \u2014 H00112233</div><div class="feed-meta">Active \u00b7 OOP max $4,200 \u00b7 $1,100 remaining \u00b7 11m ago</div></div><div class="feed-amount green">Active</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Aetna PPO — W123456789</div><div class="feed-meta">Active · Deductible $820 remaining · Copay $25 · 14s ago</div></div><div class="feed-amount green">Active</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Medicare — 1EG4-TE5-MK72</div><div class="feed-meta">Active · Part B · Deductible met · 2m ago</div></div><div class="feed-amount green">Active</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">Cigna — U18873441</div><div class="feed-meta">Inactive — coverage terminated 3/1/2026 · 5m ago</div></div><div class="feed-amount red">Inactive</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">UHC — 912345678</div><div class="feed-meta">Active — requires referral for specialist · 8m ago</div></div><div class="feed-amount" style="color:var(--amber)">⚠ Referral</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Humana — H00112233</div><div class="feed-meta">Active · OOP max $4,200 · $1,100 remaining · 11m ago</div></div><div class="feed-amount green">Active</div></div>
         </div>
       </div>
     </div>
 
-    <!-- \u2500\u2500 PAGE: SCRUBBER \u2500\u2500 -->
+    <!-- ── PAGE: SCRUBBER ── -->
     <div id="page-scrubber" style="display:none">
       <div class="page-header">
-        <div><div class="page-title">\u25ce <span>ClaimScrubber</span></div>
-        <div class="page-sub">Pre-submission validation \u2014 4 engines running in parallel</div></div>
-        <button class="btn btn-primary" onclick="showPage('demo');switchTab('scrubber-demo')">\u25b7 Scrub a Claim</button>
+        <div><div class="page-title">◎ <span>ClaimScrubber</span></div>
+        <div class="page-sub">Pre-submission validation — 4 engines running in parallel</div></div>
+        <button class="btn btn-primary" onclick="showPage('demo');switchTab('scrubber-demo')">▷ Scrub a Claim</button>
       </div>
       <div class="three-col" style="opacity:1;animation:none">
-        <div class="kpi-card" style="--accent:var(--blue)"><div class="kpi-label">Claims Today</div><div class="kpi-value">247</div><div class="kpi-delta up">\u2191 12% vs yesterday</div></div>
+        <div class="kpi-card" style="--accent:var(--blue)"><div class="kpi-label">Claims Today</div><div class="kpi-value">247</div><div class="kpi-delta up">↑ 12% vs yesterday</div></div>
         <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Errors Caught</div><div class="kpi-value" style="color:var(--red)">34</div><div class="kpi-delta down">$8,200 in denials prevented</div></div>
-        <div class="kpi-card" style="--accent:var(--blue)"><div class="kpi-label">Clean Claim Rate</div><div class="kpi-value">86%</div><div class="kpi-delta up">\u2191 4% vs last month</div></div>
+        <div class="kpi-card" style="--accent:var(--blue)"><div class="kpi-label">Clean Claim Rate</div><div class="kpi-value">86%</div><div class="kpi-delta up">↑ 4% vs last month</div></div>
       </div>
       <div class="panel" style="margin-top:16px">
         <div class="panel-head"><div class="panel-title">Top Errors Caught Today</div></div>
         <div class="feed">
-          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CCI bundling \u2014 CPT 99214 + 93000 without modifier 25</div><div class="feed-meta">Engine: CCI \u00b7 Severity: HIGH \u00b7 12 occurrences today</div></div><div class="feed-amount red">12x</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">ICD-10 missing decimal \u2014 J069 should be J06.9</div><div class="feed-meta">Engine: ICD-10 \u00b7 Severity: CRITICAL \u00b7 8 occurrences</div></div><div class="feed-amount red">8x</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">Zero charge on CPT 93000 line item</div><div class="feed-meta">Engine: CPT \u00b7 Severity: HIGH \u00b7 6 occurrences</div></div><div class="feed-amount" style="color:var(--amber)">6x</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">Timely filing approaching \u2014 148 days elapsed (Aetna)</div><div class="feed-meta">Engine: Payer Rules \u00b7 Severity: MEDIUM \u00b7 5 occurrences</div></div><div class="feed-amount" style="color:var(--amber)">5x</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--blue)"></div><div class="feed-content"><div class="feed-title">Duplicate CPT code on same claim</div><div class="feed-meta">Engine: CPT \u00b7 Severity: MEDIUM \u00b7 3 occurrences</div></div><div class="feed-amount" style="color:var(--blue)">3x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CCI bundling — CPT 99214 + 93000 without modifier 25</div><div class="feed-meta">Engine: CCI · Severity: HIGH · 12 occurrences today</div></div><div class="feed-amount red">12x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">ICD-10 missing decimal — J069 should be J06.9</div><div class="feed-meta">Engine: ICD-10 · Severity: CRITICAL · 8 occurrences</div></div><div class="feed-amount red">8x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">Zero charge on CPT 93000 line item</div><div class="feed-meta">Engine: CPT · Severity: HIGH · 6 occurrences</div></div><div class="feed-amount" style="color:var(--amber)">6x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">Timely filing approaching — 148 days elapsed (Aetna)</div><div class="feed-meta">Engine: Payer Rules · Severity: MEDIUM · 5 occurrences</div></div><div class="feed-amount" style="color:var(--amber)">5x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--blue)"></div><div class="feed-content"><div class="feed-title">Duplicate CPT code on same claim</div><div class="feed-meta">Engine: CPT · Severity: MEDIUM · 3 occurrences</div></div><div class="feed-amount" style="color:var(--blue)">3x</div></div>
         </div>
       </div>
     </div>
 
-    <!-- \u2500\u2500 PAGE: DENIALS \u2500\u2500 -->
+    <!-- ── PAGE: DENIALS ── -->
     <div id="page-denials" style="display:none">
       <div class="page-header">
-        <div><div class="page-title">\u2691 <span>DenialManager</span></div>
-        <div class="page-sub">6 engines \u00b7 AI appeal letters \u00b7 full audit trail</div></div>
-        <button class="btn btn-primary" onclick="showPage('demo');switchTab('denial-demo')">\u25b7 Process Denial</button>
+        <div><div class="page-title">⚑ <span>DenialManager</span></div>
+        <div class="page-sub">6 engines · AI appeal letters · full audit trail</div></div>
+        <button class="btn btn-primary" onclick="showPage('demo');switchTab('denial-demo')">▷ Process Denial</button>
       </div>
       <div class="three-col" style="opacity:1;animation:none">
         <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Open Denials</div><div class="kpi-value" style="color:var(--red)">41</div><div class="kpi-delta down">7 critical priority</div></div>
         <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">At Risk</div><div class="kpi-value" style="color:var(--amber)">$28.4k</div><div class="kpi-delta down">Needs action this week</div></div>
-        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Won This Month</div><div class="kpi-value">$6.2k</div><div class="kpi-delta up">\u2191 45% win rate</div></div>
+        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Won This Month</div><div class="kpi-value">$6.2k</div><div class="kpi-delta up">↑ 45% win rate</div></div>
       </div>
       <div class="panel" style="margin-top:16px">
-        <div class="panel-head"><div class="panel-title">Critical Denials \u2014 Action Required <span class="panel-badge red">7 Critical</span></div></div>
+        <div class="panel-head"><div class="panel-title">Critical Denials — Action Required <span class="panel-badge red">7 Critical</span></div></div>
         <div class="feed">
-          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-29 Timely Filing \u2014 Cigna \u00b7 Claim #8847</div><div class="feed-meta">\u2691 CRITICAL \u00b7 Appeal deadline: Apr 2, 2026 \u00b7 Gather proof of original submission</div></div><div class="feed-amount red">$1,200</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-57 Prior Auth \u2014 UHC \u00b7 MRI Lumbar Spine</div><div class="feed-meta">\u2691 CRITICAL \u00b7 Retro-auth requested \u00b7 Awaiting payer response</div></div><div class="feed-amount red">$2,400</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-50 Medical Necessity \u2014 Aetna \u00b7 99214</div><div class="feed-meta">\u2691 HIGH \u00b7 Appeal letter generated \u00b7 Ready to submit</div></div><div class="feed-amount red">$485</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">CO-16 Missing Information \u2014 BCBS \u00b7 Claim #9012</div><div class="feed-meta">\u26a0 MEDIUM \u00b7 Missing NPI on rendering provider line \u00b7 Resubmit corrected</div></div><div class="feed-amount" style="color:var(--amber)">$320</div></div>
-          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">CO-97 CCI Bundling \u2014 Medicare \u00b7 CPT 29881+29876</div><div class="feed-meta">\u26a0 MEDIUM \u00b7 Review for modifier 59 eligibility \u00b7 Check operative report</div></div><div class="feed-amount" style="color:var(--amber)">$890</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-29 Timely Filing — Cigna · Claim #8847</div><div class="feed-meta">⚑ CRITICAL · Appeal deadline: Apr 2, 2026 · Gather proof of original submission</div></div><div class="feed-amount red">$1,200</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-57 Prior Auth — UHC · MRI Lumbar Spine</div><div class="feed-meta">⚑ CRITICAL · Retro-auth requested · Awaiting payer response</div></div><div class="feed-amount red">$2,400</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-50 Medical Necessity — Aetna · 99214</div><div class="feed-meta">⚑ HIGH · Appeal letter generated · Ready to submit</div></div><div class="feed-amount red">$485</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">CO-16 Missing Information — BCBS · Claim #9012</div><div class="feed-meta">⚠ MEDIUM · Missing NPI on rendering provider line · Resubmit corrected</div></div><div class="feed-amount" style="color:var(--amber)">$320</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">CO-97 CCI Bundling — Medicare · CPT 29881+29876</div><div class="feed-meta">⚠ MEDIUM · Review for modifier 59 eligibility · Check operative report</div></div><div class="feed-amount" style="color:var(--amber)">$890</div></div>
         </div>
       </div>
     </div>
@@ -1522,7 +1522,7 @@
 </div>
 
 <script>
-// \u2500\u2500\u2500 CLOCK \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── CLOCK ───────────────────────────────────────────────────────
 function updateClock() {
   const now = new Date();
   document.getElementById('clock').textContent =
@@ -1531,7 +1531,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// \u2500\u2500\u2500 PAGE ROUTING \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── PAGE ROUTING ─────────────────────────────────────────────────
 const pages = ['dashboard','demo','roi','eligibility','scrubber','denials','enroll','enroll-new'];
 const navMap = { dashboard:'dashboard', demo:'demo', roi:'roi', eligibility:'eligibility', scrubber:'scrubber', denials:'denials' };
 
@@ -1548,7 +1548,7 @@ function showPage(name) {
   if (name === 'roi') setTimeout(updateROI, 100);
 }
 
-// \u2500\u2500\u2500 DEMO TABS \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── DEMO TABS ────────────────────────────────────────────────────
 function switchTab(id) {
   document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
@@ -1561,7 +1561,7 @@ function clearResult(id) {
   document.getElementById(id).innerHTML = '<div style="color:var(--text3);font-size:12px">// Cleared</div>';
 }
 
-// \u2500\u2500\u2500 CARC KNOWLEDGE BASE \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── CARC KNOWLEDGE BASE ──────────────────────────────────────────
 const CARC_INFO = {
   '50':  { type: 'Medical Necessity',    priority: 'HIGH',     action: 'File formal appeal with LCD/NCD citation and clinical notes', winRate: '45%' },
   '57':  { type: 'Prior Authorization',  priority: 'CRITICAL', action: 'Request retro-authorization immediately. Document if emergent.', winRate: '35%' },
@@ -1569,14 +1569,14 @@ const CARC_INFO = {
   '97':  { type: 'CCI Bundling',         priority: 'MEDIUM',   action: 'Add modifier 59/XU if services were truly distinct and separate', winRate: '80%' },
   '16':  { type: 'Missing Information',  priority: 'MEDIUM',   action: 'Review RARC code. Correct and resubmit as corrected claim (freq code 7)', winRate: '85%' },
   '11':  { type: 'Coding Error',         priority: 'MEDIUM',   action: 'Verify CPT/ICD-10 crosswalk. Correct codes and resubmit.', winRate: '80%' },
-  '4':   { type: 'Modifier Error',       priority: 'MEDIUM',   action: 'Review modifier \u2014 may be missing mod 25 on E&M + procedure same day', winRate: '85%' },
+  '4':   { type: 'Modifier Error',       priority: 'MEDIUM',   action: 'Review modifier — may be missing mod 25 on E&M + procedure same day', winRate: '85%' },
   '197': { type: 'Authorization',        priority: 'CRITICAL', action: 'Verify auth number. Resubmit with correct auth or request retro-auth.', winRate: '40%' },
   '15':  { type: 'Auth Expired',         priority: 'CRITICAL', action: 'Request new authorization or appeal with clinical urgency documentation', winRate: '30%' },
   '18':  { type: 'Duplicate Claim',      priority: 'LOW',      action: 'Check original claim status. Do not resubmit if original is pending.', winRate: '70%' },
   '96':  { type: 'Not Covered',          priority: 'LOW',      action: 'Verify plan benefits. Bill patient if truly non-covered.', winRate: '10%' },
 };
 
-// \u2500\u2500\u2500 ELIGIBILITY DEMO \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── ELIGIBILITY DEMO ─────────────────────────────────────────────
 function runEligibility() {
   const payer = document.getElementById('elig-payer').value || '00431';
   const member = document.getElementById('elig-member').value || 'W123456789';
@@ -1590,7 +1590,7 @@ function runEligibility() {
 
   setTimeout(() => {
     el.innerHTML = `
-      <div class="result-line"><span class="result-key">status</span><span class="result-val green">\u25cf ACTIVE</span></div>
+      <div class="result-line"><span class="result-key">status</span><span class="result-val green">● ACTIVE</span></div>
       <div class="result-line"><span class="result-key">payer</span><span class="result-val">${payerName} (${payer})</span></div>
       <div class="result-line"><span class="result-key">member_id</span><span class="result-val">${member}</span></div>
       <div class="result-line"><span class="result-key">plan_name</span><span class="result-val">${payerName} Choice POS II</span></div>
@@ -1608,7 +1608,7 @@ function runEligibility() {
   }, 1400);
 }
 
-// \u2500\u2500\u2500 SCRUBBER DEMO \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── SCRUBBER DEMO ────────────────────────────────────────────────
 function runScrubber() {
   const cpts = document.getElementById('scrub-cpt').value || '99214, 93000';
   const dx = document.getElementById('scrub-dx').value || 'I10';
@@ -1625,20 +1625,20 @@ function runScrubber() {
     const warnings = [];
 
     if (hasEMAndEKG) {
-      errors.push({ sev: 'HIGH', engine: 'CCI', msg: 'CPT ' + cptList.find(c => c.startsWith('992')) + ' + 93000 bundled \u2014 add modifier 25 to E&M code' });
+      errors.push({ sev: 'HIGH', engine: 'CCI', msg: 'CPT ' + cptList.find(c => c.startsWith('992')) + ' + 93000 bundled — add modifier 25 to E&M code' });
     }
 
     dx.split(',').forEach(d => {
       const code = d.trim();
       if (code.length > 3 && !code.includes('.')) {
-        warnings.push({ sev: 'MEDIUM', engine: 'ICD-10', msg: '"' + code + '" may be missing decimal \u2014 should be ' + code.slice(0,3) + '.' + code.slice(3) });
+        warnings.push({ sev: 'MEDIUM', engine: 'ICD-10', msg: '"' + code + '" may be missing decimal — should be ' + code.slice(0,3) + '.' + code.slice(3) });
       }
     });
 
     const passed = errors.length === 0;
 
     el.innerHTML = `
-      <div class="result-line"><span class="result-key">result</span><span class="result-val ${passed ? 'green' : 'red'}">${passed ? '\u2713 PASSED \u2014 Ready for submission' : '\u2717 FAILED \u2014 Fix errors before submitting'}</span></div>
+      <div class="result-line"><span class="result-key">result</span><span class="result-val ${passed ? 'green' : 'red'}">${passed ? '✓ PASSED — Ready for submission' : '✗ FAILED — Fix errors before submitting'}</span></div>
       <div class="result-line"><span class="result-key">cpt_codes</span><span class="result-val">${cpts}</span></div>
       <div class="result-line"><span class="result-key">icd10_codes</span><span class="result-val">${dx}</span></div>
       <div class="result-line"><span class="result-key">payer</span><span class="result-val">${payer}</span></div>
@@ -1646,20 +1646,20 @@ function runScrubber() {
       <div class="result-line"><span class="result-key">warnings_found</span><span class="result-val amber">${warnings.length}</span></div>
       ${errors.map(e => `<div class="result-line"><span class="result-key">[${e.sev}] ${e.engine}</span><span class="result-val red">${e.msg}</span></div>`).join('')}
       ${warnings.map(w => `<div class="result-line"><span class="result-key">[${w.sev}] ${w.engine}</span><span class="result-val amber">${w.msg}</span></div>`).join('')}
-      <div class="result-line"><span class="result-key">engines_run</span><span class="result-val">ICD-10 \u00b7 CPT \u00b7 CCI \u00b7 Payer Rules</span></div>
+      <div class="result-line"><span class="result-key">engines_run</span><span class="result-val">ICD-10 · CPT · CCI · Payer Rules</span></div>
       <div class="result-line"><span class="result-key">scrub_time</span><span class="result-val green">38ms</span></div>
     `;
   }, 800);
 }
 
-// \u2500\u2500\u2500 DENIAL DEMO \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── DENIAL DEMO ──────────────────────────────────────────────────
 function runDenial() {
   const carc = document.getElementById('denial-carc').value || '50';
   const amount = parseFloat(document.getElementById('denial-amount').value) || 485;
   const payer = document.getElementById('denial-payer').value || 'Aetna';
 
   const el = document.getElementById('denial-result');
-  el.innerHTML = '<div style="color:var(--text3);font-size:12px">// Running 6 denial engines \u00b7 generating appeal strategy...</div>';
+  el.innerHTML = '<div style="color:var(--text3);font-size:12px">// Running 6 denial engines · generating appeal strategy...</div>';
 
   setTimeout(() => {
     const info = CARC_INFO[carc] || { type: 'Other', priority: 'MEDIUM', action: 'Route to senior biller for manual review', winRate: '40%' };
@@ -1671,7 +1671,7 @@ function runDenial() {
     el.innerHTML = `
       <div class="result-line"><span class="result-key">carc_code</span><span class="result-val">${carc}</span></div>
       <div class="result-line"><span class="result-key">denial_type</span><span class="result-val">${info.type}</span></div>
-      <div class="result-line"><span class="result-key">priority</span><span class="result-val ${priorityColor}">\u2691 ${info.priority}</span></div>
+      <div class="result-line"><span class="result-key">priority</span><span class="result-val ${priorityColor}">⚑ ${info.priority}</span></div>
       <div class="result-line"><span class="result-key">payer</span><span class="result-val">${payer}</span></div>
       <div class="result-line"><span class="result-key">denied_amount</span><span class="result-val red">$${amount.toFixed(2)}</span></div>
       <div class="result-line"><span class="result-key">estimated_win_rate</span><span class="result-val green">${info.winRate}</span></div>
@@ -1679,13 +1679,13 @@ function runDenial() {
       <div class="result-line"><span class="result-key">appeal_deadline</span><span class="result-val amber">${deadline.toISOString().split('T')[0]}</span></div>
       <div class="result-line"><span class="result-key">follow_up_by</span><span class="result-val">${followup.toISOString().split('T')[0]}</span></div>
       <div class="result-line"><span class="result-key">recommended_action</span><span class="result-val">${info.action}</span></div>
-      <div class="result-line"><span class="result-key">appeal_letter</span><span class="result-val green">\u2713 Generated \u2014 review before sending</span></div>
-      <div class="result-line"><span class="result-key">engines_run</span><span class="result-val">Medical Necessity \u00b7 Auth \u00b7 POS \u00b7 Modifiers \u00b7 Timely Filing \u00b7 Coding</span></div>
+      <div class="result-line"><span class="result-key">appeal_letter</span><span class="result-val green">✓ Generated — review before sending</span></div>
+      <div class="result-line"><span class="result-key">engines_run</span><span class="result-val">Medical Necessity · Auth · POS · Modifiers · Timely Filing · Coding</span></div>
     `;
   }, 1200);
 }
 
-// \u2500\u2500\u2500 ROI CALCULATOR \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── ROI CALCULATOR ───────────────────────────────────────────────
 function updateROI() {
   const claims = parseInt(document.getElementById('sl-claims').value);
   const denial = parseInt(document.getElementById('sl-denial').value);
@@ -1711,18 +1711,18 @@ function updateROI() {
   document.getElementById('roi-denial').textContent = fmt(denialSavings);
   document.getElementById('roi-staff').textContent = fmt(staffSavings);
   document.getElementById('roi-appeal').textContent = fmt(appealRecovery);
-  document.getElementById('roi-cost').textContent = '\u2013' + fmt(cost);
+  document.getElementById('roi-cost').textContent = '–' + fmt(cost);
   document.getElementById('roi-net').textContent = fmt(net);
 }
 
-// \u2500\u2500\u2500 LIVE FEED SIMULATION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+// ─── LIVE FEED SIMULATION ─────────────────────────────────────────
 const feedEvents = [
-  { dot: 'var(--green)', title: 'Eligibility verified \u2014 UHC PPO', meta: 'Active \u00b7 $1,200 deductible remaining', amount: '\u2713 Active', cls: 'green' },
-  { dot: 'var(--blue)', title: 'Claim scrubbed \u2014 0 errors', meta: 'CPT 99213 \u00b7 ICD J06.9 \u00b7 Aetna', amount: 'Ready', cls: '' },
-  { dot: 'var(--red)', title: 'Claim blocked \u2014 ICD-10 format error', meta: 'J069 should be J06.9 \u00b7 Medicare', amount: 'Fixed', cls: 'red' },
-  { dot: 'var(--purple)', title: 'Denial processed \u2014 CO-97 CCI', meta: 'CPT 29881+29876 \u00b7 Modifier 59 needed', amount: '$890', cls: '' },
-  { dot: 'var(--green)', title: 'Eligibility verified \u2014 Humana HMO', meta: 'Active \u00b7 OOP met \u00b7 No copay', amount: '\u2713 Active', cls: 'green' },
-  { dot: 'var(--amber)', title: 'Auth denial \u2014 CO-57 UHC MRI', meta: 'Retro-auth requested \u00b7 CRITICAL', amount: '$2,400', cls: '' },
+  { dot: 'var(--green)', title: 'Eligibility verified — UHC PPO', meta: 'Active · $1,200 deductible remaining', amount: '✓ Active', cls: 'green' },
+  { dot: 'var(--blue)', title: 'Claim scrubbed — 0 errors', meta: 'CPT 99213 · ICD J06.9 · Aetna', amount: 'Ready', cls: '' },
+  { dot: 'var(--red)', title: 'Claim blocked — ICD-10 format error', meta: 'J069 should be J06.9 · Medicare', amount: 'Fixed', cls: 'red' },
+  { dot: 'var(--purple)', title: 'Denial processed — CO-97 CCI', meta: 'CPT 29881+29876 · Modifier 59 needed', amount: '$890', cls: '' },
+  { dot: 'var(--green)', title: 'Eligibility verified — Humana HMO', meta: 'Active · OOP met · No copay', amount: '✓ Active', cls: 'green' },
+  { dot: 'var(--amber)', title: 'Auth denial — CO-57 UHC MRI', meta: 'Retro-auth requested · CRITICAL', amount: '$2,400', cls: '' },
 ];
 
 let feedIdx = 0;
@@ -1739,7 +1739,7 @@ setInterval(() => {
     <div class="feed-dot" style="background:${ev.dot}"></div>
     <div class="feed-content">
       <div class="feed-title">${ev.title}</div>
-      <div class="feed-meta">${ev.meta} \u00b7 just now</div>
+      <div class="feed-meta">${ev.meta} · just now</div>
     </div>
     <div class="feed-amount ${ev.cls}">${ev.amount}</div>
   `;
