@@ -29,8 +29,8 @@
     --blue-bg:   rgba(77,159,255,0.06);
     --purple:    #b57aff;
     --purple-bg: rgba(181,122,255,0.06);
-    --teal: #00d4d4;
-    --teal-bg: rgba(0,212,212,0.06);
+    --teal:      #00d4d4;
+    --teal-bg:   rgba(0,212,212,0.06);
     --font-head: 'Syne', sans-serif;
     --font-body: 'DM Sans', sans-serif;
     --font-mono: 'DM Mono', monospace;
@@ -681,7 +681,7 @@
     padding: 10px 0;
   }
 
-  .chart-svg;t-svg { width: 100%; height: 100%; }
+  .chart-svg { width: 100%; height: 100%; }
 
   /* \u2500\u2500\u2500 ROI CALCULATOR \u2500\u2500\u2500 */
   .roi-grid {
@@ -747,7 +747,1030 @@
   }
 
   .roi-item:last-child { border-bottom: none; }
-  .roi-item-label { color: var(---text2); }
-  
-  
-  
+  .roi-item-label { color: var(--text2); }
+  .roi-item-val { font-family: var(--font-mono); color: var(--green); }
+
+  /* \u2500\u2500\u2500 SCROLLBAR \u2500\u2500\u2500 */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  /* \u2500\u2500\u2500 RESPONSIVE HELPERS \u2500\u2500\u2500 */
+  .span-2 { grid-column: span 2; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="logo">
+      <div class="logo-mark">R</div>
+      RCM AutoMed
+      <span class="logo-sub">// Command Center</span>
+    </div>
+    <div class="topbar-right">
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        3 Bots Active
+      </div>
+      <div class="topbar-time" id="clock">--:-- --</div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="nav-section">
+      <div class="nav-label">Overview</div>
+      <div class="nav-item active" onclick="showPage('dashboard')">
+        <span class="nav-icon">\u2b21</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showPage('demo')">
+        <span class="nav-icon">\u25b7</span> Live Demo
+      </div>
+      <div class="nav-item" onclick="showPage('roi')">
+        <span class="nav-icon">\u25c8</span> ROI Calculator
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Bots</div>
+      <div class="nav-item" onclick="showPage('eligibility')">
+        <span class="nav-icon">\u2726</span> EligibilityBot
+        <span class="nav-badge green">Live</span>
+      </div>
+      <div class="nav-item" onclick="showPage('scrubber')">
+        <span class="nav-icon">\u25ce</span> ClaimScrubber
+        <span class="nav-badge green">Live</span>
+      </div>
+      <div class="nav-item" onclick="showPage('denials')">
+        <span class="nav-icon">\u2691</span> DenialManager
+        <span class="nav-badge red">7</span>
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Coming Soon</div>
+      <div class="nav-item" style="opacity:0.4">
+        <span class="nav-icon">\u25f7</span> AuthBot
+      </div>
+      <div class="nav-item" style="opacity:0.4">
+        <span class="nav-icon">\u25d1</span> PatientBillingBot
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main" id="main-content">
+
+    <!-- \u2500\u2500 PAGE: DASHBOARD \u2500\u2500 -->
+    <div id="page-dashboard">
+
+      <div class="page-header">
+        <div>
+          <div class="page-title">Practice <span>Intelligence</span></div>
+          <div class="page-sub">Today's revenue cycle snapshot \u2014 Sat, Mar 21 2026</div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-ghost">\u2193 Export</button>
+          <button class="btn btn-primary" onclick="showPage('demo')">\u25b7 Run Demo</button>
+        </div>
+      </div>
+
+      <!-- KPI ROW -->
+      <div class="kpi-row">
+        <div class="kpi-card" style="--accent:var(--green)">
+          <div class="kpi-label">Claims Scrubbed Today</div>
+          <div class="kpi-value">247</div>
+          <div class="kpi-delta up">\u2191 12% vs yesterday</div>
+        </div>
+        <div class="kpi-card" style="--accent:var(--blue)">
+          <div class="kpi-label">Eligibility Checks</div>
+          <div class="kpi-value">183</div>
+          <div class="kpi-delta up">\u2191 8% vs yesterday</div>
+        </div>
+        <div class="kpi-card" style="--accent:var(--red)">
+          <div class="kpi-label">Open Denials</div>
+          <div class="kpi-value" style="color:var(--red)">41</div>
+          <div class="kpi-delta down">\u2193 $28,400 at risk</div>
+        </div>
+        <div class="kpi-card" style="--accent:var(--amber)">
+          <div class="kpi-label">Est. Recovery This Month</div>
+          <div class="kpi-value" style="color:var(--amber)">$14.2k</div>
+          <div class="kpi-delta up" style="color:var(--amber)">45% appeal win rate</div>
+        </div>
+      </div>
+
+      <!-- BOT STATUS -->
+      <div class="bot-grid">
+        <!-- EligibilityBot -->
+        <div class="bot-card" style="--bot-color:var(--green);--bot-bg:var(--green-bg);--bot-border:rgba(0,229,160,0.2)" onclick="showPage('eligibility')">
+          <div class="bot-header">
+            <div class="bot-icon">\u2726</div>
+            <div class="bot-status live"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span> LIVE</div>
+          </div>
+          <div class="bot-name">EligibilityBot</div>
+          <div class="bot-desc">Real-time insurance verification via Availity 270/271 \u2014 checks before every appointment</div>
+          <div class="bot-stats">
+            <div class="bot-stat">
+              <div class="bot-stat-val">183</div>
+              <div class="bot-stat-label">Checks today</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val">4hr</div>
+              <div class="bot-stat-label">Cache TTL</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val">98.4%</div>
+              <div class="bot-stat-label">Uptime</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val">1.2s</div>
+              <div class="bot-stat-label">Avg response</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ClaimScrubber -->
+        <div class="bot-card" style="--bot-color:var(--blue);--bot-bg:var(--blue-bg);--bot-border:rgba(77,159,255,0.2)" onclick="showPage('scrubber')">
+          <div class="bot-header">
+            <div class="bot-icon" style="background:var(--blue-bg);border-color:rgba(77,159,255,0.2)">\u25ce</div>
+            <div class="bot-status live" style="background:var(--blue-bg);color:var(--blue);border-color:rgba(77,159,255,0.2)"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block"></span> LIVE</div>
+          </div>
+          <div class="bot-name">ClaimScrubber</div>
+          <div class="bot-desc">Pre-submission claim validation \u2014 catches ICD-10, CPT, CCI, and modifier errors before denial</div>
+          <div class="bot-stats">
+            <div class="bot-stat">
+              <div class="bot-stat-val" style="color:var(--blue)">247</div>
+              <div class="bot-stat-label">Claims today</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val" style="color:var(--blue)">34</div>
+              <div class="bot-stat-label">Errors caught</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val" style="color:var(--blue)">86%</div>
+              <div class="bot-stat-label">Clean rate</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val" style="color:var(--blue)">4</div>
+              <div class="bot-stat-label">Engines</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DenialManager -->
+        <div class="bot-card" style="--bot-color:var(--purple);--bot-bg:var(--purple-bg);--bot-border:rgba(181,122,255,0.2)" onclick="showPage('denials')">
+          <div class="bot-header">
+            <div class="bot-icon" style="background:var(--purple-bg);border-color:rgba(181,122,255,0.2)">\u2691</div>
+            <div class="bot-status live" style="background:var(--purple-bg);color:var(--purple);border-color:rgba(181,122,255,0.2)"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple);display:inline-block"></span> LIVE</div>
+          </div>
+          <div class="bot-name">DenialManager</div>
+          <div class="bot-desc">AI-powered denial categorization and appeal letter generation \u2014 6 denial type engines</div>
+          <div class="bot-stats">
+            <div class="bot-stat">
+              <div class="bot-stat-val" style="color:var(--purple)">41</div>
+              <div class="bot-stat-label">Open denials</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val" style="color:var(--purple)">7</div>
+              <div class="bot-stat-label">Critical</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val" style="color:var(--purple)">45%</div>
+              <div class="bot-stat-label">Win rate</div>
+            </div>
+            <div class="bot-stat">
+              <div class="bot-stat-val" style="color:var(--purple)">6</div>
+              <div class="bot-stat-label">Engines</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW -->
+      <div class="two-col">
+
+        <!-- Activity Feed -->
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">\u26a1 Live Activity <span class="panel-badge">Real-time</span></div>
+          </div>
+          <div class="feed" id="activity-feed">
+            <div class="feed-item">
+              <div class="feed-dot" style="background:var(--green)"></div>
+              <div class="feed-content">
+                <div class="feed-title">Eligibility verified \u2014 Aetna PPO</div>
+                <div class="feed-meta">Patient #4821 \u00b7 POS 11 \u00b7 14s ago</div>
+              </div>
+              <div class="feed-amount green">\u2713 Active</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-dot" style="background:var(--red)"></div>
+              <div class="feed-content">
+                <div class="feed-title">Claim blocked \u2014 CCI edit CO-97</div>
+                <div class="feed-meta">CPT 99214 + 93000 \u00b7 missing mod 25 \u00b7 42s ago</div>
+              </div>
+              <div class="feed-amount red">$245 saved</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-dot" style="background:var(--purple)"></div>
+              <div class="feed-content">
+                <div class="feed-title">Appeal letter generated \u2014 CO-50</div>
+                <div class="feed-meta">UnitedHealthcare \u00b7 Medical necessity \u00b7 1m ago</div>
+              </div>
+              <div class="feed-amount" style="color:var(--purple)">$485 at risk</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-dot" style="background:var(--green)"></div>
+              <div class="feed-content">
+                <div class="feed-title">Eligibility verified \u2014 Medicare</div>
+                <div class="feed-meta">Patient #4819 \u00b7 POS 11 \u00b7 2m ago</div>
+              </div>
+              <div class="feed-amount green">\u2713 Active</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-dot" style="background:var(--amber)"></div>
+              <div class="feed-content">
+                <div class="feed-title">Denial \u2014 CO-29 timely filing</div>
+                <div class="feed-meta">Cigna \u00b7 Claim #8847 \u00b7 3m ago</div>
+              </div>
+              <div class="feed-amount" style="color:var(--amber)">$1,200 risk</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-dot" style="background:var(--blue)"></div>
+              <div class="feed-content">
+                <div class="feed-title">Claim scrubbed \u2014 0 errors found</div>
+                <div class="feed-meta">CPT 90837 \u00b7 ICD F32.1 \u00b7 4m ago</div>
+              </div>
+              <div class="feed-amount" style="color:var(--blue)">Ready</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Denial Breakdown -->
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">\u2691 Denial Breakdown <span class="panel-badge amber">41 Open</span></div>
+          </div>
+          <div class="panel-body">
+            <div class="denial-list">
+              <div class="denial-row">
+                <div class="denial-label">Medical Necessity</div>
+                <div class="denial-bar-wrap"><div class="denial-bar" style="width:56%;background:var(--red)"></div></div>
+                <div class="denial-count">23</div>
+                <div class="denial-pct">56%</div>
+              </div>
+              <div class="denial-row">
+                <div class="denial-label">Authorization</div>
+                <div class="denial-bar-wrap"><div class="denial-bar" style="width:17%;background:var(--amber)"></div></div>
+                <div class="denial-count">7</div>
+                <div class="denial-pct">17%</div>
+              </div>
+              <div class="denial-row">
+                <div class="denial-label">Coding Errors</div>
+                <div class="denial-bar-wrap"><div class="denial-bar" style="width:12%;background:var(--blue)"></div></div>
+                <div class="denial-count">5</div>
+                <div class="denial-pct">12%</div>
+              </div>
+              <div class="denial-row">
+                <div class="denial-label">Modifier Issues</div>
+                <div class="denial-bar-wrap"><div class="denial-bar" style="width:10%;background:var(--purple)"></div></div>
+                <div class="denial-count">4</div>
+                <div class="denial-pct">10%</div>
+              </div>
+              <div class="denial-row">
+                <div class="denial-label">Timely Filing</div>
+                <div class="denial-bar-wrap"><div class="denial-bar" style="width:5%;background:var(--green)"></div></div>
+                <div class="denial-count">2</div>
+                <div class="denial-pct">5%</div>
+              </div>
+            </div>
+
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+                <div style="text-align:center">
+                  <div style="font-family:var(--font-mono);font-size:20px;color:var(--green);font-weight:500">$14.2k</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:3px">Est. recovery</div>
+                </div>
+                <div style="text-align:center">
+                  <div style="font-family:var(--font-mono);font-size:20px;color:var(--amber);font-weight:500">$28.4k</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:3px">Total at risk</div>
+                </div>
+                <div style="text-align:center">
+                  <div style="font-family:var(--font-mono);font-size:20px;color:var(--blue);font-weight:500">45%</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:3px">Win rate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- \u2500\u2500 PAGE: LIVE DEMO \u2500\u2500 -->
+    <div id="page-demo" style="display:none">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Live <span>Bot Demo</span></div>
+          <div class="page-sub">Run any bot in real-time \u2014 enter a claim and see it work</div>
+        </div>
+      </div>
+
+      <div class="demo-section">
+        <div class="demo-tabs">
+          <div class="demo-tab active" onclick="switchTab('eligibility-demo')">\u2726 EligibilityBot</div>
+          <div class="demo-tab" onclick="switchTab('scrubber-demo')">\u25ce ClaimScrubber</div>
+          <div class="demo-tab" onclick="switchTab('denial-demo')">\u2691 DenialManager</div>
+        </div>
+
+        <!-- Eligibility Demo -->
+        <div class="demo-panel active" id="eligibility-demo">
+          <div class="demo-form">
+            <div class="form-group">
+              <label class="form-label">Payer ID</label>
+              <input class="form-input" id="elig-payer" value="00431" placeholder="e.g. 00431">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Member ID</label>
+              <input class="form-input" id="elig-member" value="W123456789" placeholder="e.g. W123456789">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Service Date</label>
+              <input class="form-input" id="elig-date" value="2026-04-01" type="date">
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:20px">
+            <button class="btn btn-primary" onclick="runEligibility()">\u25b7 Check Eligibility</button>
+            <button class="btn btn-ghost" onclick="clearResult('elig-result')">Clear</button>
+          </div>
+          <div class="demo-result" id="elig-result">
+            <div style="color:var(--text3);font-size:12px">// Enter details above and click Check Eligibility to run a live check</div>
+          </div>
+        </div>
+
+        <!-- Scrubber Demo -->
+        <div class="demo-panel" id="scrubber-demo">
+          <div class="demo-form">
+            <div class="form-group">
+              <label class="form-label">CPT Codes</label>
+              <input class="form-input" id="scrub-cpt" value="99214, 93000" placeholder="e.g. 99214, 93000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">ICD-10 Codes</label>
+              <input class="form-input" id="scrub-dx" value="I10, E11.9" placeholder="e.g. I10, J06.9">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Payer ID</label>
+              <input class="form-input" id="scrub-payer" value="00431" placeholder="e.g. 00431">
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:20px">
+            <button class="btn btn-primary" onclick="runScrubber()">\u25b7 Scrub Claim</button>
+            <button class="btn btn-ghost" onclick="clearResult('scrub-result')">Clear</button>
+          </div>
+          <div class="demo-result" id="scrub-result">
+            <div style="color:var(--text3);font-size:12px">// Enter CPT + ICD-10 codes above and click Scrub Claim</div>
+          </div>
+        </div>
+
+        <!-- Denial Demo -->
+        <div class="demo-panel" id="denial-demo">
+          <div class="demo-form">
+            <div class="form-group">
+              <label class="form-label">CARC Code</label>
+              <input class="form-input" id="denial-carc" value="50" placeholder="e.g. 50, 29, 97">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Denied Amount ($)</label>
+              <input class="form-input" id="denial-amount" value="485" placeholder="e.g. 485">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Payer</label>
+              <input class="form-input" id="denial-payer" value="Aetna (00431)" placeholder="Payer name">
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:20px">
+            <button class="btn btn-primary" onclick="runDenial()">\u25b7 Process Denial</button>
+            <button class="btn btn-ghost" onclick="clearResult('denial-result')">Clear</button>
+          </div>
+          <div class="demo-result" id="denial-result">
+            <div style="color:var(--text3);font-size:12px">// Enter CARC code and click Process Denial to see categorization + action steps</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- \u2500\u2500 PAGE: ROI CALCULATOR \u2500\u2500 -->
+    <div id="page-roi" style="display:none">
+      <div class="page-header">
+        <div>
+          <div class="page-title">ROI <span>Calculator</span></div>
+          <div class="page-sub">Show your customer exactly how much they'll save</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">\u25c8 Practice Revenue Analyzer</div>
+        </div>
+        <div class="panel-body">
+          <div class="roi-grid">
+            <div class="roi-input-group">
+              <div class="roi-slider-wrap">
+                <div class="roi-slider-label">Monthly claims volume <span id="lbl-claims">500</span></div>
+                <input type="range" min="100" max="5000" value="500" step="50" oninput="updateROI()" id="sl-claims">
+              </div>
+              <div class="roi-slider-wrap">
+                <div class="roi-slider-label">Current denial rate <span id="lbl-denial">12%</span></div>
+                <input type="range" min="2" max="30" value="12" step="1" oninput="updateROI()" id="sl-denial">
+              </div>
+              <div class="roi-slider-wrap">
+                <div class="roi-slider-label">Avg claim value <span id="lbl-value">$320</span></div>
+                <input type="range" min="50" max="2000" value="320" step="10" oninput="updateROI()" id="sl-value">
+              </div>
+              <div class="roi-slider-wrap">
+                <div class="roi-slider-label">Staff hours on billing/week <span id="lbl-hours">20hrs</span></div>
+                <input type="range" min="5" max="80" value="20" step="1" oninput="updateROI()" id="sl-hours">
+              </div>
+            </div>
+
+            <div class="roi-result">
+              <div class="roi-big" id="roi-total">$0</div>
+              <div class="roi-label">Estimated monthly savings</div>
+              <div class="roi-breakdown">
+                <div class="roi-item">
+                  <span class="roi-item-label">Denial reduction (60% improvement)</span>
+                  <span class="roi-item-val" id="roi-denial">$0</span>
+                </div>
+                <div class="roi-item">
+                  <span class="roi-item-label">Staff time saved (12hrs/wk avg)</span>
+                  <span class="roi-item-val" id="roi-staff">$0</span>
+                </div>
+                <div class="roi-item">
+                  <span class="roi-item-label">Appeal recovery (45% win rate)</span>
+                  <span class="roi-item-val" id="roi-appeal">$0</span>
+                </div>
+                <div class="roi-item" style="border-top:1px solid var(--green);margin-top:4px;padding-top:12px">
+                  <span class="roi-item-label" style="color:var(--text);font-weight:500">RCM AutoMed Pro cost</span>
+                  <span class="roi-item-val" id="roi-cost" style="color:var(--red)">\u2013$0</span>
+                </div>
+                <div class="roi-item">
+                  <span class="roi-item-label" style="color:var(--text);font-weight:500">Net ROI</span>
+                  <span class="roi-item-val" id="roi-net" style="font-size:16px">$0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- \u2500\u2500 PAGE: ELIGIBILITY \u2500\u2500 -->
+    <div id="page-eligibility" style="display:none">
+      <div class="page-header">
+        <div><div class="page-title">\u2726 <span>EligibilityBot</span></div>
+        <div class="page-sub">Real-time insurance verification via Availity 270/271 EDI</div></div>
+        <button class="btn btn-primary" onclick="showPage('demo');switchTab('eligibility-demo')">\u25b7 Run Check</button>
+      </div>
+      <div class="three-col" style="opacity:1;animation:none">
+        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Today's Checks</div><div class="kpi-value">183</div><div class="kpi-delta up">\u2191 8% vs yesterday</div></div>
+        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Cache Hit Rate</div><div class="kpi-value">67%</div><div class="kpi-delta up">Saving API costs</div></div>
+        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Avg Response Time</div><div class="kpi-value">1.2s</div><div class="kpi-delta up">\u2193 0.3s vs last week</div></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <div class="panel-head"><div class="panel-title">Recent Eligibility Checks</div></div>
+        <div class="feed">
+          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Aetna PPO \u2014 W123456789</div><div class="feed-meta">Active \u00b7 Deductible $820 remaining \u00b7 Copay $25 \u00b7 14s ago</div></div><div class="feed-amount green">Active</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Medicare \u2014 1EG4-TE5-MK72</div><div class="feed-meta">Active \u00b7 Part B \u00b7 Deductible met \u00b7 2m ago</div></div><div class="feed-amount green">Active</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">Cigna \u2014 U18873441</div><div class="feed-meta">Inactive \u2014 coverage terminated 3/1/2026 \u00b7 5m ago</div></div><div class="feed-amount red">Inactive</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">UHC \u2014 912345678</div><div class="feed-meta">Active \u2014 requires referral for specialist \u00b7 8m ago</div></div><div class="feed-amount" style="color:var(--amber)">\u26a0 Referral</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--green)"></div><div class="feed-content"><div class="feed-title">Humana \u2014 H00112233</div><div class="feed-meta">Active \u00b7 OOP max $4,200 \u00b7 $1,100 remaining \u00b7 11m ago</div></div><div class="feed-amount green">Active</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- \u2500\u2500 PAGE: SCRUBBER \u2500\u2500 -->
+    <div id="page-scrubber" style="display:none">
+      <div class="page-header">
+        <div><div class="page-title">\u25ce <span>ClaimScrubber</span></div>
+        <div class="page-sub">Pre-submission validation \u2014 4 engines running in parallel</div></div>
+        <button class="btn btn-primary" onclick="showPage('demo');switchTab('scrubber-demo')">\u25b7 Scrub a Claim</button>
+      </div>
+      <div class="three-col" style="opacity:1;animation:none">
+        <div class="kpi-card" style="--accent:var(--blue)"><div class="kpi-label">Claims Today</div><div class="kpi-value">247</div><div class="kpi-delta up">\u2191 12% vs yesterday</div></div>
+        <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Errors Caught</div><div class="kpi-value" style="color:var(--red)">34</div><div class="kpi-delta down">$8,200 in denials prevented</div></div>
+        <div class="kpi-card" style="--accent:var(--blue)"><div class="kpi-label">Clean Claim Rate</div><div class="kpi-value">86%</div><div class="kpi-delta up">\u2191 4% vs last month</div></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <div class="panel-head"><div class="panel-title">Top Errors Caught Today</div></div>
+        <div class="feed">
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CCI bundling \u2014 CPT 99214 + 93000 without modifier 25</div><div class="feed-meta">Engine: CCI \u00b7 Severity: HIGH \u00b7 12 occurrences today</div></div><div class="feed-amount red">12x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">ICD-10 missing decimal \u2014 J069 should be J06.9</div><div class="feed-meta">Engine: ICD-10 \u00b7 Severity: CRITICAL \u00b7 8 occurrences</div></div><div class="feed-amount red">8x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">Zero charge on CPT 93000 line item</div><div class="feed-meta">Engine: CPT \u00b7 Severity: HIGH \u00b7 6 occurrences</div></div><div class="feed-amount" style="color:var(--amber)">6x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">Timely filing approaching \u2014 148 days elapsed (Aetna)</div><div class="feed-meta">Engine: Payer Rules \u00b7 Severity: MEDIUM \u00b7 5 occurrences</div></div><div class="feed-amount" style="color:var(--amber)">5x</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--blue)"></div><div class="feed-content"><div class="feed-title">Duplicate CPT code on same claim</div><div class="feed-meta">Engine: CPT \u00b7 Severity: MEDIUM \u00b7 3 occurrences</div></div><div class="feed-amount" style="color:var(--blue)">3x</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- \u2500\u2500 PAGE: DENIALS \u2500\u2500 -->
+    <div id="page-denials" style="display:none">
+      <div class="page-header">
+        <div><div class="page-title">\u2691 <span>DenialManager</span></div>
+        <div class="page-sub">6 engines \u00b7 AI appeal letters \u00b7 full audit trail</div></div>
+        <button class="btn btn-primary" onclick="showPage('demo');switchTab('denial-demo')">\u25b7 Process Denial</button>
+      </div>
+      <div class="three-col" style="opacity:1;animation:none">
+        <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Open Denials</div><div class="kpi-value" style="color:var(--red)">41</div><div class="kpi-delta down">7 critical priority</div></div>
+        <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">At Risk</div><div class="kpi-value" style="color:var(--amber)">$28.4k</div><div class="kpi-delta down">Needs action this week</div></div>
+        <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Won This Month</div><div class="kpi-value">$6.2k</div><div class="kpi-delta up">\u2191 45% win rate</div></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <div class="panel-head"><div class="panel-title">Critical Denials \u2014 Action Required <span class="panel-badge red">7 Critical</span></div></div>
+        <div class="feed">
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-29 Timely Filing \u2014 Cigna \u00b7 Claim #8847</div><div class="feed-meta">\u2691 CRITICAL \u00b7 Appeal deadline: Apr 2, 2026 \u00b7 Gather proof of original submission</div></div><div class="feed-amount red">$1,200</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-57 Prior Auth \u2014 UHC \u00b7 MRI Lumbar Spine</div><div class="feed-meta">\u2691 CRITICAL \u00b7 Retro-auth requested \u00b7 Awaiting payer response</div></div><div class="feed-amount red">$2,400</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--red)"></div><div class="feed-content"><div class="feed-title">CO-50 Medical Necessity \u2014 Aetna \u00b7 99214</div><div class="feed-meta">\u2691 HIGH \u00b7 Appeal letter generated \u00b7 Ready to submit</div></div><div class="feed-amount red">$485</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">CO-16 Missing Information \u2014 BCBS \u00b7 Claim #9012</div><div class="feed-meta">\u26a0 MEDIUM \u00b7 Missing NPI on rendering provider line \u00b7 Resubmit corrected</div></div><div class="feed-amount" style="color:var(--amber)">$320</div></div>
+          <div class="feed-item"><div class="feed-dot" style="background:var(--amber)"></div><div class="feed-content"><div class="feed-title">CO-97 CCI Bundling \u2014 Medicare \u00b7 CPT 29881+29876</div><div class="feed-meta">\u26a0 MEDIUM \u00b7 Review for modifier 59 eligibility \u00b7 Check operative report</div></div><div class="feed-amount" style="color:var(--amber)">$890</div></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ── PAGE: ENROLLMENT ── -->
+    <div id="page-enroll" style="display:none">
+      <div class="page-header">
+        <div>
+          <div class="page-title">✦ <span>Enrollment</span></div>
+          <div class="page-sub">Provider credentialing &amp; payer enrollment tracking</div>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('enroll-new')">+ New Enrollment</button>
+      </div>
+
+      <div class="three-col" style="opacity:1;animation:none">
+        <div class="kpi-card" style="--accent:#00d4d4">
+          <div class="kpi-label">Active Enrollments</div>
+          <div class="kpi-value" style="color:#00d4d4">14</div>
+          <div class="kpi-delta up">↑ 2 approved this week</div>
+        </div>
+        <div class="kpi-card" style="--accent:var(--amber)">
+          <div class="kpi-label">Pending Approval</div>
+          <div class="kpi-value" style="color:var(--amber)">3</div>
+          <div class="kpi-delta" style="color:var(--text2)">Avg 28 days processing</div>
+        </div>
+        <div class="kpi-card" style="--accent:var(--green)">
+          <div class="kpi-label">Approved This Month</div>
+          <div class="kpi-value">5</div>
+          <div class="kpi-delta up">↑ 45% faster than manual</div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:0">
+        <div class="panel-head">
+          <div class="panel-title">Provider Enrollments
+            <span class="panel-badge" style="background:var(--teal-bg,rgba(0,212,212,.06));color:#00d4d4;border-color:rgba(0,212,212,.2)">14 Active</span>
+          </div>
+          <button class="btn btn-primary" style="font-size:12px;padding:6px 14px" onclick="showPage('enroll-new')">+ New</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border)">
+                <th style="padding:10px 20px;text-align:left;font-family:var(--font-mono);font-size:10px;color:var(--text3);font-weight:400;letter-spacing:.06em;text-transform:uppercase">Provider</th>
+                <th style="padding:10px 12px;text-align:left;font-family:var(--font-mono);font-size:10px;color:var(--text3);font-weight:400;letter-spacing:.06em;text-transform:uppercase">NPI</th>
+                <th style="padding:10px 12px;text-align:left;font-family:var(--font-mono);font-size:10px;color:var(--text3);font-weight:400;letter-spacing:.06em;text-transform:uppercase">Payer</th>
+                <th style="padding:10px 12px;text-align:left;font-family:var(--font-mono);font-size:10px;color:var(--text3);font-weight:400;letter-spacing:.06em;text-transform:uppercase">Type</th>
+                <th style="padding:10px 12px;text-align:left;font-family:var(--font-mono);font-size:10px;color:var(--text3);font-weight:400;letter-spacing:.06em;text-transform:uppercase">Submitted</th>
+                <th style="padding:10px 12px;text-align:left;font-family:var(--font-mono);font-size:10px;color:var(--text3);font-weight:400;letter-spacing:.06em;text-transform:uppercase">Est. Approval</th>
+                <th style="padding:10px 12px;text-align:left;font-family:var(--font-mono);font-size:10px;color:var(--text3);font-weight:400;letter-spacing:.06em;text-transform:uppercase">Status</th>
+                <th style="padding:10px 12px;text-align:left;font-family:var(--font-mono);font-size:10px;color:var(--text3);font-weight:400;letter-spacing:.06em;text-transform:uppercase">Action</th>
+              </tr>
+            </thead>
+            <tbody id="enroll-table">
+              <tr style="border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+                <td style="padding:12px 20px"><div style="font-weight:500">Dr. Sarah Johnson</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Internal Medicine</div></td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">1234567890</td>
+                <td style="padding:12px">UnitedHealthcare</td>
+                <td style="padding:12px;font-size:12px;color:var(--text2)">Par</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-01-15</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-03-15</td>
+                <td style="padding:12px"><span style="background:rgba(0,212,212,.06);color:#00d4d4;border:1px solid rgba(0,212,212,.2);padding:2px 8px;border-radius:10px;font-family:var(--font-mono);font-size:10px">Active</span></td>
+                <td style="padding:12px"><button class="btn" style="font-size:11px;padding:4px 10px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)">View</button></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+                <td style="padding:12px 20px"><div style="font-weight:500">Dr. Sarah Johnson</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Internal Medicine</div></td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">1234567890</td>
+                <td style="padding:12px">Aetna</td>
+                <td style="padding:12px;font-size:12px;color:var(--text2)">Par</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-02-01</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-04-01</td>
+                <td style="padding:12px"><span style="background:rgba(0,212,212,.06);color:#00d4d4;border:1px solid rgba(0,212,212,.2);padding:2px 8px;border-radius:10px;font-family:var(--font-mono);font-size:10px">Active</span></td>
+                <td style="padding:12px"><button class="btn" style="font-size:11px;padding:4px 10px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)">View</button></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+                <td style="padding:12px 20px"><div style="font-weight:500">Dr. Michael Smith</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Family Practice</div></td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">0987654321</td>
+                <td style="padding:12px">Medicare</td>
+                <td style="padding:12px;font-size:12px;color:var(--text2)">Par</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-03-01</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-05-01</td>
+                <td style="padding:12px"><span style="background:var(--amber-bg);color:var(--amber);border:1px solid rgba(255,185,48,.2);padding:2px 8px;border-radius:10px;font-family:var(--font-mono);font-size:10px">Pending Day 18</span></td>
+                <td style="padding:12px"><button class="btn" style="font-size:11px;padding:4px 10px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)">Track</button></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+                <td style="padding:12px 20px"><div style="font-weight:500">Dr. Lisa Chen</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Pediatrics</div></td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">1122334455</td>
+                <td style="padding:12px">Cigna</td>
+                <td style="padding:12px;font-size:12px;color:var(--text2)">Par</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-03-10</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-05-10</td>
+                <td style="padding:12px"><span style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(77,159,255,.2);padding:2px 8px;border-radius:10px;font-family:var(--font-mono);font-size:10px">Submitted</span></td>
+                <td style="padding:12px"><button class="btn" style="font-size:11px;padding:4px 10px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)">Track</button></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);transition:background .15s" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+                <td style="padding:12px 20px"><div style="font-weight:500">Dr. Lisa Chen</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Pediatrics</div></td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">1122334455</td>
+                <td style="padding:12px">BCBS</td>
+                <td style="padding:12px;font-size:12px;color:var(--text2)">Par</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-03-12</td>
+                <td style="padding:12px;font-family:var(--font-mono);font-size:12px;color:var(--text2)">2026-05-12</td>
+                <td style="padding:12px"><span style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(77,159,255,.2);padding:2px 8px;border-radius:10px;font-family:var(--font-mono);font-size:10px">Submitted</span></td>
+                <td style="padding:12px"><button class="btn" style="font-size:11px;padding:4px 10px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)">Track</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: NEW ENROLLMENT ── -->
+    <div id="page-enroll-new" style="display:none">
+      <div class="page-header">
+        <div>
+          <div class="page-title">✦ <span>New Enrollment</span></div>
+          <div class="page-sub">Submit a new provider credentialing &amp; payer enrollment</div>
+        </div>
+        <button class="btn btn-ghost" onclick="showPage('enroll')">← Back to Enrollments</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Enrollment Application
+            <span class="panel-badge" style="background:var(--teal-bg,rgba(0,212,212,.06));color:#00d4d4;border-color:rgba(0,212,212,.2)" id="step-badge">Step 1 of 3</span>
+          </div>
+        </div>
+        <div style="padding:0 24px;border-bottom:1px solid var(--border);display:flex;gap:0">
+          <div class="enroll-step active" id="estep1" style="padding:14px 20px;font-size:13px;color:#00d4d4;border-bottom:2px solid #00d4d4;cursor:pointer;font-family:var(--font-mono)" onclick="goStep(1)">1. Provider Info</div>
+          <div class="enroll-step" id="estep2" style="padding:14px 20px;font-size:13px;color:var(--text3);border-bottom:2px solid transparent;cursor:pointer;font-family:var(--font-mono)" onclick="goStep(2)">2. Payer &amp; Details</div>
+          <div class="enroll-step" id="estep3" style="padding:14px 20px;font-size:13px;color:var(--text3);border-bottom:2px solid transparent;cursor:pointer;font-family:var(--font-mono)" onclick="goStep(3)">3. Documents</div>
+        </div>
+
+        <!-- Step 1: Provider Info -->
+        <div id="estep-panel-1" style="padding:28px">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+            <div class="form-group"><label class="form-label">Provider Full Name</label><input class="form-input" placeholder="Dr. Jane Smith"></div>
+            <div class="form-group"><label class="form-label">Credentials</label><input class="form-input" placeholder="MD, DO, NP..."></div>
+            <div class="form-group"><label class="form-label">NPI Number</label><input class="form-input" placeholder="10-digit NPI"></div>
+            <div class="form-group"><label class="form-label">Tax ID (EIN/SSN)</label><input class="form-input" placeholder="XX-XXXXXXX"></div>
+            <div class="form-group"><label class="form-label">Specialty</label>
+              <select class="form-input" style="cursor:pointer">
+                <option value="">Select specialty...</option>
+                <option>Internal Medicine</option><option>Family Practice</option>
+                <option>Pediatrics</option><option>Cardiology</option>
+                <option>Orthopedics</option><option>Psychiatry</option>
+                <option>OB/GYN</option><option>Dermatology</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Group/Practice Name</label><input class="form-input" placeholder="ABC Medical Group"></div>
+            <div class="form-group"><label class="form-label">Group NPI</label><input class="form-input" placeholder="Group NPI (if applicable)"></div>
+          </div>
+          <div style="margin-top:24px;display:flex;justify-content:flex-end">
+            <button class="btn btn-primary" onclick="goStep(2)">Next: Payer Details →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Payer & Details -->
+        <div id="estep-panel-2" style="padding:28px;display:none">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+            <div class="form-group"><label class="form-label">Payer</label>
+              <select class="form-input" style="cursor:pointer">
+                <option value="">Select payer...</option>
+                <option>Aetna (00431)</option><option>Cigna (62308)</option>
+                <option>UnitedHealthcare (87726)</option><option>Medicare (CMS)</option>
+                <option>Medicaid</option><option>BCBS (00710)</option>
+                <option>Humana (61101)</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Enrollment Type</label>
+              <select class="form-input" style="cursor:pointer">
+                <option>Participating (Par)</option>
+                <option>Non-Participating</option>
+                <option>Reassignment</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Requested Effective Date</label><input class="form-input" type="date"></div>
+            <div class="form-group"><label class="form-label">Practice Address</label><input class="form-input" placeholder="123 Medical Blvd"></div>
+            <div class="form-group"><label class="form-label">City, State, ZIP</label><input class="form-input" placeholder="Tampa, FL 33601"></div>
+            <div class="form-group"><label class="form-label">Phone</label><input class="form-input" placeholder="(555) 000-0000"></div>
+            <div class="form-group" style="grid-column:span 3"><label class="form-label">Additional Notes</label><textarea class="form-input" rows="3" placeholder="Any special circumstances or notes for this enrollment..."></textarea></div>
+          </div>
+          <div style="margin-top:24px;display:flex;justify-content:space-between">
+            <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+            <button class="btn btn-primary" onclick="goStep(3)">Next: Upload Documents →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Documents -->
+        <div id="estep-panel-3" style="padding:28px;display:none">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px">
+            <div style="background:var(--bg3);border:1px dashed var(--border2);border-radius:10px;padding:20px;text-align:center;cursor:pointer" onmouseover="this.style.borderColor='#00d4d4'" onmouseout="this.style.borderColor='var(--border2)'">
+              <div style="font-size:24px;margin-bottom:8px">📄</div>
+              <div style="font-size:13px;font-weight:500;margin-bottom:4px">W-9 Form</div>
+              <div style="font-size:11px;color:var(--text3)">Required</div>
+              <button class="btn btn-ghost" style="margin-top:12px;font-size:11px;padding:5px 12px">Upload</button>
+            </div>
+            <div style="background:var(--bg3);border:1px dashed var(--border2);border-radius:10px;padding:20px;text-align:center;cursor:pointer" onmouseover="this.style.borderColor='#00d4d4'" onmouseout="this.style.borderColor='var(--border2)'">
+              <div style="font-size:24px;margin-bottom:8px">🏥</div>
+              <div style="font-size:13px;font-weight:500;margin-bottom:4px">Medical License</div>
+              <div style="font-size:11px;color:var(--text3)">Required</div>
+              <button class="btn btn-ghost" style="margin-top:12px;font-size:11px;padding:5px 12px">Upload</button>
+            </div>
+            <div style="background:var(--bg3);border:1px dashed var(--border2);border-radius:10px;padding:20px;text-align:center;cursor:pointer" onmouseover="this.style.borderColor='#00d4d4'" onmouseout="this.style.borderColor='var(--border2)'">
+              <div style="font-size:24px;margin-bottom:8px">🔬</div>
+              <div style="font-size:13px;font-weight:500;margin-bottom:4px">CLIA Certificate</div>
+              <div style="font-size:11px;color:var(--text3)">If applicable</div>
+              <button class="btn btn-ghost" style="margin-top:12px;font-size:11px;padding:5px 12px">Upload</button>
+            </div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px">
+            <input type="checkbox" id="attest-check" style="margin-top:2px;accent-color:#00d4d4;width:16px;height:16px;flex-shrink:0">
+            <label for="attest-check" style="font-size:12px;color:var(--text2);cursor:pointer;line-height:1.6">
+              I attest that all information provided is accurate and complete. I understand that submitting false or misleading information may result in denial or termination of enrollment.
+            </label>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
+            <button class="btn btn-primary" onclick="submitEnroll()" style="background:#00d4d4">✓ Submit Enrollment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// \u2500\u2500\u2500 CLOCK \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// \u2500\u2500\u2500 PAGE ROUTING \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+const pages = ['dashboard','demo','roi','eligibility','scrubber','denials','enroll','enroll-new'];
+const navMap = { dashboard:'dashboard', demo:'demo', roi:'roi', eligibility:'eligibility', scrubber:'scrubber', denials:'denials' };
+
+function showPage(name) {
+  pages.forEach(p => {
+    document.getElementById('page-' + p).style.display = p === name ? '' : 'none';
+  });
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => {
+    if (el.getAttribute('onclick') && el.getAttribute('onclick').includes("'" + name + "'")) {
+      el.classList.add('active');
+    }
+  });
+  if (name === 'roi') setTimeout(updateROI, 100);
+}
+
+// \u2500\u2500\u2500 DEMO TABS \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+function switchTab(id) {
+  document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = ['eligibility-demo','scrubber-demo','denial-demo'].indexOf(id);
+  document.querySelectorAll('.demo-tab')[idx]?.classList.add('active');
+}
+
+function clearResult(id) {
+  document.getElementById(id).innerHTML = '<div style="color:var(--text3);font-size:12px">// Cleared</div>';
+}
+
+// \u2500\u2500\u2500 CARC KNOWLEDGE BASE \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+const CARC_INFO = {
+  '50':  { type: 'Medical Necessity',    priority: 'HIGH',     action: 'File formal appeal with LCD/NCD citation and clinical notes', winRate: '45%' },
+  '57':  { type: 'Prior Authorization',  priority: 'CRITICAL', action: 'Request retro-authorization immediately. Document if emergent.', winRate: '35%' },
+  '29':  { type: 'Timely Filing',        priority: 'CRITICAL', action: 'Gather clearinghouse proof of original submission timestamp', winRate: '30%' },
+  '97':  { type: 'CCI Bundling',         priority: 'MEDIUM',   action: 'Add modifier 59/XU if services were truly distinct and separate', winRate: '80%' },
+  '16':  { type: 'Missing Information',  priority: 'MEDIUM',   action: 'Review RARC code. Correct and resubmit as corrected claim (freq code 7)', winRate: '85%' },
+  '11':  { type: 'Coding Error',         priority: 'MEDIUM',   action: 'Verify CPT/ICD-10 crosswalk. Correct codes and resubmit.', winRate: '80%' },
+  '4':   { type: 'Modifier Error',       priority: 'MEDIUM',   action: 'Review modifier \u2014 may be missing mod 25 on E&M + procedure same day', winRate: '85%' },
+  '197': { type: 'Authorization',        priority: 'CRITICAL', action: 'Verify auth number. Resubmit with correct auth or request retro-auth.', winRate: '40%' },
+  '15':  { type: 'Auth Expired',         priority: 'CRITICAL', action: 'Request new authorization or appeal with clinical urgency documentation', winRate: '30%' },
+  '18':  { type: 'Duplicate Claim',      priority: 'LOW',      action: 'Check original claim status. Do not resubmit if original is pending.', winRate: '70%' },
+  '96':  { type: 'Not Covered',          priority: 'LOW',      action: 'Verify plan benefits. Bill patient if truly non-covered.', winRate: '10%' },
+};
+
+// \u2500\u2500\u2500 ELIGIBILITY DEMO \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+function runEligibility() {
+  const payer = document.getElementById('elig-payer').value || '00431';
+  const member = document.getElementById('elig-member').value || 'W123456789';
+  const date = document.getElementById('elig-date').value || '2026-04-01';
+
+  const el = document.getElementById('elig-result');
+  el.innerHTML = '<div style="color:var(--text3);font-size:12px">// Sending 270 transaction to Availity clearinghouse...</div>';
+
+  const payerNames = { '00431':'Aetna','62308':'Cigna','87726':'UnitedHealthcare','CMS':'Medicare','61101':'Humana' };
+  const payerName = payerNames[payer] || 'Unknown Payer';
+
+  setTimeout(() => {
+    el.innerHTML = `
+      <div class="result-line"><span class="result-key">status</span><span class="result-val green">\u25cf ACTIVE</span></div>
+      <div class="result-line"><span class="result-key">payer</span><span class="result-val">${payerName} (${payer})</span></div>
+      <div class="result-line"><span class="result-key">member_id</span><span class="result-val">${member}</span></div>
+      <div class="result-line"><span class="result-key">plan_name</span><span class="result-val">${payerName} Choice POS II</span></div>
+      <div class="result-line"><span class="result-key">effective_date</span><span class="result-val">2026-01-01</span></div>
+      <div class="result-line"><span class="result-key">termination_date</span><span class="result-val amber">None</span></div>
+      <div class="result-line"><span class="result-key">deductible_remaining</span><span class="result-val amber">$820.00 (in-network)</span></div>
+      <div class="result-line"><span class="result-key">copay</span><span class="result-val">$25 (office) / $40 (specialist)</span></div>
+      <div class="result-line"><span class="result-key">coinsurance</span><span class="result-val">20% after deductible</span></div>
+      <div class="result-line"><span class="result-key">oop_max_remaining</span><span class="result-val green">$3,200.00</span></div>
+      <div class="result-line"><span class="result-key">service_date_checked</span><span class="result-val">${date}</span></div>
+      <div class="result-line"><span class="result-key">transaction_id</span><span class="result-val" style="color:var(--text3)">a3b2c1d0-4e5f-6789-abcd-ef0123456789</span></div>
+      <div class="result-line"><span class="result-key">response_time</span><span class="result-val green">1.24s</span></div>
+      <div class="result-line"><span class="result-key">from_cache</span><span class="result-val">false</span></div>
+    `;
+  }, 1400);
+}
+
+// \u2500\u2500\u2500 SCRUBBER DEMO \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+function runScrubber() {
+  const cpts = document.getElementById('scrub-cpt').value || '99214, 93000';
+  const dx = document.getElementById('scrub-dx').value || 'I10';
+  const payer = document.getElementById('scrub-payer').value || '00431';
+
+  const el = document.getElementById('scrub-result');
+  el.innerHTML = '<div style="color:var(--text3);font-size:12px">// Running 4 scrub engines in parallel...</div>';
+
+  const cptList = cpts.split(',').map(s => s.trim());
+  const hasEMAndEKG = cptList.some(c => c.startsWith('992')) && cptList.some(c => c === '93000');
+
+  setTimeout(() => {
+    const errors = [];
+    const warnings = [];
+
+    if (hasEMAndEKG) {
+      errors.push({ sev: 'HIGH', engine: 'CCI', msg: 'CPT ' + cptList.find(c => c.startsWith('992')) + ' + 93000 bundled \u2014 add modifier 25 to E&M code' });
+    }
+
+    dx.split(',').forEach(d => {
+      const code = d.trim();
+      if (code.length > 3 && !code.includes('.')) {
+        warnings.push({ sev: 'MEDIUM', engine: 'ICD-10', msg: '"' + code + '" may be missing decimal \u2014 should be ' + code.slice(0,3) + '.' + code.slice(3) });
+      }
+    });
+
+    const passed = errors.length === 0;
+
+    el.innerHTML = `
+      <div class="result-line"><span class="result-key">result</span><span class="result-val ${passed ? 'green' : 'red'}">${passed ? '\u2713 PASSED \u2014 Ready for submission' : '\u2717 FAILED \u2014 Fix errors before submitting'}</span></div>
+      <div class="result-line"><span class="result-key">cpt_codes</span><span class="result-val">${cpts}</span></div>
+      <div class="result-line"><span class="result-key">icd10_codes</span><span class="result-val">${dx}</span></div>
+      <div class="result-line"><span class="result-key">payer</span><span class="result-val">${payer}</span></div>
+      <div class="result-line"><span class="result-key">errors_found</span><span class="result-val ${errors.length > 0 ? 'red' : 'green'}">${errors.length}</span></div>
+      <div class="result-line"><span class="result-key">warnings_found</span><span class="result-val amber">${warnings.length}</span></div>
+      ${errors.map(e => `<div class="result-line"><span class="result-key">[${e.sev}] ${e.engine}</span><span class="result-val red">${e.msg}</span></div>`).join('')}
+      ${warnings.map(w => `<div class="result-line"><span class="result-key">[${w.sev}] ${w.engine}</span><span class="result-val amber">${w.msg}</span></div>`).join('')}
+      <div class="result-line"><span class="result-key">engines_run</span><span class="result-val">ICD-10 \u00b7 CPT \u00b7 CCI \u00b7 Payer Rules</span></div>
+      <div class="result-line"><span class="result-key">scrub_time</span><span class="result-val green">38ms</span></div>
+    `;
+  }, 800);
+}
+
+// \u2500\u2500\u2500 DENIAL DEMO \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+function runDenial() {
+  const carc = document.getElementById('denial-carc').value || '50';
+  const amount = parseFloat(document.getElementById('denial-amount').value) || 485;
+  const payer = document.getElementById('denial-payer').value || 'Aetna';
+
+  const el = document.getElementById('denial-result');
+  el.innerHTML = '<div style="color:var(--text3);font-size:12px">// Running 6 denial engines \u00b7 generating appeal strategy...</div>';
+
+  setTimeout(() => {
+    const info = CARC_INFO[carc] || { type: 'Other', priority: 'MEDIUM', action: 'Route to senior biller for manual review', winRate: '40%' };
+    const recovery = (amount * parseFloat(info.winRate) / 100).toFixed(2);
+    const priorityColor = info.priority === 'CRITICAL' ? 'red' : info.priority === 'HIGH' ? 'amber' : 'blue';
+    const deadline = new Date(); deadline.setDate(deadline.getDate() + 180);
+    const followup = new Date(); followup.setDate(followup.getDate() + (info.priority === 'CRITICAL' ? 7 : 30));
+
+    el.innerHTML = `
+      <div class="result-line"><span class="result-key">carc_code</span><span class="result-val">${carc}</span></div>
+      <div class="result-line"><span class="result-key">denial_type</span><span class="result-val">${info.type}</span></div>
+      <div class="result-line"><span class="result-key">priority</span><span class="result-val ${priorityColor}">\u2691 ${info.priority}</span></div>
+      <div class="result-line"><span class="result-key">payer</span><span class="result-val">${payer}</span></div>
+      <div class="result-line"><span class="result-key">denied_amount</span><span class="result-val red">$${amount.toFixed(2)}</span></div>
+      <div class="result-line"><span class="result-key">estimated_win_rate</span><span class="result-val green">${info.winRate}</span></div>
+      <div class="result-line"><span class="result-key">expected_recovery</span><span class="result-val green">$${recovery}</span></div>
+      <div class="result-line"><span class="result-key">appeal_deadline</span><span class="result-val amber">${deadline.toISOString().split('T')[0]}</span></div>
+      <div class="result-line"><span class="result-key">follow_up_by</span><span class="result-val">${followup.toISOString().split('T')[0]}</span></div>
+      <div class="result-line"><span class="result-key">recommended_action</span><span class="result-val">${info.action}</span></div>
+      <div class="result-line"><span class="result-key">appeal_letter</span><span class="result-val green">\u2713 Generated \u2014 review before sending</span></div>
+      <div class="result-line"><span class="result-key">engines_run</span><span class="result-val">Medical Necessity \u00b7 Auth \u00b7 POS \u00b7 Modifiers \u00b7 Timely Filing \u00b7 Coding</span></div>
+    `;
+  }, 1200);
+}
+
+// \u2500\u2500\u2500 ROI CALCULATOR \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+function updateROI() {
+  const claims = parseInt(document.getElementById('sl-claims').value);
+  const denial = parseInt(document.getElementById('sl-denial').value);
+  const value = parseInt(document.getElementById('sl-value').value);
+  const hours = parseInt(document.getElementById('sl-hours').value);
+
+  document.getElementById('lbl-claims').textContent = claims.toLocaleString();
+  document.getElementById('lbl-denial').textContent = denial + '%';
+  document.getElementById('lbl-value').textContent = '$' + value;
+  document.getElementById('lbl-hours').textContent = hours + 'hrs';
+
+  const denialSavings = Math.round(claims * (denial / 100) * value * 0.6);
+  const staffSavings = Math.round(hours * 0.6 * 4.3 * 35);
+  const appealRecovery = Math.round(claims * (denial / 100) * value * 0.45 * 0.3);
+  const providers = Math.max(1, Math.round(claims / 200));
+  const cost = providers * 549;
+  const total = denialSavings + staffSavings + appealRecovery;
+  const net = total - cost;
+
+  const fmt = n => '$' + n.toLocaleString();
+
+  document.getElementById('roi-total').textContent = fmt(total);
+  document.getElementById('roi-denial').textContent = fmt(denialSavings);
+  document.getElementById('roi-staff').textContent = fmt(staffSavings);
+  document.getElementById('roi-appeal').textContent = fmt(appealRecovery);
+  document.getElementById('roi-cost').textContent = '\u2013' + fmt(cost);
+  document.getElementById('roi-net').textContent = fmt(net);
+}
+
+// \u2500\u2500\u2500 LIVE FEED SIMULATION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+const feedEvents = [
+  { dot: 'var(--green)', title: 'Eligibility verified \u2014 UHC PPO', meta: 'Active \u00b7 $1,200 deductible remaining', amount: '\u2713 Active', cls: 'green' },
+  { dot: 'var(--blue)', title: 'Claim scrubbed \u2014 0 errors', meta: 'CPT 99213 \u00b7 ICD J06.9 \u00b7 Aetna', amount: 'Ready', cls: '' },
+  { dot: 'var(--red)', title: 'Claim blocked \u2014 ICD-10 format error', meta: 'J069 should be J06.9 \u00b7 Medicare', amount: 'Fixed', cls: 'red' },
+  { dot: 'var(--purple)', title: 'Denial processed \u2014 CO-97 CCI', meta: 'CPT 29881+29876 \u00b7 Modifier 59 needed', amount: '$890', cls: '' },
+  { dot: 'var(--green)', title: 'Eligibility verified \u2014 Humana HMO', meta: 'Active \u00b7 OOP met \u00b7 No copay', amount: '\u2713 Active', cls: 'green' },
+  { dot: 'var(--amber)', title: 'Auth denial \u2014 CO-57 UHC MRI', meta: 'Retro-auth requested \u00b7 CRITICAL', amount: '$2,400', cls: '' },
+];
+
+let feedIdx = 0;
+setInterval(() => {
+  const feed = document.getElementById('activity-feed');
+  if (!feed) return;
+  const ev = feedEvents[feedIdx % feedEvents.length];
+  feedIdx++;
+
+  const item = document.createElement('div');
+  item.className = 'feed-item';
+  item.style.cssText = 'animation: fadeUp 0.4s ease forwards; background: rgba(0,229,160,0.03);';
+  item.innerHTML = `
+    <div class="feed-dot" style="background:${ev.dot}"></div>
+    <div class="feed-content">
+      <div class="feed-title">${ev.title}</div>
+      <div class="feed-meta">${ev.meta} \u00b7 just now</div>
+    </div>
+    <div class="feed-amount ${ev.cls}">${ev.amount}</div>
+  `;
+  feed.insertBefore(item, feed.firstChild);
+  setTimeout(() => { item.style.background = ''; }, 2000);
+  if (feed.children.length > 8) feed.removeChild(feed.lastChild);
+}, 4000);
+
+// ─── ENROLLMENT FUNCTIONS ──────────────────────────────────────────────────
+function goStep(n) {
+  for (let i = 1; i <= 3; i++) {
+    document.getElementById('estep-panel-' + i).style.display = i === n ? '' : 'none';
+    const el = document.getElementById('estep' + i);
+    el.style.color = i === n ? '#00d4d4' : 'var(--text3)';
+    el.style.borderBottomColor = i === n ? '#00d4d4' : 'transparent';
+  }
+  document.getElementById('step-badge').textContent = 'Step ' + n + ' of 3';
+}
+function submitEnroll() {
+  const checked = document.getElementById('attest-check')?.checked;
+  if (!checked) { alert('Please check the attestation checkbox before submitting.'); return; }
+  const btn = event.target;
+  btn.textContent = '⟳ Submitting...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = '✓ Submitted!';
+    btn.style.background = 'var(--green)';
+    setTimeout(() => showPage('enroll'), 1500);
+  }, 1800);
+}
+
+</script>
+</body>
+</html>
