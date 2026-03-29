@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RCM AutoMed — Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#07080a;--bg2:#0d0f12;--bg3:#131619;--border:#1e2228;--border2:#262b33;--text:#e8eaed;--text2:#8a919e;--text3:#4d5562;--green:#00e5a0;--red:#ff4d6d;--amber:#ffb930;--blue:#4d9fff;--purple:#b57aff;--fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:14px;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.shell{display:grid;grid-template-columns:220px 1fr;grid-template-rows:56px 1fr;min-height:100vh;position:relative;z-index:1}
+.topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--border);background:rgba(7,8,10,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--fh);font-size:16px;font-weight:800}
+.logo-mark{width:28px;height:28px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#000}
+.status-pill{display:flex;align-items:center;gap:6px;font-size:11px;font-family:var(--fm);color:var(--green);background:rgba(0,229,160,.06);padding:4px 10px;border-radius:20px;border:1px solid rgba(0,229,160,.2)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.topbar-time{font-family:var(--fm);font-size:11px;color:var(--text3)}
+.sidebar{border-right:1px solid var(--border);padding:24px 0;background:var(--bg2);display:flex;flex-direction:column;gap:2px;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
+.nav-section{padding:0 16px;margin-bottom:8px}
+.nav-label{font-family:var(--fm);font-size:9px;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;padding:0 8px;margin-bottom:4px;margin-top:16px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;cursor:pointer;transition:all .15s;font-size:13px;color:var(--text2);border:1px solid transparent}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.active{background:rgba(0,229,160,.06);color:var(--green);border-color:rgba(0,229,160,.15)}
+.nav-badge{margin-left:auto;font-family:var(--fm);font-size:10px;padding:1px 6px;border-radius:10px;background:rgba(255,77,109,.06);color:var(--red);border:1px solid rgba(255,77,109,.2)}
+.nav-badge.g{background:rgba(0,229,160,.06);color:var(--green);border-color:rgba(0,229,160,.2)}
+.main{padding:28px;overflow-y:auto;display:flex;flex-direction:column;gap:24px}
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;opacity:0;transform:translateY(12px);animation:fadeUp .5s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.page-title{font-family:var(--fh);font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.page-title span{color:var(--green)}
+.page-sub{color:var(--text2);font-size:13px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .15s;font-family:var(--fb)}
+.btn-p{background:var(--green);color:#000}
+.btn-p:hover{background:#00f0aa;transform:translateY(-1px)}
+.btn-g{background:transparent;color:var(--text2);border:1px solid var(--border2)}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;opacity:0;animation:fadeUp .5s ease .1s forwards}
+.kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac,var(--green))}
+.kpi-label{font-size:11px;font-family:var(--fm);color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.kpi-value{font-family:var(--fh);font-size:32px;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--ac,var(--green))}
+.kpi-delta{margin-top:8px;font-size:11px;font-family:var(--fm);color:var(--text2)}
+.kpi-delta.up{color:var(--green)}
+.kpi-delta.dn{color:var(--red)}
+.bot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;opacity:0;animation:fadeUp .5s ease .15s forwards}
+.bot-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:all .2s}
+.bot-card:hover{border-color:var(--bc,var(--green));transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.bot-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.bot-icon{width:40px;height:40px;border-radius:10px;background:var(--bb,rgba(0,229,160,.06));border:1px solid var(--bbd,rgba(0,229,160,.2));display:flex;align-items:center;justify-content:center;font-size:18px}
+.bot-status{font-family:var(--fm);font-size:10px;padding:3px 8px;border-radius:10px;display:flex;align-items:center;gap:5px;background:rgba(0,229,160,.06);color:var(--green);border:1px solid rgba(0,229,160,.2)}
+.bot-name{font-family:var(--fh);font-size:16px;font-weight:700;margin-bottom:4px}
+.bot-desc{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:16px}
+.bot-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bot-stat{background:var(--bg3);border-radius:8px;padding:10px 12px}
+.bot-sv{font-family:var(--fm);font-size:16px;font-weight:500;color:var(--bc,var(--green))}
+.bot-sl{font-size:10px;color:var(--text3);margin-top:2px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;opacity:0;animation:fadeUp .5s ease .2s forwards}
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.panel-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
+.panel-title{font-family:var(--fh);font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.badge{font-family:var(--fm);font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(0,229,160,.06);color:var(--green);border:1px solid rgba(0,229,160,.2)}
+.badge.a{background:rgba(255,185,48,.06);color:var(--amber);border-color:rgba(255,185,48,.2)}
+.panel-body{padding:20px}
+.feed{display:flex;flex-direction:column}
+.fi{display:flex;align-items:flex-start;gap:12px;padding:12px 20px;border-bottom:1px solid var(--border);transition:background .15s}
+.fi:last-child{border-bottom:none}
+.fi:hover{background:var(--bg3)}
+.fd{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.fc{flex:1;min-width:0}
+.ft{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fm2{font-family:var(--fm);font-size:10px;color:var(--text3);margin-top:2px}
+.fa{font-family:var(--fm);font-size:12px;color:var(--text2);white-space:nowrap;flex-shrink:0}
+.fa.g{color:var(--green)}
+.fa.r{color:var(--red)}
+.dbar-list{display:flex;flex-direction:column;gap:10px}
+.dbar-row{display:flex;align-items:center;gap:12px}
+.dbar-lbl{font-size:12px;color:var(--text2);width:160px;flex-shrink:0}
+.dbar-track{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.dbar-fill{height:100%;border-radius:3px}
+.dbar-n{font-family:var(--fm);font-size:11px;color:var(--text2);width:30px;text-align:right}
+.dbar-pct{font-family:var(--fm);font-size:11px;color:var(--text3);width:36px;text-align:right}
+.demo-section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;opacity:0;animation:fadeUp .5s ease .3s forwards}
+.demo-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--bg)}
+.demo-tab{padding:12px 20px;font-size:13px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;font-family:var(--fm)}
+.demo-tab:hover{color:var(--text2)}
+.demo-tab.active{color:var(--green);border-bottom-color:var(--green)}
+.demo-panel{display:none;padding:24px}
+.demo-panel.active{display:block}
+.demo-form{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-label{font-family:var(--fm);font-size:10px;letter-spacing:.08em;color:var(--text3);text-transform:uppercase}
+.form-input{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--text);font-family:var(--fb);outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--green)}
+.demo-result{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px;font-family:var(--fm);font-size:12px;line-height:1.8;min-height:160px}
+.rl{display:flex;gap:12px}
+.rk{color:var(--text3);min-width:160px}
+.rv{color:var(--text)}
+.rv.g{color:var(--green)}
+.rv.r{color:var(--red)}
+.rv.a{color:var(--amber)}
+.roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+.roi-inputs{display:flex;flex-direction:column;gap:12px}
+.roi-sw{display:flex;flex-direction:column;gap:6px}
+.roi-sl{display:flex;justify-content:space-between;font-size:12px;color:var(--text2)}
+.roi-sl span{font-family:var(--fm);color:var(--green)}
+input[type=range]{width:100%;accent-color:var(--green);height:4px;cursor:pointer}
+.roi-result{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:24px;text-align:center}
+.roi-big{font-family:var(--fh);font-size:48px;font-weight:800;color:var(--green);letter-spacing:-.04em;line-height:1;margin-bottom:4px}
+.roi-lbl{font-size:12px;color:var(--text2);margin-bottom:20px}
+.roi-bd{display:flex;flex-direction:column;gap:8px;text-align:left}
+.roi-item{display:flex;justify-content:space-between;font-size:12px;padding:8px 0;border-bottom:1px solid var(--border)}
+.roi-item:last-child{border-bottom:none}
+.roi-il{color:var(--text2)}
+.roi-iv{font-family:var(--fm);color:var(--green)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+#pd-eligibility,#pd-scrubber,#pd-denials,#pd-roi{display:none}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;opacity:0;animation:fadeUp .5s ease .1s forwards}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div class="logo"><div class="logo-mark">R</div>RCM AutoMed<span style="color:var(--text2);font-weight:400;font-size:12px;margin-left:4px">// Command Center</span></div>
+  <div style="display:flex;align-items:center;gap:20px">
+    <div class="status-pill"><div class="dot"></div>3 Bots Active</div>
+    <div class="topbar-time" id="clock">--:--:--</div>
+  </div>
+</header>
+<nav class="sidebar">
+  <div class="nav-section">
+    <div class="nav-label">Overview</div>
+    <div class="nav-item active" onclick="showPage('dashboard')">⬡ Dashboard</div>
+    <div class="nav-item" onclick="showPage('demo')">▷ Live Demo</div>
+    <div class="nav-item" onclick="showPage('roi')">◈ ROI Calculator</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Bots</div>
+    <div class="nav-item" onclick="showPage('eligibility')">✦ EligibilityBot<span class="nav-badge g">Live</span></div>
+    <div class="nav-item" onclick="showPage('scrubber')">◎ ClaimScrubber<span class="nav-badge g">Live</span></div>
+    <div class="nav-item" onclick="showPage('denials')">⚑ DenialManager<span class="nav-badge">7</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Coming Soon</div>
+    <div class="nav-item" style="opacity:.4">◷ AuthBot</div>
+    <div class="nav-item" style="opacity:.4">◑ PatientBillingBot</div>
+  </div>
+</nav>
+<main class="main" id="main">
+
+<!-- DASHBOARD -->
+<div id="pd-dashboard">
+  <div class="page-header">
+    <div><div class="page-title">Practice <span>Intelligence</span></div><div class="page-sub">Today’s revenue cycle snapshot</div></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-g">↓ Export</button><button class="btn btn-p" onclick="showPage('demo')">▷ Run Demo</button></div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card" style="--ac:var(--green)"><div class="kpi-label">Claims Scrubbed Today</div><div class="kpi-value" id="cc">247</div><div class="kpi-delta up">↑ 12% vs yesterday</div></div>
+    <div class="kpi-card" style="--ac:var(--blue)"><div class="kpi-label">Eligibility Checks</div><div class="kpi-value" style="color:var(--blue)">183</div><div class="kpi-delta up">↑ 8% vs yesterday</div></div>
+    <div class="kpi-card" style="--ac:var(--red)"><div class="kpi-label">Open Denials</div><div class="kpi-value" style="color:var(--red)">41</div><div class="kpi-delta dn">↓ $28,400 at risk</div></div>
+    <div class="kpi-card" style="--ac:var(--amber)"><div class="kpi-label">Est. Recovery This Month</div><div class="kpi-value" style="color:var(--amber)">$14.2k</div><div class="kpi-delta up" style="color:var(--amber)">45% appeal win rate</div></div>
+  </div>
+  <div class="bot-grid">
+    <div class="bot-card" style="--bc:var(--green);--bb:rgba(0,229,160,.06);--bbd:rgba(0,229,160,.2)" onclick="showPage('eligibility')">
+      <div class="bot-hd"><div class="bot-icon">✦</div><div class="bot-status"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span>LIVE</div></div>
+      <div class="bot-name">EligibilityBot</div><div class="bot-desc">Real-time insurance verification via Availity 270/271 — before every appointment</div>
+      <div class="bot-stats"><div class="bot-stat"><div class="bot-sv">183</div><div class="bot-sl">Checks today</div></div><div class="bot-stat"><div class="bot-sv">4hr</div><div class="bot-sl">Cache TTL</div></div><div class="bot-stat"><div class="bot-sv">98.4%</div><div class="bot-sl">Uptime</div></div><div class="bot-stat"><div class="bot-sv">1.2s</div><div class="bot-sl">Avg response</div></div></div>
+    </div>
+    <div class="bot-card" style="--bc:var(--blue);--bb:rgba(77,159,255,.06);--bbd:rgba(77,159,255,.2)" onclick="showPage('scrubber')">
+      <div class="bot-hd"><div class="bot-icon" style="background:rgba(77,159,255,.06);border-color:rgba(77,159,255,.2)">◎</div><div class="bot-status" style="background:rgba(77,159,255,.06);color:var(--blue);border-color:rgba(77,159,255,.2)"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block"></span>LIVE</div></div>
+      <div class="bot-name">ClaimScrubber</div><div class="bot-desc">Pre-submission validation — catches ICD-10, CPT, CCI, modifier errors before denial</div>
+      <div class="bot-stats"><div class="bot-stat"><div class="bot-sv" style="color:var(--blue)">247</div><div class="bot-sl">Claims today</div></div><div class="bot-stat"><div class="bot-sv" style="color:var(--blue)">34</div><div class="bot-sl">Errors caught</div></div><div class="bot-stat"><div class="bot-sv" style="color:var(--blue)">86%</div><div class="bot-sl">Clean rate</div></div><div class="bot-stat"><div class="bot-sv" style="color:var(--blue)">4</div><div class="bot-sl">Engines</div></div></div>
+    </div>
+    <div class="bot-card" style="--bc:var(--purple);--bb:rgba(181,122,255,.06);--bbd:rgba(181,122,255,.2)" onclick="showPage('denials')">
+      <div class="bot-hd"><div class="bot-icon" style="background:rgba(181,122,255,.06);border-color:rgba(181,122,255,.2)">⚑</div><div class="bot-status" style="background:rgba(181,122,255,.06);color:var(--purple);border-color:rgba(181,122,255,.2)"><span style="width:6px;height:6px;border-radius:50%;background:var(--purple);display:inline-block"></span>LIVE</div></div>
+      <div class="bot-name">DenialManager</div><div class="bot-desc">AI denial categorization + appeal letters — 6 engines running in parallel</div>
+      <div class="bot-stats"><div class="bot-stat"><div class="bot-sv" style="color:var(--purple)">41</div><div class="bot-sl">Open denials</div></div><div class="bot-stat"><div class="bot-sv" style="color:var(--purple)">7</div><div class="bot-sl">Critical</div></div><div class="bot-stat"><div class="bot-sv" style="color:var(--purple)">45%</div><div class="bot-sl">Win rate</div></div><div class="bot-stat"><div class="bot-sv" style="color:var(--purple)">6</div><div class="bot-sl">Engines</div></div></div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">⚡ Live Activity <span class="badge">Real-time</span></div></div>
+      <div class="feed" id="feed">
+        <div class="fi"><div class="fd" style="background:var(--green)"></div><div class="fc"><div class="ft">Eligibility verified — Aetna PPO</div><div class="fm2">Patient #4821 · POS 11 · 14s ago</div></div><div class="fa g">✓ Active</div></div>
+        <div class="fi"><div class="fd" style="background:var(--red)"></div><div class="fc"><div class="ft">Claim blocked — CCI edit CO-97</div><div class="fm2">CPT 99214+93000 · missing mod 25 · 42s ago</div></div><div class="fa r">$245 saved</div></div>
+        <div class="fi"><div class="fd" style="background:var(--purple)"></div><div class="fc"><div class="ft">Appeal letter generated — CO-50</div><div class="fm2">UnitedHealthcare · Medical necessity · 1m ago</div></div><div class="fa" style="color:var(--purple)">$485 risk</div></div>
+        <div class="fi"><div class="fd" style="background:var(--green)"></div><div class="fc"><div class="ft">Eligibility verified — Medicare B</div><div class="fm2">Patient #4819 · Deductible met · 2m ago</div></div><div class="fa g">✓ Active</div></div>
+        <div class="fi"><div class="fd" style="background:var(--amber)"></div><div class="fc"><div class="ft">Denial — CO-29 timely filing</div><div class="fm2">Cigna · Claim #8847 · 3m ago</div></div><div class="fa" style="color:var(--amber)">$1,200</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">⚑ Denial Breakdown <span class="badge a">41 Open</span></div></div>
+      <div class="panel-body">
+        <div class="dbar-list">
+          <div class="dbar-row"><div class="dbar-lbl">Medical Necessity</div><div class="dbar-track"><div class="dbar-fill" style="width:56%;background:var(--red)"></div></div><div class="dbar-n">23</div><div class="dbar-pct">56%</div></div>
+          <div class="dbar-row"><div class="dbar-lbl">Authorization</div><div class="dbar-track"><div class="dbar-fill" style="width:17%;background:var(--amber)"></div></div><div class="dbar-n">7</div><div class="dbar-pct">17%</div></div>
+          <div class="dbar-row"><div class="dbar-lbl">Coding Errors</div><div class="dbar-track"><div class="dbar-fill" style="width:12%;background:var(--blue)"></div></div><div class="dbar-n">5</div><div class="dbar-pct">12%</div></div>
+          <div class="dbar-row"><div class="dbar-lbl">Modifier Issues</div><div class="dbar-track"><div class="dbar-fill" style="width:10%;background:var(--purple)"></div></div><div class="dbar-n">4</div><div class="dbar-pct">10%</div></div>
+          <div class="dbar-row"><div class="dbar-lbl">Timely Filing</div><div class="dbar-track"><div class="dbar-fill" style="width:5%;background:var(--green)"></div></div><div class="dbar-n">2</div><div class="dbar-pct">5%</div></div>
+        </div>
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center">
+          <div><div style="font-family:var(--fm);font-size:20px;color:var(--green);font-weight:500">$14.2k</div><div style="font-size:10px;color:var(--text3);margin-top:3px">Est. recovery</div></div>
+          <div><div style="font-family:var(--fm);font-size:20px;color:var(--amber);font-weight:500">$28.4k</div><div style="font-size:10px;color:var(--text3);margin-top:3px">Total at risk</div></div>
+          <div><div style="font-family:var(--fm);font-size:20px;color:var(--blue);font-weight:500">45%</div><div style="font-size:10px;color:var(--text3);margin-top:3px">Win rate</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE DEMO -->
+<div id="pd-demo" style="display:none">
+  <div class="page-header"><div><div class="page-title">Live <span>Bot Demo</span></div><div class="page-sub">Run any bot in real-time</div></div></div>
+  <div class="demo-section">
+    <div class="demo-tabs">
+      <div class="demo-tab active" onclick="switchTab('et')">✦ EligibilityBot</div>
+      <div class="demo-tab" onclick="switchTab('st')">◎ ClaimScrubber</div>
+      <div class="demo-tab" onclick="switchTab('dt')">⚑ DenialManager</div>
+    </div>
+    <div class="demo-panel active" id="et">
+      <div class="demo-form">
+        <div class="form-group"><label class="form-label">Payer ID</label><input class="form-input" id="ep" value="00431"></div>
+        <div class="form-group"><label class="form-label">Member ID</label><input class="form-input" id="em" value="W123456789"></div>
+        <div class="form-group"><label class="form-label">Service Date</label><input class="form-input" id="ed" value="2026-04-01" type="date"></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:20px"><button class="btn btn-p" onclick="runElig()">▷ Check Eligibility</button><button class="btn btn-g" onclick="clr('er')">Clear</button></div>
+      <div class="demo-result" id="er"><span style="color:var(--text3)">// Enter details above and click Check Eligibility</span></div>
+    </div>
+    <div class="demo-panel" id="st">
+      <div class="demo-form">
+        <div class="form-group"><label class="form-label">CPT Codes</label><input class="form-input" id="sc" value="99214, 93000"></div>
+        <div class="form-group"><label class="form-label">ICD-10 Codes</label><input class="form-input" id="sd" value="I10, E11.9"></div>
+        <div class="form-group"><label class="form-label">Payer ID</label><input class="form-input" id="sp" value="00431"></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:20px"><button class="btn btn-p" onclick="runScrub()">▷ Scrub Claim</button><button class="btn btn-g" onclick="clr('sr')">Clear</button></div>
+      <div class="demo-result" id="sr"><span style="color:var(--text3)">// Enter CPT + ICD-10 codes and click Scrub Claim</span></div>
+    </div>
+    <div class="demo-panel" id="dt">
+      <div class="demo-form">
+        <div class="form-group"><label class="form-label">CARC Code</label><input class="form-input" id="dc" value="50"></div>
+        <div class="form-group"><label class="form-label">Denied Amount ($)</label><input class="form-input" id="da" value="485"></div>
+        <div class="form-group"><label class="form-label">Payer</label><input class="form-input" id="dp" value="Aetna (00431)"></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:20px"><button class="btn btn-p" onclick="runDenial()">▷ Process Denial</button><button class="btn btn-g" onclick="clr('dr')">Clear</button></div>
+      <div class="demo-result" id="dr"><span style="color:var(--text3)">// Enter CARC code and click Process Denial</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ROI -->
+<div id="pd-roi" style="display:none">
+  <div class="page-header"><div><div class="page-title">ROI <span>Calculator</span></div><div class="page-sub">Show exactly how much your practice will save</div></div></div>
+  <div class="panel"><div class="panel-head"><div class="panel-title">◈ Practice Revenue Analyzer</div></div>
+  <div class="panel-body"><div class="roi-grid">
+    <div class="roi-inputs">
+      <div class="roi-sw"><div class="roi-sl">Monthly claims <span id="lc">500</span></div><input type="range" min="100" max="5000" value="500" step="50" oninput="calcROI()" id="slc"></div>
+      <div class="roi-sw"><div class="roi-sl">Denial rate <span id="ld">12%</span></div><input type="range" min="2" max="30" value="12" step="1" oninput="calcROI()" id="sld"></div>
+      <div class="roi-sw"><div class="roi-sl">Avg claim value <span id="lv">$320</span></div><input type="range" min="50" max="2000" value="320" step="10" oninput="calcROI()" id="slv"></div>
+      <div class="roi-sw"><div class="roi-sl">Staff billing hrs/week <span id="lh">20hrs</span></div><input type="range" min="5" max="80" value="20" step="1" oninput="calcROI()" id="slh"></div>
+    </div>
+    <div class="roi-result">
+      <div class="roi-big" id="rt">$0</div><div class="roi-lbl">Estimated monthly savings</div>
+      <div class="roi-bd">
+        <div class="roi-item"><span class="roi-il">Denial reduction (60%)</span><span class="roi-iv" id="rd">$0</span></div>
+        <div class="roi-item"><span class="roi-il">Staff time saved</span><span class="roi-iv" id="rs">$0</span></div>
+        <div class="roi-item"><span class="roi-il">Appeal recovery (45%)</span><span class="roi-iv" id="ra">$0</span></div>
+        <div class="roi-item" style="border-top:1px solid var(--green);margin-top:4px;padding-top:12px"><span class="roi-il" style="color:var(--text);font-weight:500">RCM AutoMed cost</span><span class="roi-iv" id="rc" style="color:var(--red)">–$0</span></div>
+        <div class="roi-item"><span class="roi-il" style="color:var(--text);font-weight:500">Net ROI</span><span class="roi-iv" id="rn" style="font-size:16px">$0</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</div>
+
+<!-- BOT PAGES -->
+<div id="pd-eligibility" style="display:none">
+  <div class="page-header"><div><div class="page-title">✦ <span>EligibilityBot</span></div><div class="page-sub">Real-time insurance verification via Availity 270/271 EDI</div></div><button class="btn btn-p" onclick="showPage('demo');switchTab('et')">▷ Run Check</button></div>
+  <div class="three-col" style="opacity:1;animation:none">
+    <div class="kpi-card" style="--ac:var(--green)"><div class="kpi-label">Today's Checks</div><div class="kpi-value">183</div><div class="kpi-delta up">↑ 8% vs yesterday</div></div>
+    <div class="kpi-card" style="--ac:var(--green)"><div class="kpi-label">Cache Hit Rate</div><div class="kpi-value">67%</div><div class="kpi-delta up">Saving API costs</div></div>
+    <div class="kpi-card" style="--ac:var(--green)"><div class="kpi-label">Avg Response</div><div class="kpi-value">1.2s</div><div class="kpi-delta up">↓ 0.3s vs last week</div></div>
+  </div>
+</div>
+<div id="pd-scrubber" style="display:none">
+  <div class="page-header"><div><div class="page-title">◎ <span>ClaimScrubber</span></div><div class="page-sub">Pre-submission validation — 4 engines in parallel</div></div><button class="btn btn-p" onclick="showPage('demo');switchTab('st')">▷ Scrub a Claim</button></div>
+  <div class="three-col" style="opacity:1;animation:none">
+    <div class="kpi-card" style="--ac:var(--blue)"><div class="kpi-label">Claims Today</div><div class="kpi-value" style="color:var(--blue)">247</div><div class="kpi-delta up">↑ 12% vs yesterday</div></div>
+    <div class="kpi-card" style="--ac:var(--red)"><div class="kpi-label">Errors Caught</div><div class="kpi-value" style="color:var(--red)">34</div><div class="kpi-delta dn">$8,200 in denials prevented</div></div>
+    <div class="kpi-card" style="--ac:var(--blue)"><div class="kpi-label">Clean Claim Rate</div><div class="kpi-value" style="color:var(--blue)">86%</div><div class="kpi-delta up">↑ 4% vs last month</div></div>
+  </div>
+</div>
+<div id="pd-denials" style="display:none">
+  <div class="page-header"><div><div class="page-title">⚑ <span>DenialManager</span></div><div class="page-sub">6 engines · AI appeal letters · full audit trail</div></div><button class="btn btn-p" onclick="showPage('demo');switchTab('dt')">▷ Process Denial</button></div>
+  <div class="three-col" style="opacity:1;animation:none">
+    <div class="kpi-card" style="--ac:var(--red)"><div class="kpi-label">Open Denials</div><div class="kpi-value" style="color:var(--red)">41</div><div class="kpi-delta dn">7 critical priority</div></div>
+    <div class="kpi-card" style="--ac:var(--amber)"><div class="kpi-label">At Risk</div><div class="kpi-value" style="color:var(--amber)">$28.4k</div><div class="kpi-delta dn">Needs action this week</div></div>
+    <div class="kpi-card" style="--ac:var(--green)"><div class="kpi-label">Won This Month</div><div class="kpi-value">$6.2k</div><div class="kpi-delta up">↑ 45% win rate</div></div>
+  </div>
+</div>
+
+</main>
+</div>
+<script>
+const PAGES=['dashboard','demo','roi','eligibility','scrubber','denials'];
+function showPage(n){
+  PAGES.forEach(p=>{document.getElementById('pd-'+p).style.display=p===n?'':'none'});
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el=>{if(el.getAttribute('onclick')&&el.getAttribute('onclick').includes("'"+n+"'"))el.classList.add('active')});
+  if(n==='roi')setTimeout(calcROI,100);
+}
+function switchTab(id){
+  document.querySelectorAll('.demo-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.demo-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx=['et','st','dt'].indexOf(id);
+  document.querySelectorAll('.demo-tab')[idx]?.classList.add('active');
+}
+function clr(id){document.getElementById(id).innerHTML='<span style="color:var(--text3)">// Cleared</span>'}
+const CARC={'50':{type:'Medical Necessity',pri:'HIGH',action:'File formal appeal with LCD/NCD citation and clinical notes',wr:'45%'},'57':{type:'Prior Authorization',pri:'CRITICAL',action:'Request retro-authorization immediately',wr:'35%'},'29':{type:'Timely Filing',pri:'CRITICAL',action:'Gather clearinghouse proof of original submission',wr:'30%'},'97':{type:'CCI Bundling',pri:'MEDIUM',action:'Add modifier 59/XU if services were truly distinct',wr:'80%'},'16':{type:'Missing Information',pri:'MEDIUM',action:'Review RARC, correct and resubmit as corrected claim',wr:'85%'}};
+function runElig(){
+  const p=document.getElementById('ep').value||'00431',m=document.getElementById('em').value||'W123456789',d=document.getElementById('ed').value||'2026-04-01';
+  const el=document.getElementById('er');
+  el.innerHTML='<span style="color:var(--text3)">// Sending 270 to Availity...</span>';
+  const pn={'00431':'Aetna','62308':'Cigna','87726':'UnitedHealthcare','CMS':'Medicare','61101':'Humana'}[p]||'Unknown Payer';
+  setTimeout(()=>{el.innerHTML=`<div class="rl"><span class="rk">status</span><span class="rv g">● ACTIVE</span></div><div class="rl"><span class="rk">payer</span><span class="rv">${pn} (${p})</span></div><div class="rl"><span class="rk">member_id</span><span class="rv">${m}</span></div><div class="rl"><span class="rk">plan_name</span><span class="rv">${pn} Choice POS II</span></div><div class="rl"><span class="rk">deductible_remaining</span><span class="rv a">$820.00 in-network</span></div><div class="rl"><span class="rk">copay</span><span class="rv">$25 office / $40 specialist</span></div><div class="rl"><span class="rk">coinsurance</span><span class="rv">20% after deductible</span></div><div class="rl"><span class="rk">service_date</span><span class="rv">${d}</span></div><div class="rl"><span class="rk">response_time</span><span class="rv g">1.24s</span></div>`},1400);
+}
+function runScrub(){
+  const cpts=document.getElementById('sc').value||'99214,93000',dx=document.getElementById('sd').value||'I10',p=document.getElementById('sp').value;
+  const el=document.getElementById('sr');
+  el.innerHTML='<span style="color:var(--text3)">// Running 4 scrub engines...</span>';
+  const cl=cpts.split(',').map(s=>s.trim()),hasEM=cl.some(c=>c.startsWith('992'))&&cl.some(c=>c==='93000');
+  setTimeout(()=>{
+    const errs=[],warns=[];
+    if(hasEM)errs.push({s:'HIGH',e:'CCI',m:'CPT '+cl.find(c=>c.startsWith('992'))+' + 93000 bundled — add modifier 25 to E&M'});
+    dx.split(',').forEach(d=>{const c=d.trim();if(c.length>3&&!c.includes('.'))warns.push({s:'MEDIUM',e:'ICD-10',m:'"'+c+'" may be missing decimal — should be '+c.slice(0,3)+'.'+c.slice(3)})});
+    const ok=errs.length===0;
+    el.innerHTML='<div class="rl"><span class="rk">result</span><span class="rv '+(ok?'g':'r')+'">'+(ok?'✓ PASSED — Ready':'✗ FAILED — Fix errors')+'</span></div><div class="rl"><span class="rk">cpt_codes</span><span class="rv">'+cpts+'</span></div><div class="rl"><span class="rk">errors</span><span class="rv '+(errs.length?'r':'g')+'">'+errs.length+'</span></div><div class="rl"><span class="rk">warnings</span><span class="rv a">'+warns.length+'</span></div>'+errs.map(e=>'<div class="rl"><span class="rk">['+e.s+'] '+e.e+'</span><span class="rv r">'+e.m+'</span></div>').join('')+warns.map(w=>'<div class="rl"><span class="rk">['+w.s+'] '+w.e+'</span><span class="rv a">'+w.m+'</span></div>').join('')+'<div class="rl"><span class="rk">scrub_time</span><span class="rv g">38ms</span></div>';
+  },800);
+}
+function runDenial(){
+  const carc=document.getElementById('dc').value||'50',amt=parseFloat(document.getElementById('da').value)||485,payer=document.getElementById('dp').value||'Aetna';
+  const el=document.getElementById('dr');
+  el.innerHTML='<span style="color:var(--text3)">// Running 6 denial engines...</span>';
+  setTimeout(()=>{
+    const info=CARC[carc]||{type:'Other',pri:'MEDIUM',action:'Route to senior biller for review',wr:'40%'};
+    const rec=(amt*parseFloat(info.wr)/100).toFixed(2);
+    const pc=info.pri==='CRITICAL'?'r':info.pri==='HIGH'?'a':'rv';
+    const dl=new Date();dl.setDate(dl.getDate()+180);
+    el.innerHTML='<div class="rl"><span class="rk">carc_code</span><span class="rv">'+carc+'</span></div><div class="rl"><span class="rk">denial_type</span><span class="rv">'+info.type+'</span></div><div class="rl"><span class="rk">priority</span><span class="rv '+pc+'">⚑ '+info.pri+'</span></div><div class="rl"><span class="rk">payer</span><span class="rv">'+payer+'</span></div><div class="rl"><span class="rk">denied_amount</span><span class="rv r">$'+amt.toFixed(2)+'</span></div><div class="rl"><span class="rk">est_win_rate</span><span class="rv g">'+info.wr+'</span></div><div class="rl"><span class="rk">expected_recovery</span><span class="rv g">$'+rec+'</span></div><div class="rl"><span class="rk">appeal_deadline</span><span class="rv a">'+dl.toISOString().split('T')[0]+'</span></div><div class="rl"><span class="rk">recommended_action</span><span class="rv">'+info.action+'</span></div><div class="rl"><span class="rk">appeal_letter</span><span class="rv g">✓ Generated — review before sending</span></div>';
+  },1200);
+}
+function calcROI(){
+  const c=+document.getElementById('slc').value,d=+document.getElementById('sld').value,v=+document.getElementById('slv').value,h=+document.getElementById('slh').value;
+  document.getElementById('lc').textContent=c.toLocaleString();
+  document.getElementById('ld').textContent=d+'%';
+  document.getElementById('lv').textContent='$'+v;
+  document.getElementById('lh').textContent=h+'hrs';
+  const ds=Math.round(c*(d/100)*v*.6),ss=Math.round(h*.6*4.3*35),ar=Math.round(c*(d/100)*v*.45*.3),cost=Math.max(1,Math.round(c/200))*549,total=ds+ss+ar,net=total-cost;
+  const f=n=>'$'+n.toLocaleString();
+  document.getElementById('rt').textContent=f(total);
+  document.getElementById('rd').textContent=f(ds);
+  document.getElementById('rs').textContent=f(ss);
+  document.getElementById('ra').textContent=f(ar);
+  document.getElementById('rc').textContent='–'+f(cost);
+  document.getElementById('rn').textContent=f(net);
+}
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'})},1000);
+const evts=[{dot:'var(--green)',t:'Eligibility verified — UHC PPO',m:'Active · $1,200 deductible remaining',a:'✓ Active',c:'g'},{dot:'var(--blue)',t:'Claim scrubbed — 0 errors',m:'CPT 99213 · ICD J06.9 · Aetna',a:'Ready',c:''},{dot:'var(--red)',t:'Claim blocked — ICD-10 error',m:'J069 should be J06.9 · Medicare',a:'Fixed',c:'r'},{dot:'var(--purple)',t:'Denial processed — CO-97',m:'CPT 29881+29876 · Mod 59 needed',a:'$890',c:''},{dot:'var(--amber)',t:'Auth denial — CO-57 UHC MRI',m:'Retro-auth requested · CRITICAL',a:'$2,400',c:''}];
+let fi=0;
+setInterval(()=>{
+  const feed=document.getElementById('feed');if(!feed)return;
+  const ev=evts[fi%evts.length];fi++;
+  const item=document.createElement('div');item.className='fi';
+  item.style.cssText='animation:fadeUp .4s ease forwards;background:rgba(0,229,160,.03)';
+  item.innerHTML='<div class="fd" style="background:'+ev.dot+'"></div><div class="fc"><div class="ft">'+ev.t+'</div><div class="fm2">'+ev.m+' · just now</div></div><div class="fa '+ev.c+'">'+ev.a+'</div>';
+  feed.insertBefore(item,feed.firstChild);
+  setTimeout(()=>{item.style.background=''},2000);
+  if(feed.children.length>7)feed.removeChild(feed.lastChild);
+},4000);
+</script>
+</body>
+</html>
