@@ -1,14 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AutomatedRCM · AI-Powered Medical Billing Automation</title>
+<meta name="description" content="Automated RCM uses AI to eliminate billing errors, reduce denials by 60%, and recover revenue your billing company is missing. Serving healthcare practices across Florida. Book a free demo today.">
+<meta name="keywords" content="AI medical billing, RCM automation, revenue cycle management, denial management, eligibility verification, claim scrubbing, healthcare billing Florida">
+<meta property="og:title" content="AutomatedRCM · AI-Powered Medical Billing Automation">
+<meta property="og:description" content="Stop losing revenue. Automated RCM finds billing errors, slashes denials, and recovers money 24/7 — without additional staff.">
+<meta property="og:url" content="https://automatedrcm.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AutomatedRCM · AI-Powered Medical Billing Automation">
+<meta name="twitter:description" content="Stop losing revenue. AI-powered RCM audits and automation for healthcare practices.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-
 :root{
   --cyan:#00e5ff;
   --cyan2:#00c8ff;
@@ -23,9 +32,7 @@
   --text:#a0d8f0;
   --text2:#6ba8c4;
 }
-
 html{scroll-behavior:smooth;}
-
 body{
   background:var(--dark);
   font-family:'Rajdhani','Segoe UI',sans-serif;
@@ -33,7 +40,6 @@ body{
   overflow-x:hidden;
   cursor:crosshair;
 }
-
 /* ── GRID BG ── */
 body::before{
   content:'';position:fixed;inset:0;
@@ -43,12 +49,10 @@ body::before{
   background-size:40px 40px;
   pointer-events:none;z-index:0;
 }
-
 /* ── AMBIENT GLOWS ── */
 .glow1{position:fixed;top:-120px;left:-120px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,180,255,0.10) 0%,transparent 65%);pointer-events:none;border-radius:50%;z-index:0;}
 .glow2{position:fixed;bottom:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(200,0,255,0.08) 0%,transparent 65%);pointer-events:none;border-radius:50%;z-index:0;}
 .glow3{position:fixed;top:60%;left:35%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,255,200,0.05) 0%,transparent 65%);pointer-events:none;border-radius:50%;z-index:0;}
-
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -85,7 +89,6 @@ nav{
 .live-dot{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1.5px;color:var(--green);}
 .live-dot span{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-
 /* ── HERO ── */
 .hero{
   position:relative;z-index:1;
@@ -94,7 +97,6 @@ nav{
   text-align:center;
 }
 .hero-inner{max-width:900px;margin:0 auto;}
-
 .hero-eyebrow{
   font-family:'Share Tech Mono',monospace;font-size:9px;
   letter-spacing:4px;text-transform:uppercase;
@@ -106,7 +108,6 @@ nav{
   background:linear-gradient(90deg,transparent,var(--cyan));
 }
 .hero-eyebrow::after{background:linear-gradient(270deg,transparent,var(--cyan));}
-
 .hero-title{
   font-family:'Orbitron',sans-serif;
   font-size:clamp(42px,7vw,88px);
@@ -117,13 +118,11 @@ nav{
 }
 .hero-title .accent-c{color:var(--cyan);text-shadow:0 0 30px rgba(0,229,255,0.6),0 0 60px rgba(0,229,255,0.2);}
 .hero-title .accent-m{color:var(--magenta);text-shadow:0 0 30px rgba(255,60,160,0.6),0 0 60px rgba(255,60,160,0.2);}
-
 .hero-sub{
   font-family:'Rajdhani',sans-serif;font-size:clamp(16px,2.5vw,22px);
   font-weight:500;color:var(--text2);
   margin:24px auto 44px;max-width:640px;line-height:1.5;
 }
-
 .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 .btn-primary{
   font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;
@@ -144,7 +143,6 @@ nav{
   transition:all .25s;
 }
 .btn-ghost:hover{background:rgba(0,229,255,0.08);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,229,255,0.2);}
-
 /* ── LIVE STATS TICKER ── */
 .ticker-wrap{
   position:relative;z-index:1;
@@ -164,11 +162,9 @@ nav{
 .ticker-val.gn{color:var(--green);text-shadow:0 0 8px rgba(0,255,157,0.5);}
 .ticker-sep{color:rgba(0,200,255,0.3);}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 /* ── SECTION WRAPPERS ── */
 section{position:relative;z-index:1;padding:90px 40px;}
 .container{max-width:1280px;margin:0 auto;}
-
 .section-label{
   font-family:'Share Tech Mono',monospace;font-size:8px;
   letter-spacing:4px;text-transform:uppercase;
@@ -182,7 +178,6 @@ section{position:relative;z-index:1;padding:90px 40px;}
   font-family:'Rajdhani',sans-serif;font-size:18px;
   color:var(--text2);max-width:600px;line-height:1.55;
 }
-
 /* ── GLASS PANEL ── */
 .gp{
   background:var(--panel);
@@ -197,7 +192,6 @@ section{position:relative;z-index:1;padding:90px 40px;}
 .gp-g{background:rgba(0,255,157,0.04);border-color:rgba(0,255,157,0.28);}
 .gp-g::before{background:linear-gradient(90deg,transparent,rgba(0,255,157,0.7),transparent);}
 .gp-g::after{background:linear-gradient(180deg,rgba(0,255,157,0.7),transparent);}
-
 /* ── METRICS ROW ── */
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px;}
 .metric-card{text-align:center;padding:36px 20px;}
@@ -218,7 +212,6 @@ section{position:relative;z-index:1;padding:90px 40px;}
   font-family:'Rajdhani',sans-serif;font-size:13px;
   color:var(--text2);opacity:.6;margin-top:4px;
 }
-
 /* ── FEATURES ── */
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
 .feature-card{padding:28px 24px;}
@@ -246,7 +239,6 @@ section{position:relative;z-index:1;padding:90px 40px;}
   color:var(--cyan);border:1px solid rgba(0,200,255,0.3);
   padding:3px 10px;
 }
-
 /* ── PROCESS ── */
 .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:50px;position:relative;}
 .process-grid::before{
@@ -271,7 +263,6 @@ section{position:relative;z-index:1;padding:90px 40px;}
 .step-num::after{bottom:-1px;right:-1px;border-width:0 1px 1px 0;}
 .step-title{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;}
 .step-desc{font-family:'Rajdhani',sans-serif;font-size:14px;color:var(--text2);line-height:1.5;}
-
 /* ── BOT SHOWCASE ── */
 .bots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
 .bot-card{padding:28px;}
@@ -288,7 +279,6 @@ section{position:relative;z-index:1;padding:90px 40px;}
 .bot-pct{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:var(--cyan);margin-top:16px;}
 .bot-pct.mg{color:var(--magenta);}
 .bot-pct.gn{color:var(--green);}
-
 /* ── ROI SECTION ── */
 .roi-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:50px;}
 .roi-nums{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
@@ -297,7 +287,6 @@ section{position:relative;z-index:1;padding:90px 40px;}
 .roi-val.mg{color:var(--magenta);text-shadow:0 0 14px rgba(255,60,160,0.4);}
 .roi-val.gn{color:var(--green);text-shadow:0 0 14px rgba(0,255,157,0.4);}
 .roi-lbl{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-top:6px;}
-
 /* ── TESTIMONIALS ── */
 .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
 .test-card{padding:28px;}
@@ -305,7 +294,6 @@ section{position:relative;z-index:1;padding:90px 40px;}
 .test-quote::before{content:'// ';color:var(--cyan);font-family:'Share Tech Mono',monospace;font-style:normal;}
 .test-author{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);}
 .test-role{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--text2);margin-top:2px;}
-
 /* ── CTA SECTION ── */
 .cta-section{
   position:relative;z-index:1;padding:100px 40px;text-align:center;
@@ -327,7 +315,17 @@ section{position:relative;z-index:1;padding:90px 40px;}
   padding:8px 16px;display:flex;align-items:center;gap:6px;
 }
 .cta-chip::before{content:'✓';color:var(--green);}
-
+/* ── CONTACT EMAIL DISPLAY ── */
+.contact-email{
+  display:inline-block;margin-top:24px;
+  font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;
+  color:var(--cyan);text-decoration:none;
+  border:1px solid rgba(0,200,255,0.25);
+  padding:10px 24px;
+  transition:all .2s;
+}
+.contact-email:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(0,229,255,0.2);color:#00ffff;}
+.contact-email::before{content:'📧  ';font-style:normal;}
 /* ── FOOTER ── */
 footer{
   position:relative;z-index:1;padding:40px;
@@ -336,19 +334,16 @@ footer{
 }
 .footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
 .footer-brand{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--cyan);text-shadow:0 0 12px rgba(0,229,255,0.4);}
-.footer-links{display:flex;gap:24px;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
 .footer-links a{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text2);text-decoration:none;transition:color .2s;}
 .footer-links a:hover{color:var(--cyan);}
 .footer-copy{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1.5px;color:var(--text2);opacity:.4;}
-
 /* ── SCANLINE ── */
 .scanline{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:999;
   background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
 }
-
 /* ── DIVIDER ── */
 .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.3),transparent);margin:0;}
-
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
   .metrics-grid,.features-grid{grid-template-columns:repeat(2,1fr);}
@@ -364,14 +359,12 @@ footer{
   .process-grid{grid-template-columns:1fr;}
   .hero{padding:100px 20px 60px;}
 }
-
 /* ── ANIMATIONS ── */
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
-
 <div class="scanline"></div>
 <div class="glow1"></div>
 <div class="glow2"></div>
@@ -478,7 +471,6 @@ footer{
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
 <!-- ═══ FEATURES ═══ -->
@@ -527,7 +519,6 @@ footer{
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
 <!-- ═══ PROCESS ═══ -->
@@ -559,7 +550,6 @@ footer{
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
 <!-- ═══ BOTS ═══ -->
@@ -620,7 +610,6 @@ footer{
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
 <!-- ═══ ROI ═══ -->
@@ -671,7 +660,6 @@ footer{
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
 <!-- ═══ TESTIMONIALS ═══ -->
@@ -698,7 +686,6 @@ footer{
     </div>
   </div>
 </section>
-
 <div class="divider"></div>
 
 <!-- ═══ DASHBOARD PREVIEW ═══ -->
@@ -752,7 +739,7 @@ footer{
 </section>
 
 <!-- ═══ CTA ═══ -->
-<div class="cta-section">
+<div class="cta-section" id="contact">
   <div class="container">
     <div class="section-label" style="text-align:center;">// Get Started</div>
     <h2 class="cta-title">Ready to Stop<br><span style="color:var(--cyan);">Leaving Money</span><br>on the Table?</h2>
@@ -760,6 +747,9 @@ footer{
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
       <a href="mailto:laureennicholson635@gmail.com" class="btn-primary">Schedule Your Free Demo</a>
       <a href="mailto:laureennicholson635@gmail.com" class="btn-ghost">Send Us a Message</a>
+    </div>
+    <div style="margin-top:20px;">
+      <a href="mailto:laureennicholson635@gmail.com" class="contact-email">laureennicholson635@gmail.com</a>
     </div>
     <div class="cta-chips">
       <div class="cta-chip">No Long-Term Contracts</div>
@@ -777,6 +767,9 @@ footer{
     <div>
       <div class="footer-brand">// RCM AutoMed</div>
       <div class="footer-copy" style="margin-top:6px;">Automated Medical Billing Intelligence</div>
+      <div style="margin-top:8px;">
+        <a href="mailto:laureennicholson635@gmail.com" style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--cyan);text-decoration:none;opacity:.8;">laureennicholson635@gmail.com</a>
+      </div>
     </div>
     <div class="footer-links">
       <a href="#features">Features</a>
@@ -798,11 +791,17 @@ function tick(){
 }
 setInterval(tick,1000);tick();
 
-// Scroll fade-in
+// Scroll fade-in — lower threshold + wider rootMargin so nav links work
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-},{threshold:.12});
+},{threshold:0.05, rootMargin:'0px 0px 150px 0px'});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// FALLBACK: guarantee all sections visible after 1.5s
+// Fixes blank sections when using nav links or jumping to anchor
+setTimeout(()=>{
+  document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible'));
+},1500);
 
 // Animated counters
 function animCount(el,target){
