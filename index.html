@@ -310,11 +310,13 @@ section{position:relative;z-index:1;padding:90px 40px;}
 }
 .cta-chips{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px;}
 .cta-chip{
-  font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1.5px;
-  color:var(--text2);border:1px solid rgba(0,200,255,0.2);
-  padding:8px 16px;display:flex;align-items:center;gap:6px;
+  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.3px;
+  color:#e4e8ef;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.35);
+  padding:10px 22px;border-radius:50px;display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s ease;cursor:default;
 }
-.cta-chip::before{content:'✓';color:var(--green);}
+.cta-chip:hover{background:rgba(124,58,237,0.25);border-color:rgba(124,58,237,0.6);transform:translateY(-1px);}
+.cta-chip::before{content:'\2713';color:#10b981;font-weight:700;font-size:15px;}
 /* ── CONTACT EMAIL DISPLAY ── */
 .contact-email{
   display:inline-block;margin-top:24px;
@@ -377,11 +379,11 @@ footer{
     <a href="#features">Features</a>
     <a href="#bots">Bots</a>
     <a href="#roi">ROI</a>
-    <a href="#dashboard">Dashboard</a>
-    <a href="mailto:laureennicholson635@gmail.com">Contact</a>
+    <a href="/dashboard-demo/">Dashboard</a>
+    <a href="/#contact">Contact</a>
     <div class="live-dot"><span></span>System Live</div>
   </div>
-  <a href="mailto:laureennicholson635@gmail.com" class="nav-cta">Book Demo</a>
+  <a href="/#contact" class="nav-cta">Book Demo</a>
 </nav>
 
 <!-- ═══ HERO ═══ -->
@@ -397,8 +399,8 @@ footer{
       Automated RCM eliminates billing errors, slashes denial rates, and recovers revenue you didn't know you were losing — 24/7, without additional staff.
     </p>
     <div class="hero-btns">
-      <a href="mailto:laureennicholson635@gmail.com" class="btn-primary">Request a Live Demo</a>
-      <a href="#dashboard" class="btn-ghost">View Live Dashboard</a>
+      <a href="/#contact" class="btn-primary">Request a Live Demo</a>
+      <a href="/dashboard-demo/" class="btn-ghost">View Live Dashboard</a>
     </div>
   </div>
 </section>
@@ -732,7 +734,7 @@ footer{
         </div>
       </div>
       <div style="padding:0 20px 20px;text-align:center;">
-        <a href="automatedrcm_dashboard_4_6_2026.html" class="btn-ghost" style="font-size:9px;padding:12px 28px;">View Full Dashboard →</a>
+        <a href="/dashboard-demo/" class="btn-ghost" style="font-size:9px;padding:12px 28px;">View Full Dashboard →</a>
       </div>
     </div>
   </div>
@@ -783,7 +785,7 @@ footer{
       <a href="#features">Features</a>
       <a href="#bots">Bots</a>
       <a href="#roi">ROI</a>
-      <a href="#dashboard">Dashboard</a>
+      <a href="/dashboard-demo/">Dashboard</a>
       <a href="mailto:laureennicholson635@gmail.com">Contact</a>
     </div>
     <div class="footer-copy">// All Rights Reserved · AutomatedRCM.com</div>
