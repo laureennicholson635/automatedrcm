@@ -1,22 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AutomatedRCM · AI-Powered Medical Billing Automation</title>
-<meta name="description" content="Automated RCM uses AI to eliminate billing errors, reduce denials by 60%, and recover revenue your billing company is missing. Serving healthcare practices across Florida. Book a free demo today.">
-<meta name="keywords" content="AI medical billing, RCM automation, revenue cycle management, denial management, eligibility verification, claim scrubbing, healthcare billing Florida">
-<meta property="og:title" content="AutomatedRCM · AI-Powered Medical Billing Automation">
-<meta property="og:description" content="Stop losing revenue. Automated RCM finds billing errors, slashes denials, and recovers money 24/7 — without additional staff.">
-<meta property="og:url" content="https://automatedrcm.com">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AutomatedRCM · AI-Powered Medical Billing Automation">
-<meta name="twitter:description" content="Stop losing revenue. AI-powered RCM audits and automation for healthcare practices.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Automated RCM uses AI to eliminate billing errors, reduce denials by 60%, and recover revenue your billing team is missing. AI-powered medical billing automation.">
+  <meta name="keywords" content="medical billing automation, AI RCM, revenue cycle management, claim scrubbing, denial management, healthcare AI">
+  <meta name="author" content="Laureen Nicholson">
+  <meta property="og:title" content="AutomatedRCM · AI-Powered Medical Billing Automation">
+  <meta property="og:description" content="Automated RCM uses AI to eliminate billing errors, reduce denials by 60%, and recover revenue your billing team is missing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://automatedrcm.com">
+  <link rel="canonical" href="https://automatedrcm.com">
+  <title>AutomatedRCM · AI-Powered Medical Billing Automation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --cyan:#00e5ff;
@@ -40,7 +37,6 @@ body{
   overflow-x:hidden;
   cursor:crosshair;
 }
-/* ── GRID BG ── */
 body::before{
   content:'';position:fixed;inset:0;
   background-image:
@@ -49,10 +45,14 @@ body::before{
   background-size:40px 40px;
   pointer-events:none;z-index:0;
 }
-/* ── AMBIENT GLOWS ── */
 .glow1{position:fixed;top:-120px;left:-120px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,180,255,0.10) 0%,transparent 65%);pointer-events:none;border-radius:50%;z-index:0;}
 .glow2{position:fixed;bottom:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(200,0,255,0.08) 0%,transparent 65%);pointer-events:none;border-radius:50%;z-index:0;}
 .glow3{position:fixed;top:60%;left:35%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,255,200,0.05) 0%,transparent 65%);pointer-events:none;border-radius:50%;z-index:0;}
+/* ── SCANLINE ── */
+.scanline{
+  position:fixed;inset:0;pointer-events:none;z-index:999;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+}
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -93,8 +93,7 @@ nav{
 .hero{
   position:relative;z-index:1;
   min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:120px 40px 80px;
-  text-align:center;
+  padding:120px 40px 80px;text-align:center;
 }
 .hero-inner{max-width:900px;margin:0 auto;}
 .hero-eyebrow{
@@ -103,21 +102,15 @@ nav{
   color:var(--cyan);opacity:.8;margin-bottom:28px;
   display:flex;align-items:center;justify-content:center;gap:12px;
 }
-.hero-eyebrow::before,.hero-eyebrow::after{
-  content:'';flex:1;max-width:60px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--cyan));
-}
-.hero-eyebrow::after{background:linear-gradient(270deg,transparent,var(--cyan));}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--cyan);opacity:.4;}
 .hero-title{
   font-family:'Orbitron',sans-serif;
-  font-size:clamp(42px,7vw,88px);
-  font-weight:900;line-height:.95;
-  letter-spacing:-1px;
-  color:#fff;
-  margin-bottom:8px;
+  font-size:clamp(56px,10vw,120px);
+  font-weight:900;line-height:.9;letter-spacing:-1px;
+  color:#fff;text-shadow:0 0 60px rgba(0,229,255,0.15);margin-bottom:0;
 }
-.hero-title .accent-c{color:var(--cyan);text-shadow:0 0 30px rgba(0,229,255,0.6),0 0 60px rgba(0,229,255,0.2);}
-.hero-title .accent-m{color:var(--magenta);text-shadow:0 0 30px rgba(255,60,160,0.6),0 0 60px rgba(255,60,160,0.2);}
+.accent-c{color:var(--cyan);text-shadow:0 0 40px rgba(0,229,255,0.6),0 0 80px rgba(0,229,255,0.2);}
+.accent-m{color:var(--magenta);text-shadow:0 0 30px rgba(255,60,160,0.6),0 0 60px rgba(255,60,160,0.2);}
 .hero-sub{
   font-family:'Rajdhani',sans-serif;font-size:clamp(16px,2.5vw,22px);
   font-weight:500;color:var(--text2);
@@ -136,29 +129,24 @@ nav{
 .btn-ghost{
   font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;
   color:var(--cyan);background:transparent;
-  padding:15px 36px;
-  border:1px solid rgba(0,229,255,0.4);
-  cursor:pointer;text-decoration:none;display:inline-block;
+  padding:16px 36px;border:1px solid rgba(0,200,255,0.4);cursor:pointer;
+  text-decoration:none;display:inline-block;
   clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
   transition:all .25s;
 }
-.btn-ghost:hover{background:rgba(0,229,255,0.08);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,229,255,0.2);}
-/* ── LIVE STATS TICKER ── */
+.btn-ghost:hover{border-color:var(--cyan);box-shadow:0 0 20px rgba(0,229,255,0.2);color:#fff;}
+/* ── TICKER ── */
 .ticker-wrap{
-  position:relative;z-index:1;
+  overflow:hidden;
   border-top:1px solid rgba(0,200,255,0.15);
   border-bottom:1px solid rgba(0,200,255,0.15);
-  background:rgba(0,180,255,0.04);
-  padding:12px 0;overflow:hidden;
+  padding:12px 0;background:rgba(0,180,255,0.03);
 }
-.ticker{display:flex;gap:60px;white-space:nowrap;animation:scroll 28s linear infinite;}
-.ticker-item{
-  display:flex;align-items:center;gap:10px;
-  font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;
-}
-.ticker-label{color:var(--text2);text-transform:uppercase;}
-.ticker-val{color:var(--cyan);text-shadow:0 0 8px rgba(0,229,255,0.5);}
-.ticker-val.mg{color:var(--magenta);text-shadow:0 0 8px rgba(255,60,160,0.5);}
+.ticker{display:flex;gap:32px;align-items:center;animation:scroll 30s linear infinite;width:max-content;}
+.ticker-item{display:flex;align-items:center;gap:10px;white-space:nowrap;}
+.ticker-label{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);}
+.ticker-val{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;color:var(--cyan);text-shadow:0 0 10px rgba(0,229,255,0.5);}
+.ticker-val.mg{color:var(--magenta);text-shadow:0 0 10px rgba(255,60,160,0.5);}
 .ticker-val.gn{color:var(--green);text-shadow:0 0 8px rgba(0,255,157,0.5);}
 .ticker-sep{color:rgba(0,200,255,0.3);}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -174,91 +162,55 @@ section{position:relative;z-index:1;padding:90px 40px;}
   font-family:'Orbitron',sans-serif;font-size:clamp(26px,4vw,44px);
   font-weight:700;color:#fff;margin-bottom:16px;line-height:1.1;
 }
-.section-sub{
-  font-family:'Rajdhani',sans-serif;font-size:18px;
-  color:var(--text2);max-width:600px;line-height:1.55;
-}
+.section-sub{font-family:'Rajdhani',sans-serif;font-size:18px;color:var(--text2);max-width:600px;line-height:1.55;}
 /* ── GLASS PANEL ── */
 .gp{
-  background:var(--panel);
-  border:1px solid var(--border);
+  background:var(--panel);border:1px solid var(--border);
   padding:24px;position:relative;overflow:hidden;
 }
-.gp::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,220,255,0.7),transparent);}
-.gp::after{content:'';position:absolute;top:0;left:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(0,220,255,0.7),transparent);}
-.gp-m{background:rgba(255,0,150,0.05);border-color:var(--border-m);}
-.gp-m::before{background:linear-gradient(90deg,transparent,rgba(255,80,180,0.7),transparent);}
-.gp-m::after{background:linear-gradient(180deg,rgba(255,80,180,0.7),transparent);}
-.gp-g{background:rgba(0,255,157,0.04);border-color:rgba(0,255,157,0.28);}
-.gp-g::before{background:linear-gradient(90deg,transparent,rgba(0,255,157,0.7),transparent);}
-.gp-g::after{background:linear-gradient(180deg,rgba(0,255,157,0.7),transparent);}
-/* ── METRICS ROW ── */
-.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px;}
-.metric-card{text-align:center;padding:36px 20px;}
+.gp::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,200,255,0.5),transparent);
+}
+.gp.mg{border-color:var(--border-m);}
+.gp.mg::before{background:linear-gradient(90deg,transparent,rgba(255,60,160,0.5),transparent);}
+/* ── METRICS ── */
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:50px;}
+.metric-card{text-align:center;padding:32px 20px;}
 .metric-num{
-  font-family:'Orbitron',sans-serif;font-size:clamp(36px,5vw,56px);
-  font-weight:900;color:var(--cyan);
-  text-shadow:0 0 20px rgba(0,229,255,0.5);
+  font-family:'Orbitron',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;
+  color:var(--cyan);text-shadow:0 0 20px rgba(0,229,255,0.5);
   line-height:1;display:block;
 }
 .metric-num.mg{color:var(--magenta);text-shadow:0 0 20px rgba(255,60,160,0.5);}
 .metric-num.gn{color:var(--green);text-shadow:0 0 20px rgba(0,255,157,0.5);}
-.metric-lbl{
-  font-family:'Share Tech Mono',monospace;font-size:8px;
-  letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--text2);margin-top:10px;display:block;
-}
-.metric-sub{
-  font-family:'Rajdhani',sans-serif;font-size:13px;
-  color:var(--text2);opacity:.6;margin-top:4px;
-}
+.metric-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text2);margin-top:10px;display:block;}
+.metric-sub{font-family:'Rajdhani',sans-serif;font-size:13px;color:var(--text2);opacity:.6;margin-top:4px;}
 /* ── FEATURES ── */
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
 .feature-card{padding:28px 24px;}
 .feature-icon{
   width:48px;height:48px;margin-bottom:18px;
   display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(0,200,255,0.3);
-  font-size:22px;position:relative;
+  border:1px solid rgba(0,200,255,0.3);font-size:22px;position:relative;
 }
 .feature-icon::after{
   content:'';position:absolute;bottom:-1px;right:-1px;
   width:8px;height:8px;border-right:1px solid var(--cyan);border-bottom:1px solid var(--cyan);
 }
-.feature-title{
-  font-family:'Orbitron',sans-serif;font-size:15px;font-weight:700;
-  color:#fff;margin-bottom:10px;
-}
-.feature-desc{
-  font-family:'Rajdhani',sans-serif;font-size:15px;
-  color:var(--text2);line-height:1.55;
-}
-.feature-tag{
-  display:inline-block;margin-top:14px;
-  font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1.5px;
-  color:var(--cyan);border:1px solid rgba(0,200,255,0.3);
-  padding:3px 10px;
-}
-/* ── PROCESS ── */
-.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:50px;position:relative;}
-.process-grid::before{
-  content:'';position:absolute;top:36px;left:12.5%;right:12.5%;height:1px;
-  background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--cyan));
-  opacity:.3;
-}
-.process-step{padding:0 20px;text-align:center;}
+.feature-name{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;}
+.feature-desc{font-family:'Rajdhani',sans-serif;font-size:14px;color:var(--text2);line-height:1.55;}
+.feature-stat{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--green);margin-top:14px;}
+/* ── HOW IT WORKS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:50px;}
+.step-card{padding:28px 20px;}
 .step-num{
-  width:72px;height:72px;margin:0 auto 20px;
-  border:1px solid var(--border);
+  width:48px;height:48px;margin-bottom:18px;
   display:flex;align-items:center;justify-content:center;
   position:relative;background:rgba(0,180,255,0.07);
-  font-family:'Orbitron',sans-serif;font-size:24px;font-weight:900;
-  color:var(--cyan);
+  font-family:'Orbitron',sans-serif;font-size:24px;font-weight:900;color:var(--cyan);
 }
-.step-num::before,.step-num::after{
-  content:'';position:absolute;width:8px;height:8px;
-  border-color:var(--cyan);border-style:solid;
-}
+.step-num::before,.step-num::after{content:'';position:absolute;width:8px;height:8px;border-color:var(--cyan);border-style:solid;}
 .step-num::before{top:-1px;left:-1px;border-width:1px 0 0 1px;}
 .step-num::after{bottom:-1px;right:-1px;border-width:0 1px 1px 0;}
 .step-title{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;}
@@ -268,19 +220,24 @@ section{position:relative;z-index:1;padding:90px 40px;}
 .bot-card{padding:28px;}
 .bot-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .bot-name{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--cyan);}
-.bot-status{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--green);}
+.bot-status{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--green);}
 .bot-status span{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 2s infinite;}
-.bot-stat{margin-bottom:12px;}
-.bot-stat-label{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);margin-bottom:4px;}
-.bot-bar-track{height:4px;background:rgba(0,200,255,0.1);}
-.bot-bar-fill{height:100%;background:var(--cyan);box-shadow:0 0 6px rgba(0,229,255,0.4);transition:width 1.5s cubic-bezier(.34,1.2,.64,1);}
-.bot-bar-fill.mg{background:var(--magenta);box-shadow:0 0 6px rgba(255,60,160,0.4);}
-.bot-bar-fill.gn{background:var(--green);box-shadow:0 0 6px rgba(0,255,157,0.4);}
-.bot-pct{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:var(--cyan);margin-top:16px;}
-.bot-pct.mg{color:var(--magenta);}
-.bot-pct.gn{color:var(--green);}
-/* ── ROI SECTION ── */
+.bot-metric-big{
+  font-family:'Orbitron',sans-serif;font-size:40px;font-weight:900;
+  color:var(--cyan);text-shadow:0 0 16px rgba(0,229,255,0.4);line-height:1;margin-bottom:4px;
+}
+.bot-metric-lbl{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);}
+.bot-detail{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--text2);margin-top:16px;}
+/* ── ROI ── */
 .roi-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:50px;}
+.roi-stats{display:flex;flex-direction:column;gap:20px;}
+.roi-stat{padding:20px 24px;border-left:3px solid var(--cyan);}
+.roi-stat.mg{border-color:var(--magenta);}
+.roi-stat.gn{border-color:var(--green);}
+.roi-stat-val{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--cyan);}
+.roi-stat.mg .roi-stat-val{color:var(--magenta);}
+.roi-stat.gn .roi-stat-val{color:var(--green);}
+.roi-stat-lbl{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-top:4px;}
 .roi-nums{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .roi-card{padding:24px 20px;text-align:center;}
 .roi-val{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:700;color:var(--cyan);text-shadow:0 0 14px rgba(0,229,255,0.4);}
@@ -294,6 +251,26 @@ section{position:relative;z-index:1;padding:90px 40px;}
 .test-quote::before{content:'// ';color:var(--cyan);font-family:'Share Tech Mono',monospace;font-style:normal;}
 .test-author{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);}
 .test-role{font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--text2);margin-top:2px;}
+/* ── DASHBOARD PREVIEW ── */
+.dash-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center;margin-top:50px;}
+.dash-preview{
+  background:var(--dark2);border:1px solid var(--border);
+  padding:24px;font-family:'Share Tech Mono',monospace;
+}
+.dash-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(0,200,255,0.12);
+}
+.dash-title{font-size:9px;letter-spacing:3px;color:var(--cyan);}
+.dash-time{font-size:9px;color:var(--text2);}
+.dash-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.dash-metric{padding:20px;border:1px solid rgba(0,200,255,0.12);}
+.dash-metric-lbl{font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-bottom:8px;}
+.dash-metric-val{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--cyan);text-shadow:0 0 12px rgba(0,229,255,0.4);}
+.dash-metric-val.mg{color:var(--magenta);text-shadow:0 0 12px rgba(255,60,160,0.4);}
+.dash-metric-val.gn{color:var(--green);text-shadow:0 0 12px rgba(0,255,157,0.4);}
+.dash-metric-trend{font-size:9px;color:var(--green);margin-top:6px;}
+.dash-metric-trend.down{color:var(--magenta);}
 /* ── CTA SECTION ── */
 .cta-section{
   position:relative;z-index:1;padding:100px 40px;text-align:center;
@@ -310,83 +287,97 @@ section{position:relative;z-index:1;padding:90px 40px;}
 }
 .cta-chips{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px;}
 .cta-chip{
-  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.3px;
-  color:#e4e8ef;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.35);
+  font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.3px;
+  color:#e4e8ef;background:rgba(0,180,255,0.08);border:1px solid rgba(0,200,255,0.25);
   padding:10px 22px;border-radius:50px;display:inline-flex;align-items:center;gap:8px;
   transition:all 0.2s ease;cursor:default;
 }
-.cta-chip:hover{background:rgba(124,58,237,0.25);border-color:rgba(124,58,237,0.6);transform:translateY(-1px);}
-.cta-chip::before{content:'\2713';color:#10b981;font-weight:700;font-size:15px;}
-/* ── CONTACT EMAIL DISPLAY ── */
+.cta-chip:hover{background:rgba(0,200,255,0.15);border-color:rgba(0,200,255,0.5);transform:translateY(-1px);}
+.cta-chip::before{content:'✓';color:#00ff9d;font-weight:700;font-size:15px;}
+/* ── CONTACT EMAIL ── */
 .contact-email{
   display:inline-block;margin-top:24px;
   font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;
   color:var(--cyan);text-decoration:none;
   border:1px solid rgba(0,200,255,0.25);
-  padding:10px 24px;
-  transition:all .2s;
+  padding:10px 24px;transition:all .2s;
 }
 .contact-email:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(0,229,255,0.2);color:#00ffff;}
-.contact-email::before{content:'📧  ';font-style:normal;}
 /* ── FOOTER ── */
 footer{
   position:relative;z-index:1;padding:40px;
   border-top:1px solid rgba(0,200,255,0.12);
   background:rgba(0,0,0,0.3);
 }
-.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-.footer-brand{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--cyan);text-shadow:0 0 12px rgba(0,229,255,0.4);}
-.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
-.footer-links a{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text2);text-decoration:none;transition:color .2s;}
-.footer-links a:hover{color:var(--cyan);}
-.footer-copy{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1.5px;color:var(--text2);opacity:.4;}
-/* ── SCANLINE ── */
-.scanline{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:999;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+.footer-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:20px;
 }
+.footer-brand{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:3px;color:var(--cyan);text-decoration:none;}
+.footer-tagline{font-family:'Rajdhani',sans-serif;font-size:13px;color:var(--text2);margin-top:4px;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+.footer-links a{
+  font-family:'Share Tech Mono',monospace;font-size:8px;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--text2);text-decoration:none;transition:color .2s;
+}
+.footer-links a:hover{color:var(--cyan);}
+.footer-copy{font-family:'Share Tech Mono',monospace;font-size:7.5px;letter-spacing:1.5px;color:var(--text2);opacity:.5;}
 /* ── DIVIDER ── */
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.3),transparent);margin:0;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.2),transparent);margin:0 40px;}
+/* ── FADE IN ── */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
-  .metrics-grid,.features-grid{grid-template-columns:repeat(2,1fr);}
-  .process-grid,.bots-grid,.test-grid{grid-template-columns:1fr 1fr;}
-  .process-grid::before{display:none;}
+  .features-grid,.test-grid,.bots-grid{grid-template-columns:1fr 1fr;}
   .roi-wrap{grid-template-columns:1fr;}
+  .steps-grid{grid-template-columns:1fr 1fr;}
+  .dash-layout{grid-template-columns:1fr;}
+  .metrics-grid{grid-template-columns:1fr 1fr;}
 }
-@media(max-width:680px){
+@media(max-width:768px){
   nav{padding:12px 20px;}
-  .nav-links{display:none;}
-  section{padding:60px 20px;}
-  .metrics-grid,.features-grid,.bots-grid,.test-grid,.roi-nums{grid-template-columns:1fr;}
-  .process-grid{grid-template-columns:1fr;}
+  .nav-links{gap:14px;}
   .hero{padding:100px 20px 60px;}
+  section{padding:60px 20px;}
+  .features-grid,.test-grid,.bots-grid{grid-template-columns:1fr;}
+  .steps-grid{grid-template-columns:1fr 1fr;}
+  .metrics-grid{grid-template-columns:1fr 1fr;}
+  .footer-inner{flex-direction:column;text-align:center;}
+  .cta-section{padding:60px 20px;}
 }
-/* ── ANIMATIONS ── */
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
-.fade-in.visible{opacity:1;transform:translateY(0);}
-</style>
+@media(max-width:480px){
+  .nav-links{display:none;}
+  .steps-grid,.metrics-grid{grid-template-columns:1fr;}
+}
+  </style>
 </head>
 <body>
+
 <div class="scanline"></div>
 <div class="glow1"></div>
 <div class="glow2"></div>
 <div class="glow3"></div>
 
 <!-- ═══ NAV ═══ -->
+<!-- FIX 1: Changed /dashboard-demo/ to #dashboard throughout -->
 <nav>
   <a href="#" class="nav-brand">// RCM AutoMed</a>
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#bots">Bots</a>
     <a href="#roi">ROI</a>
-    <a href="/dashboard-demo/">Dashboard</a>
-    <a href="/#contact">Contact</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#contact">Contact</a>
     <div class="live-dot"><span></span>System Live</div>
   </div>
-  <a href="/#contact" class="nav-cta">Book Demo</a>
+  <a href="#contact" class="nav-cta">Book Demo</a>
 </nav>
 
 <!-- ═══ HERO ═══ -->
+<!-- FIX 1: View Live Dashboard now links to #dashboard (the section on this page) -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">AI-Powered Medical Billing Automation</div>
@@ -399,8 +390,8 @@ footer{
       Automated RCM eliminates billing errors, slashes denial rates, and recovers revenue you didn't know you were losing — 24/7, without additional staff.
     </p>
     <div class="hero-btns">
-      <a href="/#contact" class="btn-primary">Request a Live Demo</a>
-      <a href="/dashboard-demo/" class="btn-ghost">View Live Dashboard</a>
+      <a href="#contact" class="btn-primary">Request a Live Demo</a>
+      <a href="#dashboard" class="btn-ghost">View Live Dashboard</a>
     </div>
   </div>
 </section>
@@ -420,11 +411,11 @@ footer{
     <span class="ticker-sep">//</span>
     <div class="ticker-item"><span class="ticker-label">EligibilityBot Uptime</span><span class="ticker-val gn">98.4%</span></div>
     <span class="ticker-sep">//</span>
-    <div class="ticker-item"><span class="ticker-label">Errors Caught</span><span class="ticker-val">34</span></div>
+    <div class="ticker-item"><span class="ticker-label">Errors Caught</span><span class="ticker-val mg">34</span></div>
     <span class="ticker-sep">//</span>
     <div class="ticker-item"><span class="ticker-label">Staff Hours Saved/Wk</span><span class="ticker-val gn">12 hrs</span></div>
     <span class="ticker-sep">//</span>
-    <!-- duplicate for seamless loop -->
+    <!-- Duplicate for seamless loop -->
     <div class="ticker-item"><span class="ticker-label">Claims Scrubbed Today</span><span class="ticker-val">247</span></div>
     <span class="ticker-sep">//</span>
     <div class="ticker-item"><span class="ticker-label">Eligibility Checks</span><span class="ticker-val">183</span></div>
@@ -437,7 +428,7 @@ footer{
     <span class="ticker-sep">//</span>
     <div class="ticker-item"><span class="ticker-label">EligibilityBot Uptime</span><span class="ticker-val gn">98.4%</span></div>
     <span class="ticker-sep">//</span>
-    <div class="ticker-item"><span class="ticker-label">Errors Caught</span><span class="ticker-val">34</span></div>
+    <div class="ticker-item"><span class="ticker-label">Errors Caught</span><span class="ticker-val mg">34</span></div>
     <span class="ticker-sep">//</span>
     <div class="ticker-item"><span class="ticker-label">Staff Hours Saved/Wk</span><span class="ticker-val gn">12 hrs</span></div>
   </div>
@@ -451,28 +442,29 @@ footer{
     <p class="section-sub">Real results from practices running AutomatedRCM — not projections.</p>
     <div class="metrics-grid">
       <div class="gp metric-card fade-in">
-        <span class="metric-num" data-count="86">0</span><span style="font-family:'Orbitron';font-size:28px;color:var(--cyan);font-weight:700;">%</span>
+        <span class="metric-num" data-count="86">0</span>
         <span class="metric-lbl">Clean Claim Rate</span>
-        <div class="metric-sub">Industry avg: 72%</div>
+        <span class="metric-sub">Industry avg: 72%</span>
       </div>
       <div class="gp metric-card fade-in">
-        <span class="metric-num gn">60%</span>
+        <span class="metric-num mg" data-count="60">0</span>
         <span class="metric-lbl">Denial Reduction</span>
-        <div class="metric-sub">Within first 30 days</div>
-      </div>
-      <div class="gp gp-m metric-card fade-in">
-        <span class="metric-num mg">$14.2k</span>
-        <span class="metric-lbl">Monthly Savings</span>
-        <div class="metric-sub">Average per practice</div>
+        <span class="metric-sub">Within first 30 days</span>
       </div>
       <div class="gp metric-card fade-in">
-        <span class="metric-num" data-count="12">0</span><span style="font-family:'Orbitron';font-size:28px;color:var(--cyan);font-weight:700;"> hrs</span>
+        <span class="metric-num gn">$14.2k</span>
+        <span class="metric-lbl">Monthly Savings</span>
+        <span class="metric-sub">Average per practice</span>
+      </div>
+      <div class="gp metric-card fade-in">
+        <span class="metric-num" data-count="12">0</span>
         <span class="metric-lbl">Staff Time Saved</span>
-        <div class="metric-sub">Per week, per biller</div>
+        <span class="metric-sub">Per week, per biller</span>
       </div>
     </div>
   </div>
 </section>
+
 <div class="divider"></div>
 
 <!-- ═══ FEATURES ═══ -->
@@ -484,74 +476,76 @@ footer{
     <div class="features-grid">
       <div class="gp feature-card fade-in">
         <div class="feature-icon">🔍</div>
-        <div class="feature-title">Claim Scrubber</div>
-        <p class="feature-desc">Catches CCI bundling conflicts, missing ICD-10 decimals, zero-charge CPTs, and duplicate codes before claims ever leave your system.</p>
-        <span class="feature-tag">99.1% Uptime</span>
+        <div class="feature-name">Claim Scrubber</div>
+        <div class="feature-desc">Catches CCI bundling conflicts, missing ICD-10 decimals, zero-charge CPTs, and duplicate codes before claims ever leave your system.</div>
+        <div class="feature-stat">99.1% Uptime</div>
       </div>
       <div class="gp feature-card fade-in">
         <div class="feature-icon">⚡</div>
-        <div class="feature-title">Eligibility Bot</div>
-        <p class="feature-desc">Automated real-time insurance eligibility verification for every patient, every appointment — eliminating surprise denials before they start.</p>
-        <span class="feature-tag">98.4% Uptime</span>
+        <div class="feature-name">Eligibility Bot</div>
+        <div class="feature-desc">Automated real-time insurance eligibility verification for every patient, every appointment — eliminating surprise denials before they start.</div>
+        <div class="feature-stat">98.4% Uptime</div>
       </div>
-      <div class="gp gp-m feature-card fade-in">
-        <div class="feature-icon" style="border-color:rgba(255,60,160,0.3);">🛡️</div>
-        <div class="feature-title">Denial Manager</div>
-        <p class="feature-desc">Automatically routes, prioritizes, and drafts appeals for denied claims. 45% appeal win rate with AI-generated justifications tailored to each payer.</p>
-        <span class="feature-tag" style="color:var(--magenta);border-color:rgba(255,60,160,0.3);">97.8% Uptime</span>
+      <div class="gp feature-card fade-in">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-name">Denial Manager</div>
+        <div class="feature-desc">Automatically routes, prioritizes, and drafts appeals for denied claims. 45% appeal win rate with AI-generated justifications tailored to each payer.</div>
+        <div class="feature-stat">97.8% Uptime</div>
       </div>
       <div class="gp feature-card fade-in">
         <div class="feature-icon">📊</div>
-        <div class="feature-title">Command Dashboard</div>
-        <p class="feature-desc">Real-time visibility into every claim, denial, eligibility check, and bot activity. KPIs that matter — designed for billers, not just administrators.</p>
-        <span class="feature-tag">Live · 24/7</span>
+        <div class="feature-name">Command Dashboard</div>
+        <div class="feature-desc">Real-time visibility into every claim, denial, eligibility check, and bot activity. KPIs that matter — designed for billers, not just administrators.</div>
+        <div class="feature-stat">Live · 24/7</div>
       </div>
       <div class="gp feature-card fade-in">
         <div class="feature-icon">🔄</div>
-        <div class="feature-title">Workflow Automation</div>
-        <p class="feature-desc">Custom no-code automation flows built on Make, Zapier, and Power Automate — connecting your EHR, clearinghouse, and payer portals seamlessly.</p>
-        <span class="feature-tag">HIPAA Compliant</span>
+        <div class="feature-name">Workflow Automation</div>
+        <div class="feature-desc">Custom no-code automation flows built on Make, Zapier, and Power Automate — connecting your EHR, clearinghouse, and payer portals seamlessly.</div>
+        <div class="feature-stat">HIPAA Compliant</div>
       </div>
-      <div class="gp gp-g feature-card fade-in">
-        <div class="feature-icon" style="border-color:rgba(0,255,157,0.3);">💡</div>
-        <div class="feature-title">AI Prompt Engine</div>
-        <p class="feature-desc">Purpose-built AI prompts for medical billing: appeal letters, prior auth narratives, coding queries, and payer-specific escalation language.</p>
-        <span class="feature-tag" style="color:var(--green);border-color:rgba(0,255,157,0.3);">Powered by Claude AI</span>
+      <div class="gp feature-card fade-in">
+        <div class="feature-icon">💡</div>
+        <div class="feature-name">AI Prompt Engine</div>
+        <div class="feature-desc">Purpose-built AI prompts for medical billing: appeal letters, prior auth narratives, coding queries, and payer-specific escalation language.</div>
+        <div class="feature-stat">Powered by Claude AI</div>
       </div>
     </div>
   </div>
 </section>
+
 <div class="divider"></div>
 
-<!-- ═══ PROCESS ═══ -->
+<!-- ═══ HOW IT WORKS ═══ -->
 <section>
   <div class="container">
     <div class="section-label">// How It Works</div>
     <h2 class="section-title">From Setup to<br>Savings in Days</h2>
-    <div class="process-grid">
-      <div class="process-step fade-in">
+    <div class="steps-grid">
+      <div class="gp step-card fade-in">
         <div class="step-num">01</div>
         <div class="step-title">Connect</div>
-        <p class="step-desc">We integrate with your existing EHR, clearinghouse, and payer portals — no new software to learn.</p>
+        <div class="step-desc">We integrate with your existing EHR, clearinghouse, and payer portals — no new software to learn.</div>
       </div>
-      <div class="process-step fade-in">
-        <div class="step-num" style="border-color:var(--border-m);color:var(--magenta);">02</div>
+      <div class="gp step-card fade-in">
+        <div class="step-num">02</div>
         <div class="step-title">Configure</div>
-        <p class="step-desc">Bots are customized to your specialty, payer mix, and billing rules. Ready in 48–72 hours.</p>
+        <div class="step-desc">Bots are customized to your specialty, payer mix, and billing rules. Ready in 48–72 hours.</div>
       </div>
-      <div class="process-step fade-in">
+      <div class="gp step-card fade-in">
         <div class="step-num">03</div>
         <div class="step-title">Automate</div>
-        <p class="step-desc">ClaimScrubber, EligibilityBot, and DenialManager run continuously — catching errors before they cost you.</p>
+        <div class="step-desc">ClaimScrubber, EligibilityBot, and DenialManager run continuously — catching errors before they cost you.</div>
       </div>
-      <div class="process-step fade-in">
-        <div class="step-num" style="border-color:rgba(0,255,157,0.3);color:var(--green);">04</div>
+      <div class="gp step-card fade-in">
+        <div class="step-num">04</div>
         <div class="step-title">Optimize</div>
-        <p class="step-desc">Monthly ROI reports show exactly what was saved, recovered, and prevented. Continuous improvement built in.</p>
+        <div class="step-desc">Monthly ROI reports show exactly what was saved, recovered, and prevented. Continuous improvement built in.</div>
       </div>
     </div>
   </div>
 </section>
+
 <div class="divider"></div>
 
 <!-- ═══ BOTS ═══ -->
@@ -564,54 +558,34 @@ footer{
       <div class="gp bot-card fade-in">
         <div class="bot-header">
           <span class="bot-name">// ELIGIBILITYBOT</span>
-          <div class="bot-status"><span></span>LIVE</div>
+          <span class="bot-status"><span></span>LIVE</span>
         </div>
-        <div class="bot-stat">
-          <div class="bot-stat-label">Uptime</div>
-          <div class="bot-bar-track"><div class="bot-bar-fill" style="width:98.4%"></div></div>
-        </div>
-        <div class="bot-stat">
-          <div class="bot-stat-label">Checks Today</div>
-          <div class="bot-bar-track"><div class="bot-bar-fill" style="width:74%"></div></div>
-        </div>
-        <div class="bot-pct">98.4%</div>
-        <div class="bot-stat-label" style="margin-top:4px;">Avg Response: 1.2s</div>
+        <div class="bot-metric-big">98.4%</div>
+        <div class="bot-metric-lbl">Uptime</div>
+        <div class="bot-detail">Avg Response: 1.2s</div>
       </div>
       <div class="gp bot-card fade-in">
         <div class="bot-header">
           <span class="bot-name">// CLAIMSCRUBBER</span>
-          <div class="bot-status"><span></span>LIVE</div>
+          <span class="bot-status"><span></span>LIVE</span>
         </div>
-        <div class="bot-stat">
-          <div class="bot-stat-label">Uptime</div>
-          <div class="bot-bar-track"><div class="bot-bar-fill" style="width:99.1%"></div></div>
-        </div>
-        <div class="bot-stat">
-          <div class="bot-stat-label">Claims Clean</div>
-          <div class="bot-bar-track"><div class="bot-bar-fill gn" style="width:86%"></div></div>
-        </div>
-        <div class="bot-pct gn">99.1%</div>
-        <div class="bot-stat-label" style="margin-top:4px;">34 Errors Caught Today</div>
+        <div class="bot-metric-big">99.1%</div>
+        <div class="bot-metric-lbl">Uptime</div>
+        <div class="bot-detail">34 Errors Caught Today</div>
       </div>
-      <div class="gp gp-m bot-card fade-in">
+      <div class="gp bot-card fade-in">
         <div class="bot-header">
-          <span class="bot-name" style="color:var(--magenta);">// DENIALMANAGER</span>
-          <div class="bot-status" style="color:var(--magenta);"><span style="background:var(--magenta);box-shadow:0 0 6px var(--magenta);"></span>LIVE</div>
+          <span class="bot-name">// DENIALMANAGER</span>
+          <span class="bot-status"><span></span>LIVE</span>
         </div>
-        <div class="bot-stat">
-          <div class="bot-stat-label">Uptime</div>
-          <div class="bot-bar-track"><div class="bot-bar-fill mg" style="width:97.8%"></div></div>
-        </div>
-        <div class="bot-stat">
-          <div class="bot-stat-label">Appeal Win Rate</div>
-          <div class="bot-bar-track"><div class="bot-bar-fill mg" style="width:45%"></div></div>
-        </div>
-        <div class="bot-pct mg">97.8%</div>
-        <div class="bot-stat-label" style="margin-top:4px;">$28.4k Currently Managed</div>
+        <div class="bot-metric-big">97.8%</div>
+        <div class="bot-metric-lbl">Uptime</div>
+        <div class="bot-detail">$28.4k Currently Managed</div>
       </div>
     </div>
   </div>
 </section>
+
 <div class="divider"></div>
 
 <!-- ═══ ROI ═══ -->
@@ -619,26 +593,24 @@ footer{
   <div class="container">
     <div class="section-label">// Return on Investment</div>
     <h2 class="section-title">The Numbers<br>Don't Lie</h2>
+    <p class="section-sub">Most practices recover their investment within the first month. AutomatedRCM pays for itself — and then some.</p>
     <div class="roi-wrap">
-      <div>
-        <p class="section-sub" style="max-width:100%;margin-bottom:28px;">Most practices recover their investment within the first month. AutomatedRCM pays for itself — and then some.</p>
-        <div style="display:flex;flex-direction:column;gap:14px;margin-top:20px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;" class="gp">
-            <span style="font-family:'Rajdhani',sans-serif;font-size:16px;color:var(--text);">Denial Reduction</span>
-            <span style="font-family:'Orbitron',sans-serif;font-size:16px;color:var(--cyan);">↑ 60%</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;" class="gp">
-            <span style="font-family:'Rajdhani',sans-serif;font-size:16px;color:var(--text);">Staff Time Reclaimed</span>
-            <span style="font-family:'Orbitron',sans-serif;font-size:16px;color:var(--green);">12 hrs/wk</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;" class="gp gp-m">
-            <span style="font-family:'Rajdhani',sans-serif;font-size:16px;color:var(--text);">Appeal Win Rate</span>
-            <span style="font-family:'Orbitron',sans-serif;font-size:16px;color:var(--magenta);">45%</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;" class="gp">
-            <span style="font-family:'Rajdhani',sans-serif;font-size:16px;color:var(--text);">Avg. Error Prevention Value</span>
-            <span style="font-family:'Orbitron',sans-serif;font-size:16px;color:var(--cyan);">$8.2k/mo</span>
-          </div>
+      <div class="roi-stats">
+        <div class="gp roi-stat fade-in">
+          <div class="roi-stat-val">↑ 60%</div>
+          <div class="roi-stat-lbl">Denial Reduction</div>
+        </div>
+        <div class="gp roi-stat mg fade-in">
+          <div class="roi-stat-val">12 hrs/wk</div>
+          <div class="roi-stat-lbl">Staff Time Reclaimed</div>
+        </div>
+        <div class="gp roi-stat gn fade-in">
+          <div class="roi-stat-val">45%</div>
+          <div class="roi-stat-lbl">Appeal Win Rate</div>
+        </div>
+        <div class="gp roi-stat fade-in">
+          <div class="roi-stat-val">$8.2k/mo</div>
+          <div class="roi-stat-lbl">Avg. Error Prevention Value</div>
         </div>
       </div>
       <div class="roi-nums">
@@ -646,11 +618,11 @@ footer{
           <div class="roi-val">$14.2k</div>
           <div class="roi-lbl">Monthly Savings</div>
         </div>
-        <div class="gp gp-m roi-card fade-in">
+        <div class="gp roi-card fade-in">
           <div class="roi-val mg">$28.4k</div>
           <div class="roi-lbl">Revenue Protected</div>
         </div>
-        <div class="gp gp-g roi-card fade-in">
+        <div class="gp roi-card fade-in">
           <div class="roi-val gn">86%</div>
           <div class="roi-lbl">Clean Claim Rate</div>
         </div>
@@ -662,6 +634,7 @@ footer{
     </div>
   </div>
 </section>
+
 <div class="divider"></div>
 
 <!-- ═══ TESTIMONIALS ═══ -->
@@ -680,7 +653,7 @@ footer{
         <div class="test-author">ROBERT HAYES, COO</div>
         <div class="test-role">Multi-Specialty Group · Orlando, FL</div>
       </div>
-      <div class="gp gp-m test-card fade-in">
+      <div class="gp test-card fade-in">
         <p class="test-quote">The dashboard alone is worth it. Real-time visibility into every claim means we catch problems in hours, not weeks. Game changer for our practice.</p>
         <div class="test-author">JESSICA PARK, MD</div>
         <div class="test-role">Family Practice · Miami, FL</div>
@@ -688,79 +661,61 @@ footer{
     </div>
   </div>
 </section>
+
 <div class="divider"></div>
 
 <!-- ═══ DASHBOARD PREVIEW ═══ -->
+<!-- FIX 1: "View Full Dashboard" button removed — no separate dashboard page exists -->
 <section id="dashboard">
   <div class="container">
     <div class="section-label">// Command Center Preview</div>
-    <h2 class="section-title">Your Revenue.<br><span style="color:var(--cyan);">Fully Visible.</span></h2>
-    <p class="section-sub" style="margin-bottom:36px;">The same dashboard your bots report into — live, every second. No more end-of-month surprises.</p>
-    <div class="gp" style="padding:0;overflow:hidden;border-color:rgba(0,200,255,0.4);">
-      <div style="background:rgba(0,180,255,0.08);padding:12px 20px;border-bottom:1px solid rgba(0,200,255,0.2);display:flex;align-items:center;gap:12px;">
-        <div style="width:8px;height:8px;border-radius:50%;background:var(--magenta);box-shadow:0 0 6px var(--magenta);"></div>
-        <div style="width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 6px var(--amber);"></div>
-        <div style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);"></div>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--cyan);margin-left:8px;">// RCM AUTOMED · COMMAND CENTER · LIVE</span>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--text2);margin-left:auto;" id="preview-clk">--:--:-- UTC</span>
+    <h2 class="section-title">Your Revenue.<br>Fully Visible.</h2>
+    <p class="section-sub">The same dashboard your bots report into — live, every second. No more end-of-month surprises.</p>
+    <div class="dash-layout">
+      <div>
+        <p style="font-family:'Rajdhani',sans-serif;font-size:17px;color:var(--text2);line-height:1.7;margin-bottom:24px;">
+          Real-time KPIs, denial tracking, bot activity feeds, and revenue recovery metrics — all in one place. Built for billing teams, not just administrators.
+        </p>
+        <a href="#contact" class="btn-primary" style="font-size:11px;">Request Access</a>
       </div>
-      <div style="padding:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-        <div class="gp" style="padding:16px;">
-          <div style="font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--cyan);opacity:.7;margin-bottom:8px;">// CLAIMS SCRUBBED</div>
-          <div style="font-family:'Orbitron',sans-serif;font-size:32px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(0,229,255,0.5);">247</div>
-          <div style="font-family:'Share Tech Mono',monospace;font-size:7.5px;color:var(--green);margin-top:4px;">↑ 12% vs yesterday</div>
-          <svg viewBox="0 0 100 26" preserveAspectRatio="none" style="width:100%;height:24px;margin-top:6px;">
-            <polyline points="0,22 14,18 28,20 42,14 56,16 70,10 84,7 100,3" fill="none" stroke="#00e5ff" stroke-width="1.5" opacity=".8"/>
-            <polyline points="0,22 14,18 28,20 42,14 56,16 70,10 84,7 100,3 100,26 0,26" fill="rgba(0,229,255,0.07)"/>
-          </svg>
+      <div class="dash-preview">
+        <div class="dash-header">
+          <span class="dash-title">// RCM AUTOMED · COMMAND CENTER · LIVE</span>
+          <span class="dash-time" id="preview-clk">00:00:00 UTC</span>
         </div>
-        <div class="gp gp-m" style="padding:16px;">
-          <div style="font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--magenta);opacity:.7;margin-bottom:8px;">// OPEN DENIALS</div>
-          <div style="font-family:'Orbitron',sans-serif;font-size:32px;font-weight:700;color:var(--magenta);text-shadow:0 0 12px rgba(255,60,160,0.5);">41</div>
-          <div style="font-family:'Share Tech Mono',monospace;font-size:7.5px;color:var(--magenta);margin-top:4px;">↓ $28.4k at risk</div>
-          <svg viewBox="0 0 100 26" preserveAspectRatio="none" style="width:100%;height:24px;margin-top:6px;">
-            <polyline points="0,8 14,10 28,7 42,12 56,9 70,14 84,11 100,16" fill="none" stroke="#ff3ca0" stroke-width="1.5" opacity=".8"/>
-            <polyline points="0,8 14,10 28,7 42,12 56,9 70,14 84,11 100,16 100,26 0,26" fill="rgba(255,60,160,0.07)"/>
-          </svg>
+        <div class="dash-metrics">
+          <div class="dash-metric">
+            <div class="dash-metric-lbl">// CLAIMS SCRUBBED</div>
+            <div class="dash-metric-val">247</div>
+            <div class="dash-metric-trend">↑ 12% vs yesterday</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-lbl">// OPEN DENIALS</div>
+            <div class="dash-metric-val mg">41</div>
+            <div class="dash-metric-trend down">↓ $28.4k at risk</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-lbl">// EST. RECOVERY</div>
+            <div class="dash-metric-val gn">$14.2k</div>
+            <div class="dash-metric-trend">↑ 45% appeal win rate</div>
+          </div>
         </div>
-        <div class="gp gp-g" style="padding:16px;">
-          <div style="font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--green);opacity:.7;margin-bottom:8px;">// EST. RECOVERY</div>
-          <div style="font-family:'Orbitron',sans-serif;font-size:32px;font-weight:700;color:var(--green);text-shadow:0 0 12px rgba(0,255,157,0.5);">$14.2k</div>
-          <div style="font-family:'Share Tech Mono',monospace;font-size:7.5px;color:var(--green);margin-top:4px;">↑ 45% appeal win rate</div>
-          <svg viewBox="0 0 100 26" preserveAspectRatio="none" style="width:100%;height:24px;margin-top:6px;">
-            <polyline points="0,20 14,16 28,18 42,12 56,14 70,8 84,6 100,4" fill="none" stroke="#00ff9d" stroke-width="1.5" opacity=".8"/>
-            <polyline points="0,20 14,16 28,18 42,12 56,14 70,8 84,6 100,4 100,26 0,26" fill="rgba(0,255,157,0.07)"/>
-          </svg>
-        </div>
-      </div>
-      <div style="padding:0 20px 20px;text-align:center;">
-        <a href="/dashboard-demo/" class="btn-ghost" style="font-size:9px;padding:12px 28px;">View Full Dashboard →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CTA ═══ -->
+<!-- ═══ CONTACT ═══ -->
+<!-- FIX 2 & 3: Replaced Google Form (which was opening Outlook) with direct email contact -->
+<!-- Removed "Book a free discovery call" language -->
 <div class="cta-section" id="contact">
   <div class="container">
-    <div class="section-label" style="text-align:center; margin-bottom:1rem;">// Get Started</div>
-    <h2 class="cta-title">
-      Ready to Stop <span style="color:var(--accent);">Leaving Money</span>
-      on the Table?
-    </h2>
-    <p class="cta-sub">Fill out the form below and we'll reach out to schedule your free 30-minute discovery call — no commitment required.</p>
-    <div style="margin:32px auto; max-width:640px;">
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSdT37U2-m3Hw0vBv466Xo_D2V4xGCCkVWXARYKYEgMWdNcmGA/viewform?embedded=true"
-        width="100%"
-        height="820"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        style="border-radius:8px; display:block; background:#ffffff;">
-        Loading form…
-      </iframe>
-    </div>
+    <div class="section-label">// Get Started</div>
+    <h2 class="cta-title">Ready to Stop Leaving Money<br><span style="color:var(--cyan)">on the Table?</span></h2>
+    <p class="cta-sub">Send us a message and we'll get back to you within 24 hours to discuss your practice's needs.</p>
+    <a href="mailto:laureennicholson635@gmail.com?subject=AutomatedRCM%20Demo%20Request" class="btn-primary" style="font-size:11px;padding:18px 44px;">Send a Message</a>
+    <br>
+    <a href="mailto:laureennicholson635@gmail.com" class="contact-email">📧&nbsp;&nbsp;laureennicholson635@gmail.com</a>
     <div class="cta-chips">
       <div class="cta-chip">No Long-Term Contracts</div>
       <div class="cta-chip">HIPAA Compliant</div>
@@ -775,19 +730,16 @@ footer{
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-brand">// RCM AutoMed</div>
-      <div class="footer-copy" style="margin-top:6px;">Automated Medical Billing Intelligence</div>
-      <div style="margin-top:8px;">
-        <a href="mailto:laureennicholson635@gmail.com" style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--cyan);text-decoration:none;opacity:.8;">laureennicholson635@gmail.com</a>
-      </div>
+      <a href="#" class="footer-brand">// RCM AutoMed</a>
+      <div class="footer-tagline">Automated Medical Billing Intelligence</div>
     </div>
-    <div class="footer-links">
+    <nav class="footer-links">
       <a href="#features">Features</a>
       <a href="#bots">Bots</a>
       <a href="#roi">ROI</a>
-      <a href="/dashboard-demo/">Dashboard</a>
-      <a href="mailto:laureennicholson635@gmail.com">Contact</a>
-    </div>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#contact">Contact</a>
+    </nav>
     <div class="footer-copy">// All Rights Reserved · AutomatedRCM.com</div>
   </div>
 </footer>
@@ -808,7 +760,6 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 
 // FALLBACK: guarantee all sections visible after 1.5s
-// Fixes blank sections when using nav links or jumping to anchor
 setTimeout(()=>{
   document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible'));
 },1500);
