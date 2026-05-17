@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutomatedRCM | AI Billing Audit</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #eef2f7;
+      color: #1e293b;
+      min-height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────────────────── */
+    .header {
+      background: #1b3a6b;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: #3b82f6;
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: white; font-weight: 700;
+    }
+    .logo-text { color: white; font-size: 17px; font-weight: 700; letter-spacing: -0.2px; }
+    .logo-sep { color: rgba(255,255,255,0.25); margin: 0 6px; }
+    .logo-sub { color: rgba(255,255,255,0.55); font-size: 13px; }
+    .demo-tag {
+      background: #f59e0b;
+      color: #1e293b;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 4px;
+      letter-spacing: 0.8px;
+    }
+
+    /* ── Layout ─────────────────────────────────────────── */
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 28px 24px 48px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    @media (max-width: 860px) { .page { grid-template-columns: 1fr; } }
+
+    /* ── Cards ───────────────────────────────────────────── */
+    .card {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 6px 20px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .card-head {
+      padding: 14px 20px;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-head-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .card-body { padding: 20px; }
+
+    /* ── Practice panel ──────────────────────────────────── */
+    .practice-name { font-size: 17px; font-weight: 700; color: #0f172a; }
+    .practice-meta {
+      font-size: 12px; color: #64748b; line-height: 1.65; margin-top: 5px;
+    }
+    .practice-meta strong { color: #475569; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 16px;
+    }
+    .kpi { background: #f8fafc; border-radius: 9px; padding: 11px 13px; border: 1px solid #e9eef4; }
+    .kpi.full { grid-column: 1 / -1; }
+    .kpi-label {
+      font-size: 9.5px; font-weight: 700; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;
+    }
+    .kpi-value { font-size: 19px; font-weight: 800; }
+    .kpi-value.neutral  { color: #0f172a; }
+    .kpi-value.good     { color: #059669; }
+    .kpi-value.bad      { color: #dc2626; }
+    .kpi-value.warn     { color: #d97706; }
+    .kpi-bench {
+      font-size: 10px; margin-top: 2px;
+    }
+    .kpi-bench.red  { color: #dc2626; }
+    .kpi-bench.grn  { color: #059669; }
+    .kpi-bench.gray { color: #94a3b8; }
+
+    .flag-box {
+      margin-top: 14px;
+      padding: 11px 13px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 9px;
+    }
+    .flag-box-title { font-size: 11px; font-weight: 700; color: #c2410c; margin-bottom: 4px; }
+    .flag-box-text  { font-size: 11px; color: #7c2d12; line-height: 1.55; }
+
+    /* ── Audit center ────────────────────────────────────── */
+
+    /* State: ready */
+    #state-ready { padding: 44px 28px; text-align: center; }
+    .ready-icon {
+      width: 68px; height: 68px;
+      background: #eff6ff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 20px;
+    }
+    .ready-title { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+    .ready-sub   {
+      font-size: 14px; color: #64748b; line-height: 1.55; margin-bottom: 30px;
+      max-width: 400px; margin-left: auto; margin-right: auto;
+    }
+    .run-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #1b3a6b; color: white;
+      border: none; border-radius: 11px;
+      padding: 15px 36px;
+      font-size: 15px; font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(27,58,107,0.35);
+      transition: background 0.18s, transform 0.15s, box-shadow 0.15s;
+    }
+    .run-btn:hover { background: #1e4d8c; transform: translateY(-2px); box-shadow: 0 7px 18px rgba(27,58,107,0.4); }
+    .run-btn:active { transform: translateY(0); }
+    .run-btn-note { font-size: 11px; color: #94a3b8; margin-top: 10px; }
+
+    .teaser-row {
+      display: flex; justify-content: center; gap: 32px;
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .teaser-item { text-align: center; }
+    .teaser-val  { font-size: 26px; font-weight: 800; }
+    .teaser-val.bad  { color: #dc2626; }
+    .teaser-val.warn { color: #d97706; }
+    .teaser-lbl  { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+    .teaser-bch  { font-size: 10px; margin-top: 2px; }
+    .teaser-bch.bad  { color: #dc2626; }
+    .teaser-bch.warn { color: #d97706; }
+
+    /* State: loading */
+    #state-loading { padding: 48px 28px; text-align: center; display: none; }
+    .spinner-wrap { display: flex; justify-content: center; margin-bottom: 22px; }
+    .spinner {
+      width: 52px; height: 52px;
+      border: 5px solid #e2e8f0;
+      border-top-color: #1b3a6b;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    #loading-step  { font-size: 13px; color: #64748b; min-height: 20px; transition: opacity 0.3s; }
+    .progress-track {
+      height: 5px; background: #e2e8f0; border-radius: 3px;
+      max-width: 320px; margin: 18px auto 0; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: #1b3a6b; border-radius: 3px;
+      width: 0%; transition: width 0.5s ease;
+    }
+
+    /* State: results */
+    #state-results { padding: 20px; display: none; }
+
+    /* Recovery banner */
+    .recovery-banner {
+      background: linear-gradient(135deg, #047857 0%, #059669 100%);
+      border-radius: 11px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+    .rec-label { font-size: 11px; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+    .rec-amount { font-size: 34px; font-weight: 900; color: white; letter-spacing: -1px; }
+    .rec-sub { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 3px; }
+    .rec-cta {
+      background: white; color: #047857;
+      border: none; border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 12px; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .rec-cta:hover { background: #f0fdf4; }
+
+    /* Tabs */
+    .tabs {
+      display: flex; gap: 3px;
+      background: #f1f5f9;
+      border-radius: 9px;
+      padding: 3px;
+      margin-bottom: 16px;
+    }
+    .tab-btn {
+      flex: 1; border: none; background: transparent;
+      border-radius: 7px;
+      padding: 8px 6px;
+      font-size: 11.5px; font-weight: 500; color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+      white-space: nowrap;
+    }
+    .tab-btn.active { background: white; color: #0f172a; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,0.09); }
+    .tab-pill {
+      font-size: 9px; font-weight: 700;
+      padding: 1px 5px; border-radius: 3px;
+    }
+    .tab-pill.grn { background: #dcfce7; color: #166534; }
+    .tab-pill.red { background: #fee2e2; color: #991b1b; }
+    .tab-pill.blu { background: #dbeafe; color: #1e40af; }
+
+    /* Panel content */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .audit-content {
+      font-size: 13px; line-height: 1.8; color: #374151;
+      min-height: 180px;
+    }
+    .audit-content h3 {
+      font-size: 13.5px; font-weight: 700; color: #0f172a;
+      margin: 18px 0 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .audit-content h3:first-child { margin-top: 0; }
+    .audit-content p { margin-bottom: 10px; }
+    .audit-content ul { margin: 6px 0 10px 18px; }
+    .audit-content li { margin-bottom: 5px; }
+    .audit-content strong { color: #0f172a; }
+    .audit-content .dollar { color: #059669; font-weight: 700; }
+    .audit-content .urgent { color: #dc2626; font-weight: 700; }
+    .audit-content .warning { color: #d97706; font-weight: 700; }
+
+    /* Fade-in animation for content blocks */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(7px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeUp 0.35s ease forwards;
+    }
+
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      font-size: 11px;
+      color: #94a3b8;
+      padding: 16px 0 8px;
+      grid-column: 1 / -1;
+    }
+    .page-footer a { color: #3b82f6; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ───────────────────────────────────────────── -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-mark">A</div>
+    <span class="logo-text">AutomatedRCM</span>
+    <span class="logo-sep">|</span>
+    <span class="logo-sub">AI Billing Intelligence</span>
+  </div>
+  <span class="demo-tag">SANDBOX DEMO</span>
+</header>
+
+<!-- ── Page grid ─────────────────────────────────────────── -->
+<div class="page">
+
+  <!-- LEFT: Practice overview ─────────────────────────── -->
+  <div>
+    <div class="card">
+      <div class="card-head">
+        <span class="card-head-title">Practice Under Audit</span>
+        <span style="font-size:11px;color:#94a3b8;">Jan – Jun 2026</span>
+      </div>
+      <div class="card-body">
+        <div class="practice-name">Sunshine Family Medicine, PC</div>
+        <div class="practice-meta">
+          <strong>Provider:</strong> Dr. Sarah Chen, MD<br>
+          <strong>Specialty:</strong> Family Medicine &nbsp;·&nbsp; Tampa, FL<br>
+          <strong>EHR:</strong> athenahealth &nbsp;·&nbsp; <strong>Clearinghouse:</strong> Availity
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi full">
+            <div class="kpi-label">Total Charges Billed — 6 Months</div>
+            <div class="kpi-value neutral">$574,200</div>
+            <div class="kpi-bench gray">847 claims submitted · Jan–Jun 2026</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Collections</div>
+            <div class="kpi-value warn">$412,100</div>
+            <div class="kpi-bench red">71.8% rate</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Industry Benchmark</div>
+            <div class="kpi-value good">82%</div>
+            <div class="kpi-bench grn">Collection rate</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Denial Rate</div>
+            <div class="kpi-value bad">19.2%</div>
+            <div class="kpi-bench red">↑ 2.3× benchmark</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">AR &gt; 90 Days</div>
+            <div class="kpi-value bad">$48,200</div>
+            <div class="kpi-bench red">37.8% of total AR</div>
+          </div>
+        </div>
+
+        <div class="flag-box">
+          <div class="flag-box-title">⚠️ FLAGS DETECTED</div>
+          <div class="flag-box-text">
+            Denial rate 2.3× above industry standard &nbsp;·&nbsp;
+            12 claims approaching timely filing deadline &nbsp;·&nbsp;
+            $48,200 in AR aging past 90 days
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Audit center ──────────────────────────────── -->
+  <div>
+    <div class="card">
+
+      <!-- STATE 1: READY ──────────────────────────────── -->
+      <div id="state-ready">
+        <div class="ready-icon">🔍</div>
+        <div class="ready-title">Your AI Audit Is Ready</div>
+        <div class="ready-sub">
+          847 claims loaded · 6 months of billing history analyzed.<br>
+          Claude AI will find every recoverable dollar in this practice.
+        </div>
+        <button class="run-btn" onclick="runAudit()">
+          <span style="font-size:14px;">▶</span>
+          Run Full AI Audit
+        </button>
+        <div class="run-btn-note">Powered by Claude AI · ~15 seconds</div>
+
+        <div class="teaser-row">
+          <div class="teaser-item">
+            <div class="teaser-val bad">19.2%</div>
+            <div class="teaser-lbl">Denial Rate</div>
+            <div class="teaser-bch bad">Benchmark: 8–10%</div>
+          </div>
+          <div class="teaser-item">
+            <div class="teaser-val bad">71.8%</div>
+            <div class="teaser-lbl">Collection Rate</div>
+            <div class="teaser-bch bad">Benchmark: 82%</div>
+          </div>
+          <div class="teaser-item">
+            <div class="teaser-val warn">$48,200</div>
+            <div class="teaser-lbl">AR &gt; 90 Days</div>
+            <div class="teaser-bch warn">Action required</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 2: LOADING ─────────────────────────────── -->
+      <div id="state-loading">
+        <div class="spinner-wrap"><div class="spinner"></div></div>
+        <div class="loading-title">Claude AI Analyzing Claims Data</div>
+        <div id="loading-step">Initializing...</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- STATE 3: RESULTS ─────────────────────────────── -->
+      <div id="state-results">
+
+        <!-- Recovery banner -->
+        <div class="recovery-banner">
+          <div>
+            <div class="rec-label">Total Immediate Recovery Opportunity</div>
+            <div class="rec-amount">$43,200</div>
+            <div class="rec-sub">+ $5,840/mo in coding improvements &nbsp;·&nbsp; $8,100 timely filing at risk</div>
+          </div>
+          <button class="rec-cta" onclick="scheduleCall()">Schedule Recovery Call →</button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" id="tab-btn-ar"       onclick="switchTab('ar', this)">
+            💰 A/R Recovery <span class="tab-pill grn">$43.2K</span>
+          </button>
+          <button class="tab-btn" id="tab-btn-denials"         onclick="switchTab('denials', this)">
+            🚫 Denials <span class="tab-pill red">19.2%</span>
+          </button>
+          <button class="tab-btn" id="tab-btn-coding"          onclick="switchTab('coding', this)">
+            📋 Coding <span class="tab-pill blu">$5.8K/mo</span>
+          </button>
+          <button class="tab-btn" id="tab-btn-summary"         onclick="switchTab('summary', this)">
+            📊 Summary
+          </button>
+        </div>
+
+        <!-- Panels -->
+        <div class="tab-panel active" id="panel-ar">
+          <div class="audit-content" id="content-ar"></div>
+        </div>
+        <div class="tab-panel" id="panel-denials">
+          <div class="audit-content" id="content-denials"></div>
+        </div>
+        <div class="tab-panel" id="panel-coding">
+          <div class="audit-content" id="content-coding"></div>
+        </div>
+        <div class="tab-panel" id="panel-summary">
+          <div class="audit-content" id="content-summary"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    AutomatedRCM · AI-Powered Medical Billing ·
+    <a href="https://learningaiwithlaureen.com" target="_blank">learningaiwithlaureen.com</a>
+    &nbsp;·&nbsp; SANDBOX — Demo data only, no real PHI
+  </div>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CONFIGURATION
+   Update WORKER_URL after deploying automatedrcm-audit-worker.js
+   ═══════════════════════════════════════════════════════════ */
+const WORKER_URL = 'https://automatedrcm-audit.laureennicholson635.workers.dev';
+
+/* ═══════════════════════════════════════════════════════════
+   FAKE PRACTICE DATA — Sunshine Family Medicine, PC
+   ═══════════════════════════════════════════════════════════ */
+const PRACTICE_DATA = {
+  practice: {
+    name: "Sunshine Family Medicine, PC",
+    npi: "1234567890",
+    specialty: "Family Medicine",
+    provider: "Dr. Sarah Chen, MD",
+    location: "Tampa, FL 33602",
+    ehr: "athenahealth",
+    clearinghouse: "Availity",
+    audit_period: "January 2026 - June 2026"
+  },
+  financial_summary: {
+    total_charges_billed: 574200,
+    total_collections: 412100,
+    collection_rate_pct: 71.8,
+    industry_benchmark_collection_rate_pct: 82.0,
+    total_claims_submitted: 847,
+    total_claims_denied: 163,
+    denial_rate_pct: 19.2,
+    industry_benchmark_denial_rate_pct: 8.5,
+    total_outstanding_ar: 127450,
+    ar_over_90_days: 48200,
+    average_days_to_payment: 34
+  },
+  ar_aging: {
+    "0_30_days":     { amount: 42300, claims: 89 },
+    "31_60_days":    { amount: 28100, claims: 54 },
+    "61_90_days":    { amount:  8850, claims: 19 },
+    "91_120_days":   { amount: 31200, claims: 31 },
+    "120_plus_days": { amount: 17000, claims: 24 }
+  },
+  denials_by_reason_code: [
+    {
+      code: "CO-50", description: "Medical Necessity",
+      count: 52, total_amount: 18740, primary_payer: "Aetna",
+      root_cause: "Missing documentation supporting medical necessity for level 4 E&M visits. Aetna requires specific clinical indicators (vitals, review of systems, exam findings) documented in the chart note to support 99214. Currently 41% of Aetna claims are denied on this code alone."
+    },
+    {
+      code: "CO-97", description: "Bundling / CCI Edit Violation",
+      count: 38, total_amount: 11420, primary_payer: "United Healthcare",
+      root_cause: "99213 billed with 36415 (venipuncture) and 93000 (EKG) without modifier 25. CCI edits require modifier 25 on the E&M when a separate, significant procedure is performed on the same day. Modifier is missing in 38 claims."
+    },
+    {
+      code: "CO-16", description: "Missing / Incorrect Information",
+      count: 29, total_amount: 9180, primary_payer: "Blue Cross Blue Shield",
+      root_cause: "Referral and prior authorization numbers missing from CMS-1500 Box 23. BCBS requires prior auth number for specialist referrals and certain diagnostic tests. Front desk not capturing auth numbers at time of scheduling."
+    },
+    {
+      code: "PR-1", description: "Deductible — Patient Responsibility",
+      count: 22, total_amount: 7240, primary_payer: "Multiple payers",
+      root_cause: "18 of 22 patient deductible amounts not collected at time of service. Patients not being informed of outstanding deductible balances prior to appointment. $5,180 collectible at point of service with a basic balance-due workflow."
+    },
+    {
+      code: "CO-4", description: "Inconsistent / Missing Modifier",
+      count: 14, total_amount: 5690, primary_payer: "Medicare",
+      root_cause: "Modifier 25 missing on E&M visits billed same day as minor office procedures (11721 nail debridement, 17000 destruction of lesion). Medicare requires modifier 25 to indicate the E&M was a separate, medically necessary service."
+    },
+    {
+      code: "CO-119", description: "Timely Filing — Exceeded or Approaching",
+      count: 8, total_amount: 3820, primary_payer: "Aetna / United Healthcare",
+      root_cause: "8 claims already past timely filing window and unrecoverable ($3,820 written off). URGENT: 12 additional claims for Aetna (7 claims, $4,820) and UHC (5 claims, $3,280) are approaching deadline within 28-45 days. Total at immediate risk: $8,100."
+    }
+  ],
+  denials_by_payer: [
+    { payer: "Aetna",                  claims_submitted: 152, claims_denied: 41, denial_rate_pct: 27.0, total_denied_amount: 24180 },
+    { payer: "United Healthcare",      claims_submitted: 127, claims_denied: 31, denial_rate_pct: 24.4, total_denied_amount: 17930 },
+    { payer: "Medicare",               claims_submitted: 237, claims_denied: 28, denial_rate_pct: 11.8, total_denied_amount: 12040 },
+    { payer: "Blue Cross Blue Shield", claims_submitted: 271, claims_denied: 49, denial_rate_pct: 18.1, total_denied_amount: 21450 },
+    { payer: "Self-Pay",               claims_submitted:  60, claims_denied: 14, denial_rate_pct: 23.3, total_denied_amount:  6490 }
+  ],
+  em_code_distribution: {
+    note: "Family Medicine E&M national benchmarks per CMS specialty data",
+    codes: [
+      { cpt: "99202", desc: "New Patient — Low",          practice_pct:  1.4, benchmark_pct:  5.0, six_mo_revenue:  1560 },
+      { cpt: "99203", desc: "New Patient — Moderate",     practice_pct:  5.7, benchmark_pct: 12.0, six_mo_revenue: 10560 },
+      { cpt: "99204", desc: "New Patient — Mod-High",     practice_pct:  3.7, benchmark_pct: 18.0, six_mo_revenue:  9610 },
+      { cpt: "99205", desc: "New Patient — High",         practice_pct:  0.9, benchmark_pct:  6.0, six_mo_revenue:  3360 },
+      { cpt: "99212", desc: "Established — Low",          practice_pct: 10.5, benchmark_pct: 10.0, six_mo_revenue: 10680 },
+      { cpt: "99213", desc: "Established — Moderate",     practice_pct: 57.7, benchmark_pct: 36.0, six_mo_revenue: 97800 },
+      { cpt: "99214", desc: "Established — Mod-High",     practice_pct: 15.5, benchmark_pct: 45.0, six_mo_revenue: 42570 },
+      { cpt: "99215", desc: "Established — High",         practice_pct:  1.8, benchmark_pct:  9.0, six_mo_revenue:  7350 }
+    ],
+    key_finding: "Practice bills 99213 at 57.7% vs 36% benchmark and 99214 at only 15.5% vs 45% benchmark — strong indicator of systemic undercoding due to documentation habits, not clinical complexity",
+    estimated_monthly_revenue_impact: 5840,
+    six_month_impact: 35040
+  },
+  modifier_gaps: {
+    modifier_25_missing: 14,
+    modifier_59_needed: 9,
+    modifier_57_missing: 3,
+    total_lost_revenue: 5690
+  },
+  timely_filing_urgent: [
+    { payer: "Aetna",             claims: 7, amount: 4820, days_until_deadline: 28, action: "URGENT — submit corrected claims within 28 days" },
+    { payer: "United Healthcare", claims: 5, amount: 3280, days_until_deadline: 45, action: "HIGH PRIORITY — submit within 45 days" }
+  ],
+  recovery_summary: {
+    total_immediately_recoverable: 43200,
+    timely_filing_at_immediate_risk: 8100,
+    monthly_coding_opportunity: 5840,
+    six_month_coding_opportunity: 35040,
+    breakdown: [
+      { category: "CO-50 Medical Necessity — Aetna (documentation addendum + resubmit)", amount: 18740 },
+      { category: "CO-97 Bundling — UHC (add modifier 25, resubmit)",                    amount: 11420 },
+      { category: "CO-16 Missing auth — BCBS (correct Box 23, resubmit)",                amount:  9180 },
+      { category: "CO-4 Missing modifier 25 — Medicare (corrected claims)",              amount:  3860 }
+    ]
+  }
+};
+
+/* ═══════════════════════════════════════════════════════════
+   LOADING STEPS
+   ═══════════════════════════════════════════════════════════ */
+const LOADING_STEPS = [
+  "Loading 847 claims from athenahealth export...",
+  "Analyzing A/R aging buckets across 5 payers...",
+  "Calculating denial rates by reason code...",
+  "Identifying timely filing deadline risks...",
+  "Comparing E&M coding against specialty benchmarks...",
+  "Calculating monthly revenue impact of undercoding...",
+  "Claude AI generating your full audit report...",
+  "Formatting findings and recommendations..."
+];
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN AUDIT FUNCTION
+   ═══════════════════════════════════════════════════════════ */
+async function runAudit() {
+  show('state-loading');
+  hide('state-ready');
+
+  const stepEl    = document.getElementById('loading-step');
+  const fillEl    = document.getElementById('progress-fill');
+  let   stepIdx   = 0;
+  const stepCount = LOADING_STEPS.length;
+
+  const ticker = setInterval(() => {
+    if (stepIdx < stepCount) {
+      stepEl.textContent = LOADING_STEPS[stepIdx];
+      fillEl.style.width = `${Math.round(((stepIdx + 1) / stepCount) * 82)}%`;
+      stepIdx++;
+    }
+  }, 1400);
+
+  try {
+    const res = await fetch(`${WORKER_URL}/audit`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ practiceData: PRACTICE_DATA })
+    });
+
+    if (!res.ok) throw new Error(`Worker returned HTTP ${res.status}`);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    clearInterval(ticker);
+    fillEl.style.width = '100%';
+    stepEl.textContent = 'Audit complete ✓';
+    await sleep(700);
+
+    hide('state-loading');
+    show('state-results');
+
+    renderSection('content-ar',      data.ar_recovery     || '');
+    renderSection('content-denials', data.denial_patterns || '');
+    renderSection('content-coding',  data.coding_audit    || '');
+    renderSection('content-summary', data.summary         || '');
+
+  } catch (err) {
+    clearInterval(ticker);
+    hide('state-loading');
+    show('state-ready');
+    alert(
+      `Audit could not complete.\n\n` +
+      `Error: ${err.message}\n\n` +
+      `Check that WORKER_URL is set correctly at the top of this file's <script> section.`
+    );
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RENDER SECTION — converts markdown → HTML, animates in
+   ═══════════════════════════════════════════════════════════ */
+function renderSection(elementId, markdownText) {
+  const el   = document.getElementById(elementId);
+  const html = mdToHtml(markdownText);
+  el.innerHTML = html;
+
+  // Staggered fade-up animation on each block
+  const blocks = el.querySelectorAll('p, h3, ul, li');
+  blocks.forEach((b, i) => {
+    b.classList.add('fade-in');
+    b.style.animationDelay = `${i * 70}ms`;
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MARKDOWN → HTML CONVERTER (lightweight)
+   ═══════════════════════════════════════════════════════════ */
+function mdToHtml(text) {
+  if (!text) return '<em style="color:#94a3b8;">No data returned from AI.</em>';
+
+  let t = text
+    // Escape
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    // Headers
+    .replace(/^#{1,3} (.+)$/gm, '<h3>$1</h3>')
+    // Bold
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // Italic
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // Dollar amounts → green
+    .replace(/(\$[\d,]+(?:\.\d+)?)/g, '<span class="dollar">$1</span>')
+    // Urgent/risk keywords → red
+    .replace(/\b(URGENT|urgent|deadline|at risk|immediately|timely filing)\b/g,
+             '<span class="urgent">$1</span>')
+    // Warning keywords → amber
+    .replace(/\b(WARNING|warning|approaching|overdue|below benchmark|undercoding)\b/g,
+             '<span class="warning">$1</span>')
+    // Bullet points
+    .replace(/^[-•*] (.+)$/gm, '<li>$1</li>')
+    // Numbered lists
+    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+    // Wrap adjacent li tags in ul
+    .replace(/((?:<li>[\s\S]*?<\/li>\s*)+)/g, '<ul>$1</ul>')
+    // Double newline → paragraph break
+    .replace(/\n\n+/g, '</p><p>')
+    // Single newline → line break
+    .replace(/\n/g, '<br>');
+
+  return `<p>${t}</p>`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TAB SWITCHER
+   ═══════════════════════════════════════════════════════════ */
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`panel-${name}`).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCHEDULE CALL CTA
+   ═══════════════════════════════════════════════════════════ */
+function scheduleCall() {
+  const msg = `Thank you for reviewing your audit results.\n\nTo begin recovering $43,200 in identified claims and improving your monthly collections by $5,840, contact AutomatedRCM:\n\nLaureen Nicholson\nlearnin gaiwithlaureen.com\nlaureennicholson635@gmail.com`;
+  alert(msg);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+function show(id) { document.getElementById(id).style.display = 'block'; }
+function hide(id) { document.getElementById(id).style.display = 'none';  }
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+</script>
+</body>
+</html>
