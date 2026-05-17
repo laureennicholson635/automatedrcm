@@ -1,721 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutomatedRCM | AI-Powered Medical Billing Services</title>
-  <meta name="description" content="AutomatedRCM delivers full-service AI-powered medical billing for healthcare practices nationwide. Eligibility, coding, claims, denials, and reporting — one partner, one fee. North Port, FL.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutomatedRCM | Revenue Cycle Intelligence</title>
+  <meta name="description" content="Medical billing intelligence for practices that need cleaner claims, fewer denials, and stronger revenue cycle visibility." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'Inter',-apple-system,sans-serif;color:#0f172a;background:#fff;line-height:1.6;overflow-x:hidden}
-    :root{
-      --navy:#0d1f3c;--navy2:#163251;--green:#10b981;--green2:#059669;
-      --white:#fff;--g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;
-      --g400:#94a3b8;--g500:#64748b;--g700:#334155;--g900:#0f172a;
-      --r: 12px;--rl:20px;
-      --s1:0 1px 3px rgba(0,0,0,.08);
-      --s2:0 4px 16px rgba(0,0,0,.10);
-      --s3:0 12px 40px rgba(0,0,0,.14);
-    }
-    .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-    .chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
-    .chip::before{content:'●';font-size:8px}
-    h1,h2,h3{line-height:1.1;font-weight:800;color:var(--navy)}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:8px;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:all .18s}
-    .btn-green{background:var(--green);color:#fff}
-    .btn-green:hover{background:var(--green2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(16,185,129,.3)}
-    .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--g200)}
-    .btn-ghost:hover{border-color:var(--navy);background:var(--g50)}
-    .btn-white{background:#fff;color:var(--navy)}
-    .btn-white:hover{background:var(--g100)}
-    .fade{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
-    .fade.on{opacity:1;transform:none}
-
-    /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:200;
-      background:rgba(255,255,255,.88);backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--g200);transition:box-shadow .3s}
-    nav.scrolled{box-shadow:var(--s2)}
-    .nav-i{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:17px;color:var(--navy)}
-    .logo-box{width:32px;height:32px;background:var(--navy);border-radius:7px;display:flex;align-items:center;justify-content:center}
-    .logo-box svg{width:18px;height:18px;fill:var(--green)}
-    .logo span{color:var(--green)}
-    .nav-links{display:flex;gap:28px;list-style:none}
-    .nav-links a{font-size:14px;font-weight:500;color:var(--g700);text-decoration:none;transition:color .2s}
-    .nav-links a:hover{color:var(--navy)}
-    .nav-right{display:flex;align-items:center;gap:12px}
-    .nav-sign{font-size:14px;font-weight:500;color:var(--g500);text-decoration:none}
-    @media(max-width:760px){.nav-links{display:none}}
-
-    /* ── HERO ── */
-    .hero{padding:128px 0 88px;background:linear-gradient(160deg,#f0f7ff 0%,#fff 55%,#f0fdf9 100%);position:relative;overflow:hidden}
-    .hero::after{content:'';position:absolute;top:-120px;right:-160px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.05),transparent 70%);pointer-events:none}
-    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-    @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-flow{display:none}}
-    .hero-tag{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--g200);border-radius:99px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--green);margin-bottom:20px;box-shadow:var(--s1)}
-    .hero-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-    .hero h1{font-size:clamp(40px,5.5vw,64px);color:var(--navy);margin-bottom:20px}
-    .hero h1 span{color:var(--green)}
-    .hero-sub{font-size:17px;color:var(--g500);line-height:1.7;margin-bottom:32px;max-width:480px}
-    .hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
-    .hero-checks{display:flex;gap:20px;flex-wrap:wrap}
-    .hero-check{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--g500);font-weight:500}
-    .hero-check svg{width:15px;height:15px;color:var(--green);flex-shrink:0}
-
-    /* ── HERO WORKFLOW CARD ── */
-    .hero-flow{background:var(--navy);border-radius:18px;padding:24px;box-shadow:var(--s3);position:relative;overflow:hidden}
-    .hf-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-    .hf-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35)}
-    .hf-badge{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--green)}
-    .hf-live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite}
-    .hf-steps{display:flex;flex-direction:column;gap:4px}
-    .hf-step{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;transition:all .35s;cursor:pointer;border:1px solid transparent}
-    .hf-step.active{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.22)}
-    .hf-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:10px;font-weight:800;color:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .35s}
-    .hf-step.active .hf-num{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 0 8px rgba(16,185,129,.4)}
-    .hf-ico{font-size:14px;flex-shrink:0;opacity:.3;transition:opacity .35s}
-    .hf-step.active .hf-ico{opacity:1}
-    .hf-name{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.35);transition:color .35s;line-height:1.25;flex:1}
-    .hf-step.active .hf-name{color:#fff}
-    .hf-arrow{font-size:11px;color:var(--green);opacity:0;transition:opacity .35s;flex-shrink:0}
-    .hf-step.active .hf-arrow{opacity:1}
-    .hf-progress{height:3px;background:rgba(255,255,255,.07);border-radius:2px;margin-top:16px;overflow:hidden}
-    .hf-fill{height:100%;background:linear-gradient(90deg,var(--green),#34d399);border-radius:2px;transition:width .06s linear}
-
-
-    /* ── ROI CALC ── */
-    .roi{padding:96px 0;background:var(--g50)}
-    .sec-hdr{margin-bottom:52px}
-    .sec-hdr h2{font-size:clamp(28px,4vw,44px);margin-top:10px}
-    .sec-hdr p{font-size:16px;color:var(--g500);margin-top:10px;max-width:540px}
-    .roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start}
-    @media(max-width:800px){.roi-grid{grid-template-columns:1fr}}
-    .calc-box{background:#fff;border-radius:var(--rl);padding:32px;box-shadow:var(--s2);border:1px solid var(--g200)}
-    .calc-field{margin-bottom:24px}
-    .calc-lbl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px}
-    .calc-lbl b{font-size:16px;color:#0ea5e9;font-weight:800}
-    input[type=range]{width:100%;-webkit-appearance:none;height:5px;border-radius:3px;background:var(--g200);outline:none}
-    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--navy);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-    .calc-hint{font-size:11px;color:var(--g400);margin-top:5px}
-    .result-box{background:var(--navy);border-radius:var(--rl);padding:32px;color:#fff}
-    .result-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:20px}
-    .result-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-    .result-row:last-of-type{border:none}
-    .rl{font-size:13px;color:rgba(255,255,255,.55)}
-    .rv{font-size:20px;font-weight:800}
-    .rv.red{color:#fca5a5}.rv.yel{color:#fcd34d}.rv.grn{color:var(--green)}
-    .result-note{font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:10px;line-height:1.5}
-
-    /* ── WORKFLOW ── */
-    .workflow{padding:96px 0;background:#fff}
-    .steps{margin-top:56px;display:flex;flex-direction:column}
-    .step{display:grid;grid-template-columns:72px 1fr;position:relative}
-    .step-l{display:flex;flex-direction:column;align-items:center}
-    .step-n{width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;transition:all .3s}
-    .step-icon{width:44px;height:44px;background:var(--g100);border-radius:10px;border:1px solid var(--g200);display:flex;align-items:center;justify-content:center;font-size:18px;margin-top:-44px;margin-left:20px;opacity:0;transition:all .3s}
-    .step.on .step-icon{opacity:1}
-    .step-line{width:2px;flex:1;background:var(--g200);min-height:32px;transition:background .4s}
-    .step.on .step-line{background:linear-gradient(to bottom,var(--green),var(--g200))}
-    .step:last-child .step-line{display:none}
-    .step-body{padding:0 0 40px 20px}
-    .step-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--g400);margin-bottom:4px}
-    .step-title{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px}
-    .step-desc{font-size:14px;color:var(--g500);line-height:1.65}
-    .step-badge{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:11px;font-weight:700;color:#0ea5e9}
-
-    /* ── SERVICES ── */
-    .services{padding:96px 0;background:var(--g50)}
-    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
-    @media(max-width:860px){.svc-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:560px){.svc-grid{grid-template-columns:1fr}}
-    .svc-card{background:#fff;border-radius:var(--r);padding:24px;border:1px solid var(--g200);box-shadow:var(--s1);transition:all .22s}
-    .svc-card:hover{transform:translateY(-3px);box-shadow:var(--s2);border-color:var(--g200)}
-    .svc-ico{width:44px;height:44px;border-radius:10px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
-    .svc-card h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:6px}
-    .svc-card p{font-size:13px;color:var(--g500);line-height:1.6}
-
-    /* ── COMPARISON TABLE ── */
-    .compare{padding:96px 0;background:#fff}
-    .compare-tbl{margin-top:52px;border-radius:var(--rl);overflow:hidden;border:1px solid var(--g200);box-shadow:var(--s2)}
-    .cmp-hdr{display:grid;grid-template-columns:2fr 1.5fr 1.5fr}
-    .cmp-hdr-cell{padding:16px 20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-    .cmp-hdr-cell:first-child{background:#fff;color:var(--g500)}
-    .cmp-hdr-cell.inhouse{background:var(--g50);color:var(--g500);border-left:1px solid var(--g200)}
-    .cmp-hdr-cell.arcm{background:var(--navy);color:rgba(255,255,255,.7);border-left:1px solid rgba(255,255,255,.1)}
-    .cmp-hdr-cell.arcm span{color:var(--green)}
-    .cmp-row{display:grid;grid-template-columns:2fr 1.5fr 1.5fr;border-top:1px solid var(--g200)}
-    .cmp-cell{padding:14px 20px;font-size:13px}
-    .cmp-cell.metric{color:var(--g700);font-weight:600;background:#fff}
-    .cmp-cell.inhouse{background:var(--g50);border-left:1px solid var(--g200);color:var(--g500)}
-    .cmp-cell.arcm{background:var(--navy);border-left:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
-    .cmp-cell.arcm .ck{color:var(--green);margin-right:5px}
-    .cmp-cell.inhouse .xk{color:#fca5a5;margin-right:5px}
-    .cmp-sub{font-size:11px;color:var(--g400);margin-top:2px}
-    .cmp-sub-w{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px}
-
-    /* ── APPEAL DEMO ── */
-    .appeal{padding:96px 0;background:var(--g50)}
-    .appeal-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;align-items:start;margin-top:52px}
-    @media(max-width:800px){.appeal-grid{grid-template-columns:1fr}}
-    .appeal-ctrl{display:flex;flex-direction:column;gap:16px}
-    .field-lbl{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:7px;display:block}
-    .sel-wrap{position:relative}
-    .sel{width:100%;padding:13px 14px;border:1.5px solid var(--g200);border-radius:8px;font-size:14px;color:var(--navy);background:#fff;appearance:none;outline:none;cursor:pointer;transition:border-color .2s;font-family:'Inter',sans-serif}
-    .sel:focus{border-color:var(--navy)}
-    .sel-arr{position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--g400);font-size:12px}
-    .gen-btn{width:100%;background:var(--navy);color:#fff;border:none;padding:15px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s;font-family:'Inter',sans-serif}
-    .gen-btn:hover{background:var(--navy2)}
-    .appeal-note{font-size:11px;color:var(--g400);text-align:center;line-height:1.6}
-    .appeal-out{background:#fff;border-radius:var(--r);border:1px solid var(--g200);min-height:360px;padding:24px}
-    .appeal-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:320px;color:var(--g400);text-align:center;gap:10px}
-    .appeal-empty svg{width:40px;height:40px;opacity:.4}
-    .appeal-result{display:none}
-    .appeal-result.show{display:block}
-    .sample-tag{background:#fef3c7;color:#92400e;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;display:inline-block;margin-bottom:14px}
-    .letter{font-size:13px;color:var(--g700);line-height:1.8;white-space:pre-line;font-family:'Inter',sans-serif}
-    .letter .ph{color:#0ea5e9;font-style:italic}
-
-    /* ── ELIGIBILITY ── */
-    .elig{padding:96px 0;background:#fff}
-    .elig-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;align-items:start;margin-top:52px}
-    @media(max-width:800px){.elig-grid{grid-template-columns:1fr}}
-    .e-field{margin-bottom:14px}
-    .e-input,.e-sel{width:100%;padding:12px 14px;border:1.5px solid var(--g200);border-radius:8px;font-size:14px;color:var(--navy);background:#fff;appearance:none;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif}
-    .e-input:focus,.e-sel:focus{border-color:var(--navy)}
-    .e-btn{width:100%;background:var(--green);color:#fff;border:none;padding:15px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s;margin-top:6px;font-family:'Inter',sans-serif}
-    .e-btn:hover{background:var(--green2)}
-    .e-panel{background:var(--g50);border-radius:var(--r);border:1px solid var(--g200);padding:24px;min-height:340px}
-    .e-wait{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:var(--g400);text-align:center;gap:10px}
-    .e-wait svg{width:40px;height:40px;opacity:.4}
-    .e-spinning{display:none;align-items:center;justify-content:center;gap:10px;padding:20px}
-    .e-spinning.show{display:flex}
-    .spinner{width:22px;height:22px;border:3px solid var(--g200);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .e-result{display:none}
-    .e-result.show{display:block}
-    .sim-tag{background:#eff6ff;color:#1d4ed8;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;display:inline-block;margin-bottom:14px}
-    .e-status{background:#d1fae5;border:1px solid #a7f3d0;border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:16px}
-    .e-status-ico{font-size:22px}
-    .e-status-txt{font-size:15px;font-weight:700;color:#065f46}
-    .e-status-sub{font-size:12px;color:#047857;margin-top:1px}
-    .e-drow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--g200);font-size:13px}
-    .e-drow:last-child{border:none}
-    .e-dk{color:var(--g500)}
-    .e-dv{color:var(--navy);font-weight:700}
-
-    /* ── WHY ── */
-    .why{padding:96px 0;background:var(--navy)}
-    .why .chip{color:var(--green)}
-    .why h2{color:#fff}
-    .why-sub{font-size:16px;color:rgba(255,255,255,.5);margin-top:10px;max-width:520px}
-    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
-    @media(max-width:800px){.why-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:520px){.why-grid{grid-template-columns:1fr}}
-    .why-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:24px}
-    .why-ico{font-size:26px;margin-bottom:12px}
-    .why-card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
-    .why-card p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6}
-    .why-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
-    @media(max-width:700px){.why-stats{grid-template-columns:1fr 1fr}}
-    .w-stat{text-align:center}
-    .w-val{font-size:38px;font-weight:900;color:var(--green)}
-    .w-lbl{font-size:13px;color:rgba(255,255,255,.35);margin-top:4px}
-
-    /* ── PRICING ── */
-    .pricing{padding:96px 0;background:#fff}
-    .pricing .sec-hdr{text-align:center}
-    .pricing .sec-hdr p{margin:10px auto 0}
-    .price-card{max-width:760px;margin:48px auto 0;background:var(--navy);border-radius:24px;padding:48px;box-shadow:var(--s3)}
-    .price-badge{background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;display:inline-block;margin-bottom:18px}
-    .price-head{font-size:clamp(28px,4vw,48px);font-weight:900;color:#fff;margin-bottom:6px}
-    .price-head span{color:var(--green)}
-    .price-note{color:rgba(255,255,255,.4);font-size:14px;margin-bottom:28px}
-    .price-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-    @media(max-width:600px){.price-cols{grid-template-columns:1fr}}
-    .price-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-    .price-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.7)}
-    .price-list li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0;margin-top:1px}
-    .price-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin:28px 0}
-    .price-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-    .price-footer{text-align:center;margin-top:14px;font-size:12px;color:rgba(255,255,255,.3)}
-
-    /* ── CTA ── */
-    .cta-sec{padding:96px 0;background:linear-gradient(135deg,#f0fdf9,#eff6ff)}
-    .cta-sec .sec-hdr{text-align:center}
-    .cta-sec .sec-hdr p{margin:10px auto 0}
-    .cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:32px}
-    .cta-contact{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:24px;flex-wrap:wrap}
-    .cta-contact a{font-size:13px;color:var(--g500);text-decoration:none;display:flex;align-items:center;gap:5px}
-    .cta-contact a:hover{color:var(--navy)}
-    .cta-trust{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:16px;flex-wrap:wrap}
-    .cta-trust span{font-size:12px;color:var(--g400);display:flex;align-items:center;gap:4px}
-
-    /* ── FOOTER ── */
-    footer{background:var(--g900);padding:56px 0 28px}
-    .foot-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px}
-    @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
-    .foot-brand{font-size:16px;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px;margin-bottom:10px}
-    .foot-brand svg{width:16px;height:16px;fill:var(--green)}
-    .foot-brand span{color:var(--green)}
-    .foot-tagline{font-size:13px;color:rgba(255,255,255,.35);line-height:1.6;max-width:220px}
-    .foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);margin-bottom:14px}
-    .foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:8px;transition:color .2s}
-    .foot-col a:hover{color:#fff}
-    .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-    .foot-bottom p{font-size:12px;color:rgba(255,255,255,.25)}
-    .foot-badges{display:flex;gap:8px}
-    .f-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.08)}
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<!-- NAV -->
-<nav id="nav">
-  <div class="wrap">
-    <div class="nav-i">
-      <a href="#" class="logo">
-        <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg></div>
-        Automated<span>RCM</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#demo">Demo</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-      </ul>
-      <div class="nav-right">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com" target="_blank" rel="noopener" class="nav-sign">Contact</a>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com&su=Free+Revenue+Audit" target="_blank" rel="noopener" class="btn btn-green" style="padding:10px 18px;font-size:13px;">Book Free Audit →</a>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="AutomatedRCM Home">
+      <div class="brand-mark">AR</div>
+      <div>
+        <span class="brand-name">Automated<span>RCM</span></span>
+        <small>Revenue Cycle Intelligence</small>
       </div>
-    </div>
-  </div>
-</nav>
+    </a>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div class="fade">
-        <div class="hero-tag"><span class="hero-dot"></span> AI-Powered Revenue Cycle Management</div>
-        <h1>Your billing.<br>Fully automated.<br><span>Zero missed revenue.</span></h1>
-        <p class="hero-sub">AutomatedRCM handles your end-to-end medical billing — eligibility, coding, claims, denials, and posting — so you collect every dollar you've earned.</p>
-        <div class="hero-btns">
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com&su=Free+Revenue+Audit" target="_blank" rel="noopener" class="btn btn-green" style="font-size:15px;padding:15px 26px;">Book Free Audit →</a>
-          <a href="#demo" class="btn btn-ghost" style="font-size:15px;padding:15px 26px;">▶ See It Work</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#home" class="active">Home</a>
+      <a href="#services">Services</a>
+      <a href="#process">How It Works</a>
+      <a href="#difference">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="nav-cta" href="mailto:Laureenicholson635@gmail.com?subject=Free%20Revenue%20Audit%20Request">
+      <span>✉</span> Get a Free Audit
+    </a>
+  </header>
+
+  <main id="home">
+    <section class="hero section-dark">
+      <div class="hero-content">
+        <p class="eyebrow">Revenue Cycle Intelligence</p>
+        <h1>Smarter Billing.<br>Stronger Revenue.<br><span>Healthier Practices.</span></h1>
+        <p class="hero-copy">We combine revenue cycle expertise, automation, and AI-assisted review to help practices catch denials earlier, recover missed revenue, and understand exactly where money is getting stuck.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:Laureenicholson635@gmail.com?subject=Free%20Revenue%20Audit%20Request">✉ Get a Free Audit</a>
+          <a class="btn btn-secondary" href="mailto:Laureenicholson635@gmail.com?subject=AutomatedRCM%20Contact%20Request">✉ Contact Us</a>
         </div>
-        <div class="hero-checks">
-          <div class="hero-check"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>HIPAA Compliant</div>
-          <div class="hero-check"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>EHR-Agnostic</div>
-          <div class="hero-check"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>No Long-Term Contracts</div>
+        <div class="trust-strip">
+          <div><span>盾</span> HIPAA-conscious workflows</div>
+          <div><span>👤</span> Human-reviewed billing logic</div>
+          <div><span>▥</span> Built for small & mid-sized practices</div>
         </div>
       </div>
-      <div class="hero-flow fade">
-        <div class="hf-header">
-          <span class="hf-title">How It Works</span>
-          <div class="hf-badge"><div class="hf-live-dot"></div> 8 Steps · Fully Managed</div>
-        </div>
-        <div class="hf-steps" id="hfSteps">
-          <div class="hf-step active"><div class="hf-num">1</div><span class="hf-ico">✅</span><span class="hf-name">Patient Intake &amp; Eligibility Verification</span><span class="hf-arrow">→</span></div>
-          <div class="hf-step"><div class="hf-num">2</div><span class="hf-ico">🔐</span><span class="hf-name">Prior Authorization Tracking</span><span class="hf-arrow">→</span></div>
-          <div class="hf-step"><div class="hf-num">3</div><span class="hf-ico">💻</span><span class="hf-name">Charge Capture &amp; Coding Review</span><span class="hf-arrow">→</span></div>
-          <div class="hf-step"><div class="hf-num">4</div><span class="hf-ico">🔍</span><span class="hf-name">Claim Scrubbing</span><span class="hf-arrow">→</span></div>
-          <div class="hf-step"><div class="hf-num">5</div><span class="hf-ico">📤</span><span class="hf-name">Electronic Claim Submission</span><span class="hf-arrow">→</span></div>
-          <div class="hf-step"><div class="hf-num">6</div><span class="hf-ico">💰</span><span class="hf-name">Payment Posting &amp; Reconciliation</span><span class="hf-arrow">→</span></div>
-          <div class="hf-step"><div class="hf-num">7</div><span class="hf-ico">🛡️</span><span class="hf-name">Denial Management &amp; Appeals</span><span class="hf-arrow">→</span></div>
-          <div class="hf-step"><div class="hf-num">8</div><span class="hf-ico">📊</span><span class="hf-name">Reporting &amp; Continuous Improvement</span><span class="hf-arrow">→</span></div>
-        </div>
-        <div class="hf-progress"><div class="hf-fill" id="hfFill" style="width:12.5%"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-
-<!-- ROI CALCULATOR -->
-<section class="roi" id="roi">
-  <div class="wrap">
-    <div class="sec-hdr fade">
-      <div class="chip">Live ROI Calculator</div>
-      <h2>See your revenue lift, in real time.</h2>
-      <p>Model the impact of better billing on your practice. Drag the sliders — numbers update as you go.</p>
-    </div>
-    <div class="roi-grid">
-      <div class="calc-box fade">
-        <div style="font-size:12px;font-weight:700;color:var(--g500);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px">Your Practice</div>
-        <div class="calc-field">
-          <div class="calc-lbl">Monthly claims submitted <b id="cd1">500</b></div>
-          <input type="range" id="s1" min="50" max="2000" value="500" step="10" oninput="calc()">
-          <div class="calc-hint">Drag to set your approximate monthly claim volume</div>
-        </div>
-        <div class="calc-field">
-          <div class="calc-lbl">Average claim value <b id="cd2">$150</b></div>
-          <input type="range" id="s2" min="75" max="500" value="150" step="5" oninput="calc()">
-          <div class="calc-hint">Primary care ~$100 · Specialty ~$200–$400</div>
-        </div>
-        <div class="calc-field">
-          <div class="calc-lbl">Current denial rate <b id="cd3">18%</b></div>
-          <input type="range" id="s3" min="5" max="40" value="18" step="1" oninput="calc()">
-          <div class="calc-hint">Industry average is 15–25%. Most practices underestimate this.</div>
-        </div>
-      </div>
-      <div class="result-box fade">
-        <div class="result-title">Projected Impact</div>
-        <div class="result-row"><span class="rl">Denied claims / month</span><span class="rv red" id="r1">90</span></div>
-        <div class="result-row"><span class="rl">Revenue at risk / month</span><span class="rv red" id="r2">$13,500</span></div>
-        <div class="result-row"><span class="rl">Estimated uncollected</span><span class="rv yel" id="r3">$5,400</span></div>
-        <div class="result-row"><span class="rl">Projected AutomatedRCM recovery</span><span class="rv grn" id="r4">$3,240</span></div>
-        <div class="result-row"><span class="rl">Estimated annual gain</span><span class="rv grn" id="r5">$38,880</span></div>
-        <div style="margin-top:20px">
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com&su=Free+Revenue+Audit" target="_blank" rel="noopener" class="btn btn-green" style="width:100%;justify-content:center;font-size:15px;padding:15px">Get My Free Revenue Audit →</a>
-        </div>
-        <div class="result-note">Based on industry benchmarks. Your actual numbers may vary. Free audit shows your real figures — no obligation.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 8-STEP WORKFLOW -->
-<section class="workflow" id="how-it-works">
-  <div class="wrap">
-    <div class="sec-hdr fade">
-      <div class="chip">How It Works</div>
-      <h2>An eight-step revenue cycle, fully managed.</h2>
-      <p>From the moment a patient books to the day payment lands in your account — every stage monitored, every dollar tracked.</p>
-    </div>
-    <div class="steps">
-      <div class="step fade"><div class="step-l"><div class="step-n">1</div><div class="step-line"></div></div><div class="step-body"><div class="step-num">Step 01</div><div class="step-title">Patient Intake & Eligibility Verification</div><div class="step-desc">Real-time insurance verification before every appointment — active coverage, deductibles, copays, and prior auth requirements confirmed before the patient arrives. Zero surprise front-desk denials.</div><div class="step-badge">⚡ AI-verified · Sub-2-second response</div></div></div>
-      <div class="step fade"><div class="step-l"><div class="step-n">2</div><div class="step-line"></div></div><div class="step-body"><div class="step-num">Step 02</div><div class="step-title">Prior Authorization Tracking</div><div class="step-desc">High-cost procedures are flagged and tracked for authorization requirements. Alerts fire before expirations. No claim gets stuck waiting on a missing auth you didn't know you needed.</div><div class="step-badge">⚡ Automated tracking · Pre-expiry alerts</div></div></div>
-      <div class="step fade"><div class="step-l"><div class="step-n">3</div><div class="step-line"></div></div><div class="step-body"><div class="step-num">Step 03</div><div class="step-title">Charge Capture & Coding Review</div><div class="step-desc">Charges are reviewed for accuracy before claim creation — catching missing CPT codes, diagnosis-to-procedure mismatches, and bundling issues that would trigger automatic denials downstream.</div><div class="step-badge">⚡ AI-assisted review · Powered by Claude AI</div></div></div>
-      <div class="step fade"><div class="step-l"><div class="step-n">4</div><div class="step-line"></div></div><div class="step-body"><div class="step-num">Step 04</div><div class="step-title">Claim Scrubbing</div><div class="step-desc">Every claim passes AI scrubbing against CCI edits, modifier rules, ICD-10 precision requirements, and payer-specific guidelines. Claims that fail are corrected before submission — not rejected after.</div><div class="step-badge">⚡ Multi-layer scrubbing · Payer-specific rules</div></div></div>
-      <div class="step fade"><div class="step-l"><div class="step-n">5</div><div class="step-line"></div></div><div class="step-body"><div class="step-num">Step 05</div><div class="step-title">Electronic Claim Submission</div><div class="step-desc">Clean claims submit electronically through the clearinghouse with real-time status tracking. Rejections surface immediately — not days later when the follow-up window has narrowed.</div><div class="step-badge">⚡ Office Ally clearinghouse · Real-time tracking</div></div></div>
-      <div class="step fade"><div class="step-l"><div class="step-n">6</div><div class="step-line"></div></div><div class="step-body"><div class="step-num">Step 06</div><div class="step-title">Payment Posting & Reconciliation</div><div class="step-desc">ERAs and EOBs are processed and posted. Every payment is checked against the expected allowable — underpayments flagged, contractual adjustments verified, patient balances calculated correctly.</div><div class="step-badge">⚡ Automated ERA processing · Underpayment alerts</div></div></div>
-      <div class="step fade"><div class="step-l"><div class="step-n">7</div><div class="step-line"></div></div><div class="step-body"><div class="step-num">Step 07</div><div class="step-title">Denial Management & Appeals</div><div class="step-desc">Denials are categorized by code, prioritized by dollar value, and appealed with detailed justifications tailored to each payer. No denial sits idle — every one gets a response.</div><div class="step-badge">⚡ AI-drafted appeals · Prioritized by value</div></div></div>
-      <div class="step fade"><div class="step-l"><div class="step-n">8</div><div class="step-line"></div></div><div class="step-body"><div class="step-num">Step 08</div><div class="step-title">Reporting & Continuous Improvement</div><div class="step-desc">Monthly reports show collections, denial trends, recovery amounts, and KPIs in plain language. Denial patterns feed back into scrubbing rules — performance improves every month automatically.</div><div class="step-badge">⚡ Monthly reports · Built-in optimization loop</div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="wrap">
-    <div class="sec-hdr fade">
-      <div class="chip">Services</div>
-      <h2>Everything your billing team does. Done better.</h2>
-      <p>We replace your billing headaches — not augment them. One partner, one fee, the full cycle.</p>
-    </div>
-    <div class="svc-grid">
-      <div class="svc-card fade"><div class="svc-ico">🔍</div><h3>End-to-End RCM</h3><p>We own every step of the cycle — eligibility through final posting. One accountable partner instead of multiple vendors and software tools.</p></div>
-      <div class="svc-card fade"><div class="svc-ico">🤖</div><h3>AI-Assisted Coding Review</h3><p>AI flags coding issues and suggests corrections. Every claim reviewed for accuracy before submission — catching errors before they become denials.</p></div>
-      <div class="svc-card fade"><div class="svc-ico">🛡️</div><h3>Denial Recovery</h3><p>Every denial worked promptly. Root causes identified, appeals drafted and submitted — no claim left idle in a queue.</p></div>
-      <div class="svc-card fade"><div class="svc-ico">👁️</div><h3>Real-Time Visibility</h3><p>A live dashboard showing net collections, A/R aging, denial reasons, and claim status — updated continuously, accessible anytime.</p></div>
-      <div class="svc-card fade"><div class="svc-ico">🏥</div><h3>Provider Enrollment & CAQH</h3><p>New providers enrolled across your top payers. CAQH profile managed, credentials tracked, re-attestations handled before they lapse.</p></div>
-      <div class="svc-card fade"><div class="svc-ico">📋</div><h3>Billing Audits</h3><p>Comprehensive audits identifying coding errors, underpayments, missed charges, and compliance gaps — before a payer audit finds them first.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- COMPARISON TABLE -->
-<section class="compare" id="compare">
-  <div class="wrap">
-    <div class="sec-hdr fade">
-      <div class="chip">The Real Cost Comparison</div>
-      <h2>In-house billing vs. AutomatedRCM.</h2>
-      <p>Most practices don't realize how much their in-house billing team actually costs — or what they're leaving uncollected.</p>
-    </div>
-    <div class="compare-tbl fade">
-      <div class="cmp-hdr">
-        <div class="cmp-hdr-cell"></div>
-        <div class="cmp-hdr-cell inhouse">In-House Billing Team<br><span style="font-weight:400;color:var(--g400);font-size:11px">Your staff · Your overhead</span></div>
-        <div class="cmp-hdr-cell arcm"><span>Automated</span>RCM<br><span style="font-weight:400;color:rgba(255,255,255,.35);font-size:11px">Our systems · Our accountability</span></div>
-      </div>
-      <div class="cmp-row"><div class="cmp-cell metric">Clean claim rate<div class="cmp-sub">Industry benchmark</div></div><div class="cmp-cell inhouse"><span class="xk">–</span>85–88% average<div class="cmp-sub">Manual review, staffing variability</div></div><div class="cmp-cell arcm"><span class="ck">✓</span>Targets 90%+<div class="cmp-sub-w">AI scrubbing + payer-specific rules</div></div></div>
-      <div class="cmp-row"><div class="cmp-cell metric">Denial response time<div class="cmp-sub">Time from denial to action</div></div><div class="cmp-cell inhouse"><span class="xk">–</span>7–14 days<div class="cmp-sub">Worked when bandwidth allows</div></div><div class="cmp-cell arcm"><span class="ck">✓</span>Prioritized promptly<div class="cmp-sub-w">Every denial gets a response</div></div></div>
-      <div class="cmp-row"><div class="cmp-cell metric">Days in A/R<div class="cmp-sub">Industry average: 38 days</div></div><div class="cmp-cell inhouse"><span class="xk">–</span>35–45 days typical<div class="cmp-sub">Claims queue behind daily workload</div></div><div class="cmp-cell arcm"><span class="ck">✓</span>Active follow-up reduces this<div class="cmp-sub-w">No backlog, continuous queue</div></div></div>
-      <div class="cmp-row"><div class="cmp-cell metric">Total billing cost<div class="cmp-sub">% of gross revenue</div></div><div class="cmp-cell inhouse"><span class="xk">–</span>8–12% of revenue<div class="cmp-sub">Salaries, benefits, software, overhead</div></div><div class="cmp-cell arcm"><span class="ck">✓</span>Starting at 6%<div class="cmp-sub-w">One transparent fee, no hidden costs</div></div></div>
-      <div class="cmp-row"><div class="cmp-cell metric">Reporting visibility<div class="cmp-sub">How often you see your numbers</div></div><div class="cmp-cell inhouse"><span class="xk">–</span>Monthly reports<div class="cmp-sub">Spreadsheets, lagging indicators</div></div><div class="cmp-cell arcm"><span class="ck">✓</span>Live dashboard<div class="cmp-sub-w">KPIs updated continuously</div></div></div>
-      <div class="cmp-row"><div class="cmp-cell metric">Coverage continuity<div class="cmp-sub">What happens when staff is out</div></div><div class="cmp-cell inhouse"><span class="xk">–</span>PTO and turnover gaps<div class="cmp-sub">One sick day = billing backlog</div></div><div class="cmp-cell arcm"><span class="ck">✓</span>AI runs continuously<div class="cmp-sub-w">No single-employee dependencies</div></div></div>
-      <div class="cmp-row"><div class="cmp-cell metric">Compliance burden<div class="cmp-sub">HIPAA, payer rule changes</div></div><div class="cmp-cell inhouse"><span class="xk">–</span>Falls on your practice<div class="cmp-sub">Staff training, policy updates</div></div><div class="cmp-cell arcm"><span class="ck">✓</span>Managed by AutomatedRCM<div class="cmp-sub-w">HIPAA-compliant processes, signed BAA</div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- APPEAL DEMO -->
-<section class="appeal" id="demo">
-  <div class="wrap">
-    <div class="sec-hdr fade">
-      <div class="chip">See AI in Action</div>
-      <h2>Watch a denial appeal get drafted in seconds.</h2>
-      <p>Select a common denial reason and see the type of appeal letter we generate — no patient data required.</p>
-    </div>
-    <div class="appeal-grid">
-      <div class="appeal-ctrl fade">
-        <div>
-          <label class="field-lbl">Select a denial reason:</label>
-          <div class="sel-wrap">
-            <select class="sel" id="dsel"><option value="">— Choose a denial code —</option><option value="co50">CO-50 · Not Medically Necessary</option><option value="co97">CO-97 · Already Included in Another Service</option><option value="co4">CO-4 · Modifier Inconsistency</option><option value="co29">CO-29 · Timely Filing Limit Exceeded</option><option value="co16">CO-16 · Missing or Incomplete Information</option></select>
-            <div class="sel-arr">▾</div>
+      <div class="hero-visual" aria-label="Revenue cycle dashboard illustration">
+        <div class="dashboard-card">
+          <div class="dash-title">RCM Performance Dashboard</div>
+          <div class="metric-grid">
+            <div><small>Total Collections</small><strong>$1,842,769</strong><em>+18%</em></div>
+            <div><small>Net Collection Rate</small><strong>96.4%</strong><em>+7.2%</em></div>
+            <div><small>Denial Rate</small><strong>8.7%</strong><em>-2.1%</em></div>
+          </div>
+          <div class="chart-row">
+            <div class="donut"></div>
+            <div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span></div>
           </div>
         </div>
-        <button class="gen-btn" onclick="genAppeal()">⚡ Generate Sample Appeal Letter</button>
-        <p class="appeal-note">Simulated demo only. No patient data entered or required.<br>Real appeals use your actual claim details.</p>
+        <div class="badge">Florida-Based<br><span>RCM Experts</span></div>
       </div>
-      <div class="appeal-out fade">
-        <div class="appeal-empty" id="aempty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg><p style="font-size:13px">Select a denial code and click Generate.</p></div>
-        <div class="appeal-result" id="ares"><span class="sample-tag">⚠ Sample Letter — Demo Only</span><div class="letter" id="aletter"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ELIGIBILITY DEMO -->
-<section class="elig">
-  <div class="wrap">
-    <div class="sec-hdr fade">
-      <div class="chip">Eligibility Verification Demo</div>
-      <h2>Insurance verified before the patient arrives.</h2>
-      <p>See how real-time eligibility checks eliminate the surprise denials your front desk dreads.</p>
-    </div>
-    <div class="elig-grid">
-      <div class="fade">
-        <div class="e-field"><label class="field-lbl">Insurance Company</label><select class="e-sel" id="ep"><option value="">— Select payer —</option><option>Blue Cross Blue Shield</option><option>Aetna</option><option>United Healthcare</option><option>Cigna</option><option>Humana</option><option>Medicare</option><option>Medicaid (Florida)</option></select></div>
-        <div class="e-field"><label class="field-lbl">Plan Type</label><select class="e-sel" id="epl"><option value="">— Select plan type —</option><option>PPO</option><option>HMO</option><option>EPO</option><option>Medicare Part B</option><option>Medicaid</option></select></div>
-        <div class="e-field"><label class="field-lbl">Appointment Date</label><input type="date" class="e-input" id="edt"></div>
-        <button class="e-btn" onclick="runElig()">⚡ Run Eligibility Check</button>
-        <p style="font-size:11px;color:var(--g400);text-align:center;margin-top:8px">Simulated demo. No real patient data used.</p>
-      </div>
-      <div class="e-panel fade">
-        <div class="e-wait" id="ewait"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.955 11.955 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg><p style="font-size:13px">Fill in the fields and click Run Eligibility Check.</p></div>
-        <div class="e-spinning" id="espin"><div class="spinner"></div><span style="font-size:14px;color:var(--g500)">Checking coverage in real time…</span></div>
-        <div class="e-result" id="eres">
-          <span class="sim-tag">⚠ Simulated Result — Demo Only</span>
-          <div class="e-status"><div class="e-status-ico">✅</div><div><div class="e-status-txt">Coverage Active & Verified</div><div class="e-status-sub" id="esub">Patient is eligible for services on the requested date.</div></div></div>
-          <div class="e-drow"><span class="e-dk">Insurance Company</span><span class="e-dv" id="er1">—</span></div>
-          <div class="e-drow"><span class="e-dk">Plan Type</span><span class="e-dv" id="er2">—</span></div>
-          <div class="e-drow"><span class="e-dk">Coverage Status</span><span class="e-dv" style="color:var(--green)">Active ✓</span></div>
-          <div class="e-drow"><span class="e-dk">In-Network Deductible</span><span class="e-dv">$1,500 / $1,150 met</span></div>
-          <div class="e-drow"><span class="e-dk">Copay</span><span class="e-dv">$30 primary / $60 specialist</span></div>
-          <div class="e-drow"><span class="e-dk">Prior Auth Required</span><span class="e-dv" id="er3" style="color:var(--green)">No ✓</span></div>
-          <div class="e-drow"><span class="e-dk">Response Time</span><span class="e-dv" id="er4" style="color:var(--green)">1.3 seconds</span></div>
+    <section id="process" class="leaks-section">
+      <div class="leaks-copy">
+        <p class="eyebrow teal">Revenue leaks happen at every step</p>
+        <h2>Find the leaks.<br>Fix the process. Keep more.</h2>
+        <div class="pipeline">
+          <div class="step">Eligibility<br>Verification</div>
+          <div class="arrow">→</div>
+          <div class="step">Coding &<br>Documentation</div>
+          <div class="arrow">→</div>
+          <div class="step">Claim<br>Scrubbing</div>
+          <div class="arrow">→</div>
+          <div class="step alert">Denials &<br>Rejections</div>
+          <div class="arrow">→</div>
+          <div class="step">Payment<br>Posting</div>
+          <div class="arrow">→</div>
+          <div class="step">A/R Follow-Up<br>& Collections</div>
         </div>
+        <p class="section-copy">Small gaps in any step can lead to big revenue losses. <strong>We help you find them — and fix them.</strong></p>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- WHY -->
-<section class="why">
-  <div class="wrap">
-    <div class="sec-hdr">
-      <div class="chip">Why AutomatedRCM</div>
-      <h2>The billing partner who never stops working.</h2>
-      <p class="why-sub">Ten years of medical billing expertise, augmented by AI that runs your revenue cycle around the clock.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card fade"><div class="why-ico">🧠</div><h3>Expertise + AI</h3><p>10 years of medical billing experience driving every decision. AI handles the volume and catches what human review misses. You get both.</p></div>
-      <div class="why-card fade"><div class="why-ico">🔒</div><h3>HIPAA Compliant</h3><p>AES-256 encryption, TLS 1.3, multi-factor authentication, and Business Associate Agreements with every vendor. Your patients' data is always protected.</p></div>
-      <div class="why-card fade"><div class="why-ico">📈</div><h3>You Pay on Results</h3><p>Pricing is a percentage of what we actually collect — so AutomatedRCM only wins when your practice wins. No flat retainers, no surprises.</p></div>
-      <div class="why-card fade"><div class="why-ico">⚡</div><h3>Live in 48–72 Hours</h3><p>No software to install. No long onboarding. We connect to your existing systems and start improving your claim process within days.</p></div>
-      <div class="why-card fade"><div class="why-ico">🗺️</div><h3>Nationwide Coverage</h3><p>Based in North Port, FL — serving practices across Florida and nationwide. Primary care, cardiology, dermatology, gastroenterology, oncology, and more.</p></div>
-      <div class="why-card fade"><div class="why-ico">📋</div><h3>Done For You</h3><p>We do the billing. You focus on patients. AutomatedRCM is a complete done-for-you service — not another tool your staff has to manage.</p></div>
-    </div>
-    <div class="why-stats">
-      <div class="w-stat fade"><div class="w-val">10+</div><div class="w-lbl">Years Billing Experience</div></div>
-      <div class="w-stat fade"><div class="w-val">48h</div><div class="w-lbl">Average Setup Time</div></div>
-      <div class="w-stat fade"><div class="w-val">24/7</div><div class="w-lbl">AI Monitoring</div></div>
-      <div class="w-stat fade"><div class="w-val">HIPAA</div><div class="w-lbl">Fully Compliant</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="wrap">
-    <div class="sec-hdr fade">
-      <div class="chip">Transparent Pricing</div>
-      <h2>One transparent fee. We only win when you do.</h2>
-      <p>No setup fees. No long-term contracts. We charge a percentage of what we actually collect for you.</p>
-    </div>
-    <div class="price-card fade">
-      <span class="price-badge">Performance-Based</span>
-      <div class="price-head">Starting at <span>6%</span> of net collections</div>
-      <div class="price-note">Custom quote based on your practice size, specialty, and claim volume · Contact us for your number</div>
-      <div class="price-cols">
-        <ul class="price-list">
-          <li>End-to-end revenue cycle management</li>
-          <li>AI-assisted coding review on every claim</li>
-          <li>Real-time eligibility verification</li>
-          <li>Denial management and appeals</li>
-          <li>Medical billing audits</li>
+      <aside class="audit-card" id="contact">
+        <div class="card-icon">☑</div>
+        <h3>Get a Free<br>Revenue Audit</h3>
+        <p>Send us a sample of your A/R report or de-identified claim data.</p>
+        <ul>
+          <li>We’ll identify where revenue is leaking</li>
+          <li>Show you what can be recovered</li>
+          <li>Provide actionable recommendations</li>
         </ul>
-        <ul class="price-list">
-          <li>Provider enrollment & CAQH management</li>
-          <li>Monthly performance reporting</li>
-          <li>Live dashboard access</li>
-          <li>HIPAA-compliant handling, signed BAA</li>
-          <li>Works with your existing EHR — no new software</li>
-        </ul>
-      </div>
-      <hr class="price-divider">
-      <div class="price-btns">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com&su=Pricing+Quote+Request" target="_blank" rel="noopener" class="btn btn-green" style="font-size:15px;padding:15px 28px">Book Free Audit →</a>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com&su=Pricing+Question" target="_blank" rel="noopener" class="btn btn-white" style="font-size:15px;padding:15px 28px">Get a Custom Quote</a>
-      </div>
-      <div class="price-footer">No setup fees · No long-term contracts · Cancel with 30 days notice</div>
-    </div>
-  </div>
-</section>
+        <a class="btn btn-primary full" href="mailto:Laureenicholson635@gmail.com?subject=Free%20Revenue%20Audit%20Request">✉ Get a Free Audit</a>
+      </aside>
+    </section>
 
-<!-- CTA -->
-<section class="cta-sec" id="contact">
-  <div class="wrap">
-    <div class="sec-hdr fade">
-      <div class="chip">Free Billing Audit</div>
-      <h2>Find the revenue you're leaving on the table.</h2>
-      <p>Send us a recent A/R report. We'll return a written analysis of every revenue leak we find — no obligation, no sales pitch.</p>
-    </div>
-    <div class="cta-btns fade">
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com&su=Free+Revenue+Audit+Request" target="_blank" rel="noopener" class="btn btn-green" style="font-size:16px;padding:16px 32px">Book Free Audit →</a>
-      <a href="tel:+19177800696" class="btn btn-ghost" style="font-size:16px;padding:16px 32px">📞 Schedule a Call</a>
-    </div>
-    <div class="cta-contact fade">
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com" target="_blank" rel="noopener">✉ laureennicholson635@gmail.com</a>
-      <a href="tel:+19177800696">📞 (917) 780-0696</a>
-      <span style="color:var(--g400);font-size:13px">🔒 HIPAA Compliant</span>
-    </div>
-    <div class="cta-trust fade">
-      <span>✓ No commitment required</span>
-      <span>✓ Response within 24 hours</span>
-      <span>✓ North Port, FL · Serving practices nationwide</span>
-    </div>
-  </div>
-</section>
+    <section id="services" class="services-section">
+      <p class="eyebrow teal center">Our Services</p>
+      <h2 class="center">End-to-end revenue cycle solutions that deliver results.</h2>
+      <div class="service-grid">
+        <article><div class="icon">⌕</div><h3>RCM Audits</h3><p>Deep-dive analysis of your billing process to find leaks, trends, and recovery opportunities.</p></article>
+        <article><div class="icon">↺</div><h3>Denial Management</h3><p>Reduce denials and rework with root cause analysis and proactive prevention.</p></article>
+        <article><div class="icon">▤</div><h3>Claim Review</h3><p>AI-assisted claim review with human oversight before submission.</p></article>
+        <article><div class="icon">▣</div><h3>Provider Enrollment & CAQH</h3><p>Faster enrollments, clean CAQH profiles, and less turnaround time.</p></article>
+        <article><div class="icon">$</div><h3>A/R Follow-Up & Collections</h3><p>Persistent follow-up that improves collections without harming patient relationships.</p></article>
+        <article><div class="icon">▥</div><h3>Reporting & Insights</h3><p>Actionable dashboards that show what’s working — and what’s not.</p></article>
+      </div>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
+    <section id="difference" class="difference section-dark">
       <div>
-        <div class="foot-brand"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/></svg>Automated<span>RCM</span></div>
-        <div class="foot-tagline">AI-powered medical billing services for independent and group practices. North Port, FL.</div>
+        <p class="eyebrow">Why AutomatedRCM?</p>
+        <h2>Not just software.<br>Not just outsourcing.<br><span>Operational intelligence.</span></h2>
       </div>
-      <div class="foot-col">
-        <h4>Product</h4>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#services">Services</a>
-        <a href="#demo">Live Demo</a>
-        <a href="#pricing">Pricing</a>
+      <div class="difference-grid">
+        <article><h3>Revenue Cycle Experts</h3><p>Years of hands-on RCM experience across multiple specialties.</p></article>
+        <article><h3>AI-Assisted, Human-Reviewed</h3><p>Technology that enhances accuracy — humans ensure accountability.</p></article>
+        <article><h3>Transparent & Collaborative</h3><p>You always know what we’re doing, why we’re doing it, and the impact it’s having.</p></article>
+        <article><h3>Built for Practices Like Yours</h3><p>We understand the challenges of small to mid-sized practices.</p></article>
       </div>
-      <div class="foot-col">
-        <h4>Specialties</h4>
-        <a href="#contact">Primary Care</a>
-        <a href="#contact">Cardiology</a>
-        <a href="#contact">Dermatology</a>
-        <a href="#contact">Gastroenterology</a>
-        <a href="#contact">Oncology</a>
+    </section>
+
+    <section class="final-cta">
+      <div class="paper-visual"></div>
+      <div>
+        <h2>Let’s turn your A/R into predictable revenue.</h2>
+        <p>Send us a sample. Get clarity. Start recovering what you’re owed.</p>
       </div>
-      <div class="foot-col">
-        <h4>Contact</h4>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=laureennicholson635@gmail.com" target="_blank" rel="noopener">Email Us</a>
-        <a href="tel:+19177800696">(917) 780-0696</a>
-        <a href="#contact">Book a Free Audit</a>
-        <a href="#contact">Get a Quote</a>
+      <div class="final-buttons">
+        <a class="btn btn-primary" href="mailto:Laureenicholson635@gmail.com?subject=Free%20Revenue%20Audit%20Request">✉ Get a Free Audit</a>
+        <a class="btn btn-outline" href="mailto:Laureenicholson635@gmail.com?subject=AutomatedRCM%20Contact%20Request">✉ Contact Us</a>
+      </div>
+      <ul class="mini-list">
+        <li>Florida-Based Team</li>
+        <li>HIPAA-Conscious Processes</li>
+        <li>No Long-Term Contracts</li>
+        <li>Results-Driven Approach</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="brand footer-brand">
+      <div class="brand-mark">AR</div>
+      <div>
+        <span class="brand-name">Automated<span>RCM</span></span>
+        <small>Revenue Cycle Intelligence</small>
       </div>
     </div>
-    <div class="foot-bottom">
-      <p>© 2026 Automated RCM LLC · EIN 42-1858586 · North Port, FL · All Rights Reserved</p>
-      <div class="foot-badges"><span class="f-badge">HIPAA Compliant</span><span class="f-badge">BAA Available</span></div>
-    </div>
-  </div>
-</footer>
-
-<script>
-// NAV
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));
-
-// HERO WORKFLOW ANIMATION
-(function(){
-  const steps=document.querySelectorAll('#hfSteps .hf-step');
-  const fill=document.getElementById('hfFill');
-  if(!steps.length||!fill)return;
-  let cur=0,pct=0;
-  const STEP_MS=2400,TICK=50;
-  function activate(i){
-    steps.forEach(s=>s.classList.remove('active'));
-    steps[i].classList.add('active');
-    pct=0;
-  }
-  setInterval(function(){
-    pct+=(TICK/STEP_MS)*100;
-    fill.style.width=Math.min(pct,100)+'%';
-    if(pct>=100){cur=(cur+1)%steps.length;activate(cur);}
-  },TICK);
-  steps.forEach(function(s,i){s.addEventListener('click',function(){cur=i;activate(i);});});
-})();
-
-// SCROLL ANIMATIONS
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');if(x.target.classList.contains('step'))x.target.classList.add('on')}})},{threshold:.1,rootMargin:'0px 0px 60px 0px'});
-document.querySelectorAll('.fade,.step').forEach((el,i)=>{el.style.transitionDelay=(i%5*.07)+'s';obs.observe(el)});
-
-// ROI CALCULATOR
-function fmt(n){return n>=1000?'$'+(n/1000).toFixed(1)+'k':'$'+Math.round(n).toLocaleString()}
-function calc(){
-  const c=+document.getElementById('s1').value,a=+document.getElementById('s2').value,r=+document.getElementById('s3').value/100;
-  document.getElementById('cd1').textContent=c.toLocaleString();
-  document.getElementById('cd2').textContent='$'+a;
-  document.getElementById('cd3').textContent=Math.round(r*100)+'%';
-  const denied=Math.round(c*r),risk=denied*a,uncol=risk*.4,rec=uncol*.6,annual=rec*12;
-  document.getElementById('r1').textContent=denied.toLocaleString();
-  document.getElementById('r2').textContent=fmt(risk);
-  document.getElementById('r3').textContent=fmt(uncol);
-  document.getElementById('r4').textContent=fmt(rec);
-  document.getElementById('r5').textContent=fmt(annual);
-}
-calc();
-
-// APPEAL DEMO
-const appeals={
-  co50:{letter:`Date: [DATE]\n\nTo: [PAYER] Appeals Department\nRe: Appeal — CO-50 Medical Necessity\nPatient: [DEMO PATIENT] | DOS: [DATE OF SERVICE]\nClaim #: [CLAIM NUMBER]\n\nDear Appeals Reviewer,\n\nWe appeal the denial of the above claim under CO-50 (not medically necessary).\n\n<b>Clinical Justification:</b>\nThe service was medically necessary based on the patient's documented presenting symptoms, clinical history, and the treating physician's professional judgment. The procedure directly addressed the patient's condition consistent with evidence-based guidelines.\n\n<b>Supporting Documentation Attached:</b>\n• Office visit notes and clinical documentation\n• Relevant diagnostic findings\n• Applicable clinical guidelines supporting medical necessity\n• Treating physician attestation\n\nWe respectfully request full review of the attached documentation and ask that this denial be overturned.\n\nSincerely,\nAutomatedRCM on behalf of [PRACTICE NAME]`},
-  co97:{letter:`Date: [DATE]\n\nTo: [PAYER] Appeals Department\nRe: Appeal — CO-97 Bundling Denial\nPatient: [DEMO PATIENT] | DOS: [DATE OF SERVICE]\nClaim #: [CLAIM NUMBER]\n\nDear Appeals Reviewer,\n\nWe appeal the denial under CO-97 (payment included in allowance for another service).\n\n<b>Basis for Appeal:</b>\nA review of applicable CCI edits confirms these services are NOT subject to bundling when billed with the appropriate modifier. The procedures were performed as separate, distinct services on the same date and are properly supported by the attached documentation.\n\n<b>Modifier Justification:</b>\nModifier [XX] was appropriately appended to indicate distinct, separately identifiable services. Per CCI policy, this modifier correctly overrides the bundling edit.\n\n<b>Documentation Attached:</b>\n• Procedure notes confirming separate services\n• CCI edit reference supporting unbundling with modifier\n\nWe request reconsideration and approval as submitted.\n\nSincerely,\nAutomatedRCM on behalf of [PRACTICE NAME]`},
-  co4:{letter:`Date: [DATE]\n\nTo: [PAYER] Appeals Department\nRe: Appeal — CO-4 Modifier Inconsistency\nPatient: [DEMO PATIENT] | DOS: [DATE OF SERVICE]\nClaim #: [CLAIM NUMBER]\n\nDear Appeals Reviewer,\n\nWe appeal the denial under CO-4 (service inconsistent with modifier).\n\n<b>Corrected Information:</b>\nUpon review, we are submitting a corrected claim with the appropriate modifier and complete clinical documentation confirming the service qualifies under the correct billing category.\n\nThe procedure was performed in accordance with applicable billing guidelines. The modifier applied is consistent with the service rendered as documented in the attached clinical notes.\n\n<b>Attached:</b>\n• Corrected claim form\n• Complete clinical documentation\n• Modifier reference and justification\n\nWe request this claim be reprocessed with the corrected information.\n\nSincerely,\nAutomatedRCM on behalf of [PRACTICE NAME]`},
-  co29:{letter:`Date: [DATE]\n\nTo: [PAYER] Appeals Department\nRe: Appeal — CO-29 Timely Filing\nPatient: [DEMO PATIENT] | DOS: [DATE OF SERVICE]\nClaim #: [CLAIM NUMBER]\n\nDear Appeals Reviewer,\n\nWe appeal the denial under CO-29 (timely filing limit exceeded).\n\n<b>Timely Filing Exception Requested:</b>\nThis claim was originally submitted within your timely filing window on [ORIGINAL DATE], as evidenced by the attached clearinghouse confirmation. The claim was subsequently rejected due to [REASON] and corrected promptly upon identification.\n\n<b>Supporting Evidence:</b>\n• Original submission confirmation (clearinghouse timestamp)\n• Rejection notice documenting the reason for resubmission\n• Corrected claim submitted within reasonable time of rejection\n\nThe delay was not due to administrative negligence. We respectfully request a timely filing exception and ask that this claim be processed for payment.\n\nSincerely,\nAutomatedRCM on behalf of [PRACTICE NAME]`},
-  co16:{letter:`Date: [DATE]\n\nTo: [PAYER] Appeals Department\nRe: Resubmission — CO-16 Missing Information\nPatient: [DEMO PATIENT] | DOS: [DATE OF SERVICE]\nClaim #: [CLAIM NUMBER]\n\nDear Appeals Reviewer,\n\nWe respond to the denial under CO-16 (claim lacks information needed for adjudication).\n\n<b>Information Provided:</b>\nWe have reviewed the denial and are providing the missing information as follows:\n\n• [MISSING ELEMENT — e.g., NPI, referring provider, authorization number]\n• Corrected claim form is attached\n• All required supporting documentation is enclosed\n\nThe original claim lacked [SPECIFIC INFORMATION], now corrected in the attached resubmission. All other claim information remains accurate.\n\nWe request this claim be reopened and processed with the complete information provided.\n\nSincerely,\nAutomatedRCM on behalf of [PRACTICE NAME]\nEIN: [PRACTICE EIN] | NPI: [PROVIDER NPI]`}
-};
-function genAppeal(){
-  const c=document.getElementById('dsel').value;
-  if(!c){alert('Please select a denial reason first.');return}
-  document.getElementById('aempty').style.display='none';
-  const r=document.getElementById('ares');r.classList.add('show');
-  document.getElementById('aletter').innerHTML=appeals[c].letter
-    .replace(/\n/g,'<br>')
-    .replace(/\[([^\]]+)\]/g,'<span class="ph">[$1]</span>');
-}
-
-// ELIGIBILITY
-function runElig(){
-  const p=document.getElementById('ep').value,pl=document.getElementById('epl').value;
-  if(!p||!pl){alert('Please select an insurance company and plan type.');return}
-  document.getElementById('ewait').style.display='none';
-  document.getElementById('eres').classList.remove('show');
-  document.getElementById('espin').classList.add('show');
-  const t=(Math.random()*1.2+.7).toFixed(1);
-  setTimeout(()=>{
-    document.getElementById('espin').classList.remove('show');
-    document.getElementById('er1').textContent=p;
-    document.getElementById('er2').textContent=pl;
-    document.getElementById('er4').textContent=t+' seconds';
-    const auth=['Aetna','United Healthcare','Humana'].includes(p);
-    document.getElementById('er3').textContent=auth?'Required for some CPTs ⚠':'No ✓';
-    document.getElementById('er3').style.color=auth?'#f59e0b':'var(--green)';
-    const d=document.getElementById('edt').value;
-    if(d)document.getElementById('esub').textContent='Patient is eligible for services on '+new Date(d+'T12:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-    document.getElementById('eres').classList.add('show');
-  },1800);
-}
-</script>
+    <p>✉ <a href="mailto:Laureenicholson635@gmail.com?subject=AutomatedRCM%20Contact%20Request">Laureenicholson635@gmail.com</a></p>
+    <p>Florida, USA</p>
+    <p class="copyright">© 2026 AutomatedRCM. All rights reserved.</p>
+  </footer>
 </body>
 </html>
