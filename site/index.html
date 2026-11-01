@@ -181,6 +181,16 @@
     .step h3 { margin: 0 0 12px; font-size: 24px; line-height: 1.15; font-weight: 800; letter-spacing: -.6px; text-wrap: balance; }
     .step p { color: var(--body); font-size: 14px; line-height: 1.6; }
 
+    .team { padding: 32px 36px 44px; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 20px; text-align: left; }
+    .person { display: flex; gap: 20px; align-items: flex-start; background: #fff; border: 1px solid var(--line-1); border-radius: 18px; padding: 26px; box-shadow: 0 8px 24px rgba(15,42,74,.05); }
+    .person img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; flex: none; }
+    .person div { min-width: 0; }
+    .person h3 { font-size: 20px; font-weight: 800; letter-spacing: -.3px; }
+    .person .role { color: var(--blue); font-size: 13px; font-weight: 700; margin-top: 2px; }
+    .person .years { display: inline-block; background: var(--tint-2); color: var(--ink); font-size: 13px; font-weight: 800; padding: 5px 12px; border-radius: 999px; margin: 12px 0 10px; }
+    .person .bio { color: var(--body); font-size: 14px; line-height: 1.6; }
+
     .cta { margin: 20px 36px 36px; background: linear-gradient(135deg, var(--blue), var(--blue-hover)); border-radius: 22px; padding: 48px 40px; display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; color: #fff; }
     .cta .text { flex: 1 1 360px; }
     .cta h2 { margin: 0 0 10px; font-size: clamp(24px, 2.8vw, 34px); font-weight: 800; letter-spacing: -.8px; text-wrap: balance; }
@@ -217,7 +227,8 @@
       .hero-actions .btn { width: 100%; justify-content: center; }
       .stats { margin: -20px 20px 0; padding: 18px 20px; grid-template-columns: 1fr; gap: 16px; }
       .stat { border-left: 0; padding-left: 0; }
-      .solutions, .how { padding-left: 20px; padding-right: 20px; }
+      .solutions, .how, .team { padding-left: 20px; padding-right: 20px; }
+      .person { flex-direction: column; gap: 14px; }
       .security, .cta { margin-left: 20px; margin-right: 20px; }
       .cta { padding: 32px 24px; }
       .cta .btn-white { width: 100%; text-align: center; }
@@ -243,6 +254,7 @@
       <a href="#top" class="active">Home</a>
       <a href="#how">How It Works</a>
       <a href="#solutions">Services</a>
+      <a href="#team">Our Team</a>
       <a href="/blog/">Resources</a>
       <a href="mailto:laureennicholson@getautomatedrcm.com">Contact</a>
     </nav>
@@ -257,6 +269,7 @@
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
     <a href="#how">How It Works</a>
     <a href="#solutions">Services</a>
+    <a href="#team">Our Team</a>
     <a href="/blog/">Resources</a>
     <a href="mailto:laureennicholson@getautomatedrcm.com">Contact</a>
     <a class="pill pill-primary" href="https://audit.getautomatedrcm.com">Get Your Free Billing Audit</a>
@@ -347,6 +360,35 @@
   </section>
 
   <!-- CTA -->
+  <!-- TEAM -->
+  <section class="team" id="team">
+    <div class="section-head">
+      <div class="kicker">Our team</div>
+      <h2>Real billing experience behind the AI</h2>
+      <p>More than 40 years of combined experience across every level of the revenue cycle.</p>
+    </div>
+    <div class="team-grid">
+      <div class="person">
+        <img src="https://assets.getautomatedrcm.com/cathy.png" alt="Cathy Rosales" width="96" height="96" loading="lazy">
+        <div>
+          <h3>Cathy Rosales, CPC</h3>
+          <div class="role">Co-Founder &amp; Chief Executive Officer</div>
+          <div class="years">30 years in RCM</div>
+          <p class="bio">Cathy is a Certified Professional Coder (CPC) who has worked in revenue cycle management for 30 years, at all levels of the field. Her experience includes serving as a director of revenue cycle management.</p>
+        </div>
+      </div>
+      <div class="person">
+        <img src="https://assets.getautomatedrcm.com/laureen.png" alt="Laureen Nicholson" width="96" height="96" loading="lazy">
+        <div>
+          <h3>Laureen Nicholson</h3>
+          <div class="role">Co-Founder &amp; Chief Operating Officer</div>
+          <div class="years">Nearly 12 years in RCM</div>
+          <p class="bio">Laureen has worked across all levels of revenue cycle management for nearly 12 years. Her experience includes serving as an RCM optimization manager.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="cta" id="cta">
     <div class="text">
       <h2>See how much revenue your practice is leaving behind.</h2>
